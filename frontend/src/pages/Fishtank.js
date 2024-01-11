@@ -28,7 +28,7 @@ function Fishtank() {
       if (error) return <div>Error: {error.message}</div>;
     
       return (
-        <div className="aquarium">
+        <div className="fishtank">
           {fishes.map(fish => (
             <Fish key={fish.id} fish={fish} />
           ))}

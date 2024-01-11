@@ -1,14 +1,17 @@
 import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Fishtank from './pages/Fishtank';
+import FishDetail from './pages/FishDetail';
 
 function App() {
   return (
-    <div className="App">
-      <div>
-        <h1>Fiskakvarium</h1>
-        <Fishtank />
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Fishtank />} />
+        <Route path="/fiskar/:pk" element={<FishDetail />} />
+      </Routes>
+    </Router>
   );
 }
 

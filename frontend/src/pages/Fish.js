@@ -1,10 +1,17 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 // Fish.js
 function Fish({ fish }) {
     return (
       <div className="fish">
-        <h3>{fish.fish_type}</h3> {/* Visa fisktypen */}
-        <p>{fish.message}</p> {/* Visa meddelandet */}
-        <p>Likes: {fish.likes_count}</p> {/* Använder 'like_count' direkt från prop */}
+        <h3>
+          <Link to={`/fiskar/${fish.id}`}>
+            {fish.fish_type}
+          </Link>
+        </h3> 
+        <p>{fish.message}</p> 
+        <p>Likes: {fish.likes_count}</p> 
       </div>
     );
   }
