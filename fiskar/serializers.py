@@ -1,10 +1,19 @@
 # serializers.py
 from rest_framework import serializers
+from django.contrib.auth.models import User
 from .models import Fish
 from .models import Like
 
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username']  # Inkludera bara fältet 'username'
+
+
 class FishSerializer(serializers.ModelSerializer):
     likes_count = serializers.SerializerMethodField()
+    user = UserSerializer(read_only=True)  # Lägg till den här raden för att inkludera UserSerializer
 
     class Meta:
         model = Fish
@@ -16,6 +25,8 @@ class FishSerializer(serializers.ModelSerializer):
     
 
 class LikeSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)  # Lägg till den här raden för att inkludera UserSerializer
+
     class Meta:
         model = Like
         fields = ['id', 'user', 'fish', 'created_at']
