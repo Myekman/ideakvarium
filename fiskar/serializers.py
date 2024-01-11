@@ -3,7 +3,7 @@ from rest_framework import serializers
 from .models import Fish
 from .models import Like
 
-class FishSerializer(serializers.ModelSerializer)
+class FishSerializer(serializers.ModelSerializer):
     likes_count = serializers.SerializerMethodField()
 
     class Meta:
