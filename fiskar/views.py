@@ -54,15 +54,38 @@ class FishList(generics.ListCreateAPIView):
     search_fields = ('user__username', 'message', 'fish_type')
 
     #sök efter de största eller de minska fiskarna
+    # def get_queryset(self):
+    #     queryset = super().get_queryset()
+    #     largest = self.request.query_params.get('largest', None)
+    #     smallest = self.request.query_params.get('smallest', None)
+    #     # smallest = self.request.query_params.get('smallest', None)
+    #     if largest:
+    #         # Antag att en "stor fisk" har fler likes än 90% av alla fiskar
+    #         threshold = queryset.annotate(like_count=Count('likes')).aggregate(ninetieth_percentile=Percentile('like_count', 0.9))['ninetieth_percentile']
+    #         queryset = queryset.filter(likes__count__gt=threshold)
+    #     elif smallest:
+
+    #     return queryset
     def get_queryset(self):
         queryset = super().get_queryset()
         largest = self.request.query_params.get('largest', None)
-        # smallest = self.request.query_params.get('smallest', None)
+        smallest = self.request.query_params.get('smallest', None)
+
+        # Konvertera likes till en numerisk kolumn för att räkna och beräkna percentiler
+        queryset = queryset.annotate(like_count=Count('likes'))
+
         if largest:
-            queryset = queryset.filter(like_count__gt=1) #gt = större än, se filters.py
-        # elif smallest:
-        #     queryset = queryset.filter(like_count__lte=10) #lte = mindre än, se filters.py
+            # Antag att en "stor fisk" har fler likes än 90% av alla fiskar
+            ninetieth_percentile = queryset.aggregate(ninetieth_percentile=Percentile('like_count', 0.9))['ninetieth_percentile']
+            queryset = queryset.filter(like_count__gt=ninetieth_percentile)
+        elif smallest:
+            # Antag att en "liten fisk" har färre likes än 10% av alla fiskar
+            tenth_percentile = queryset.aggregate(tenth_percentile=Percentile('like_count', 0.1))['tenth_percentile']
+            queryset = queryset.filter(like_count__lte=tenth_percentile)
+
         return queryset
+
+
 
     def get_queryset(self):
         return Fish.objects.all()

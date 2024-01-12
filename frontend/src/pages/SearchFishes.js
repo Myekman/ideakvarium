@@ -1,25 +1,21 @@
-import React, { useState } from 'react';
-
+import React from 'react';
 
 function SearchBigFishes({ onSearch }) {
-    const [searchFishes, setSearchFishes] = useState('');
-  
-    const handleSearchSubmit = (e) => {
-      e.preventDefault();
-      // Anropa search som skickas från fishtank
-      onSearch(searchFishes);
+
+    const handleShowLargestClick = () => {
+      onSearch('largest'); // largest är bestämt i views.py
     };
 
+    const handleShowSmallestClick = () => {
+      onSearch('smallest'); // smallest är bestämt i views.py
+    };
+
+
     return (
-        <form onSubmit={handleSearchSubmit}>
-          <input
-            type="text"
-            placeholder="Sök fiskar..."
-            value={searchFishes}
-            onChange={(e) => setSearchFishes(e.target.value)}
-          />
-          <button type="submit">Sök</button>
-        </form>
+      <div>
+        <button onClick={handleShowLargestClick}>Visa de största fiskarna</button>
+        <button onClick={handleShowSmallestClick}>Visa de minsta fiskarna</button>
+      </div>
       );
   }
   
