@@ -11,7 +11,8 @@ function Fish({ fish }) {
           </Link>
         </h3> 
         <p>{fish.message}</p> 
-        <p>Likes: {fish.likes_count}</p> 
+        <p>Likes: {fish.likes_count}</p>
+        <p>{fish.user.username}</p>
       </div>
     );
   }

@@ -12,7 +12,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .filters import FishFilter
 
 
-
+#----------------------------------------------------------------------LIKE/UNLIKE FISH
 @api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated])
 def like_unlike_fish(request, pk):
@@ -42,23 +42,26 @@ def like_unlike_fish(request, pk):
         return Response({"detail": "Fish liked"}, status=status.HTTP_201_CREATED)
     
 
+
 class FishList(generics.ListCreateAPIView):
     queryset = Fish.objects.all()
     serializer_class = FishSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly] # Allow GET for everyone, require authentication for POST
+
+
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    filterset_class = FishFilter
+    filterset_class = FishFilter #för likes_count
     search_fields = ('user__username', 'message', 'fish_type')
 
     #sök efter de största eller de minska fiskarna
     def get_queryset(self):
         queryset = super().get_queryset()
         largest = self.request.query_params.get('largest', None)
-        smallest = self.request.query_params.get('smallest', None)
+        # smallest = self.request.query_params.get('smallest', None)
         if largest:
-            queryset = queryset.filter(like_count__gt=10) #gt = större än, se filters.py
-        elif smallest:
-            queryset = queryset.filter(like_count__lte=10) #lte = mindre än, se filters.py
+            queryset = queryset.filter(like_count__gt=1) #gt = större än, se filters.py
+        # elif smallest:
+        #     queryset = queryset.filter(like_count__lte=10) #lte = mindre än, se filters.py
         return queryset
 
     def get_queryset(self):
