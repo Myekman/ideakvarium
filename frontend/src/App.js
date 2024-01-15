@@ -3,8 +3,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Fishtank from './pages/Fishtank';
 import FishDetail from './pages/FishDetail';
-import LoginForm from '../src/pages/auth/SigninForm'
-import Register from '../src/pages/auth/RegistrationForm'
+import LoginForm from './pages/auth/SigninForm';
+// import Register from './pages/auth/RegistrationForm';
 import Navbar from './pages/components/Navbar';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
         } />
         <Route path="/fiskar/:pk" element={<FishDetail />} />
         <Route path="/login" element={<LoginForm />} />
-        <Route path="/register" element={<Register />} />
+        {/* <Route path="/register" element={<Register />} /> */}
       </Routes>
     </Router>
   );

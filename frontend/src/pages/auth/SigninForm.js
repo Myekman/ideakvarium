@@ -6,7 +6,6 @@ function LoginForm({ onLoginSuccess }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -15,7 +14,7 @@ function LoginForm({ onLoginSuccess }) {
         password: password,
       });
       // Anropa onLoginSuccess med token och användarinfo
-      onLoginSuccess(response.data.token, response.data.user);
+      onLoginSuccess(response.data.key, response.data.user);
       // Rensa formuläret
       setUsername('');
       setPassword('');
