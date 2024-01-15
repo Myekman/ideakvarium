@@ -53,17 +53,6 @@ class FishList(generics.ListCreateAPIView):
     filterset_class = FishFilter #för likes_count
     search_fields = ('user__username', 'message', 'fish_type')
 
-    #sök efter de största eller de minska fiskarna
-    # def get_queryset(self):
-    #     queryset = super().get_queryset()
-    #     largest = self.request.query_params.get('largest', None)
-    #     smallest = self.request.query_params.get('smallest', None)
-    #     # smallest = self.request.query_params.get('smallest', None)
-    #     if largest:
-    #         # Antag att en "stor fisk" har fler likes än 90% av alla fiskar
-    #         threshold = queryset.annotate(like_count=Count('likes')).aggregate(ninetieth_percentile=Percentile('like_count', 0.9))['ninetieth_percentile']
-    #         queryset = queryset.filter(likes__count__gt=threshold)
-    #     elif smallest:
 
     #     return queryset
     def get_queryset(self):
