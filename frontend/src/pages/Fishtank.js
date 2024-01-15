@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Fish from './Fish';
 import SearchBigFishes from './SearchFishes';
-import Login from './auth/SigninForm';
-import Register from './auth/RegistrationForm';
 
 
 function Fishtank() {
@@ -90,9 +88,6 @@ function Fishtank() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button onClick={handleSearch}>Sök</button>
-
-          <Login />
-          <Register />
 
           <SearchBigFishes onSearch={handleFilter} />
           {fishes.map(fish => (
