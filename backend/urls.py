@@ -18,7 +18,14 @@ from django.contrib import admin
 from django.urls import path, include
 from .views import root_route
 from rest_framework.authtoken.views import obtain_auth_token
+# from django.views.decorators.csrf import csrf_exempt
 from dj_rest_auth.views import LogoutView  # Import the built-in LogoutView
+from dj_rest_auth.views import LoginView
+
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 urlpatterns = [
     path('', root_route),
@@ -26,8 +33,12 @@ urlpatterns = [
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path('dj-rest-auth/logout/', LogoutView.as_view(), name='rest_logout'),   # Use the built-in LogoutView
+    # path('dj-rest-auth/login/', csrf_exempt(LoginView.as_view()), name='rest_login'),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),  # Token login endpoint
     path('api-auth/', include('rest_framework.urls')),  # Lägger till inloggningssidan
 
     path('api/', include('fiskar.urls')),
+
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]

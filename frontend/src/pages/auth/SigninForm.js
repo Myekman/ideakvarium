@@ -1,26 +1,39 @@
-// LoginForm.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Importera useHistory hook från react-router-dom
 
-function LoginForm({ onLoginSuccess }) {
+function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // Använd useHistory hook för att omdirigera användaren
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/dj-rest-auth/login/', {
+      const response = await axios.post('/api/token/', {
         username: username,
         password: password,
       });
-      // Anropa onLoginSuccess med token och användarinfo
-      onLoginSuccess(response.data.key, response.data.user);
+      console.log('Inloggning lyckades! Användarnamn:', username); 
+      // Spara JWT i localStorage eller på annat säkert sätt
+      localStorage.setItem('access_token', response.data.access);
+      localStorage.setItem('refresh_token', response.data.refresh);
       // Rensa formuläret
       setUsername('');
       setPassword('');
+      // Omdirigera användaren till en annan sida, t.ex. hem
+      navigate('/'); // Byt ut '/home' mot den rutt du vill omdirigera till
     } catch (error) {
-      console.error('Login error', error.response);
-      // Visa felmeddelande
+      if (error.response) {
+        // Servern svarade med en statuskod som inte är inom 2xx-intervallet
+        console.error('Login error', error.response.status, error.response.data);
+      } else if (error.request) {
+        // Förfrågan gjordes men inget svar mottogs
+        console.error('Login error', error.request);
+      } else {
+        // Något gick fel vid skapandet av förfrågan
+        console.error('Login error', error.message);
+      }
     }
   };
 

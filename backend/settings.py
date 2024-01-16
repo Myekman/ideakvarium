@@ -39,11 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'dj_rest_auth',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',
     'django_filters',
+    'rest_framework_simplejwt',
     'corsheaders',
     'fiskar',
 ]
@@ -70,23 +72,32 @@ CSRF_TRUSTED_ORIGINS = (
 
 #----------------------------------------------------------------Rekomenderas för produktion
 # CORS_ALLOW_ALL_ORIGINS = False
-# CORS_ALLOWED_ORIGINS = [
-#     "https://example.com",
-#     "https://sub.example.com",
-#     "http://localhost:3000",  # React's default port
-#     "http://127.0.0.1:9000",  # Some other port
-# ]
+CORS_ALLOWED_ORIGINS = [
+    # "https://example.com",
+    # "https://sub.example.com",
+    "http://localhost:3000"  # React's default port
+    # "http://127.0.0.1:9000",  # Some other port
+]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
     # ...
 }
+
+REST_USE_JWT = True
+
+JWT_AUTH_SECURE = True
+
+JWT_AUTH_COOKIE ='my-app-auth'
+JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
+JWT_AUTH_SAMESITE = 'None'
 
 ROOT_URLCONF = 'backend.urls'
 
