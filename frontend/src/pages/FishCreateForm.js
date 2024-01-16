@@ -26,7 +26,7 @@ const PostCreateFish = () => {
         if (!token) {
         console.log('Ingen token hittades');
         }
-      const response = await axiosReq.post('/api/fiskar/', fishData);
+      const response = await axiosReq.post('/fiskar/', fishData);
       console.log(response.data);
       // Återställ formuläret eller hantera framgångsrik skapelse här
       setFishData({

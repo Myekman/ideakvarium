@@ -19,7 +19,7 @@ function App() {
           </>
         } />
         <Route path="/fiskar/:pk" element={<FishDetail />} />
-        <Route path="/fiskar" element={<FishCreateForm />} />
+        <Route path="/fiskar/create" element={<FishCreateForm />} />
         <Route path="/login" element={<LoginForm />} />
         {/* <Route path="/register" element={<Register />} /> */}
       </Routes>
