@@ -22,7 +22,7 @@ function LoginForm() {
       setUsername('');
       setPassword('');
       // Omdirigera användaren till en annan sida, t.ex. hem
-      navigate('/'); // Byt ut '/home' mot den rutt du vill omdirigera till
+      navigate('/'); 
     } catch (error) {
       if (error.response) {
         // Servern svarade med en statuskod som inte är inom 2xx-intervallet
