@@ -14,8 +14,7 @@ const Navbar = () => {
         console.log('Access token:', localStorage.getItem('access_token')); // bör vara null
         console.log('Refresh token:', localStorage.getItem('refresh_token')); // bör vara null
 
-        // Omdirigera användaren till inloggningssidan eller startsidan
-        navigate('/'); // Anpassa sökvägen efter din routingkonfiguration
+        navigate('/'); 
     };
 
 

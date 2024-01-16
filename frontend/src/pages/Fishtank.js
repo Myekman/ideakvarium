@@ -30,7 +30,7 @@ function Fishtank() {
       if (loading) return <div>Loading...</div>;
       if (error) return <div>Error: {error.message}</div>;
 
-
+      // sök efter de största / minsta fskarna
       const handleFilter = (searchFishes) => {
         setLoading(true);
         let searchQuery = '';
@@ -55,9 +55,9 @@ function Fishtank() {
           });
       };
 
+      // sök efter fiskar med ord, tex username, fishtype eller messsage.
       const handleSearch = () => {
         setLoading(true);
-        // Använd söktermen som en query-parameter för att filtrera fiskarna
         fetch(`http://127.0.0.1:8000/api/fiskar?search=${searchTerm}`)
           .then((response) => {
             if (!response.ok) {
@@ -93,8 +93,6 @@ function Fishtank() {
           {fishes.map(fish => (
             <Fish key={fish.id} fish={fish} />
           ))}
-          {/* {loading && <p>Loading...</p>}
-          {!loading && fishes.map((fish) => <Fish key={fish.id} fish={fish} />)} */}
       </div>
       );
     }

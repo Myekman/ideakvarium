@@ -18,6 +18,8 @@ function LoginForm() {
       // Spara JWT i localStorage eller på annat säkert sätt
       localStorage.setItem('access_token', response.data.access);
       localStorage.setItem('refresh_token', response.data.refresh);
+      console.log('Access token:', localStorage.getItem('access_token')); 
+      console.log('Refresh token:', localStorage.getItem('refresh_token')); 
       // Rensa formuläret
       setUsername('');
       setPassword('');

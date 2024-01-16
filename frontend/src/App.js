@@ -6,6 +6,7 @@ import FishDetail from './pages/FishDetail';
 import LoginForm from './pages/auth/SigninForm';
 // import Register from './pages/auth/RegistrationForm';
 import Navbar from './pages/components/Navbar';
+import FishCreateForm from './pages/FishCreateForm';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           </>
         } />
         <Route path="/fiskar/:pk" element={<FishDetail />} />
+        <Route path="/fiskar" element={<FishCreateForm />} />
         <Route path="/login" element={<LoginForm />} />
         {/* <Route path="/register" element={<Register />} /> */}
       </Routes>
