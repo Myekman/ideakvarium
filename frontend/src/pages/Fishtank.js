@@ -37,7 +37,7 @@ function Fishtank() {
         if (searchFishes === 'largest') {
           searchQuery = 'like_count__gt=1';
         }
-        fetch(`http://127.0.0.1:8000/api/fiskar?${searchQuery}`)
+        fetch(`http://127.0.0.1:8000/api/fiskar/?${searchQuery}`)
           .then((response) => {
             if (!response.ok) {
               throw new Error('Network response was not ok');
@@ -58,7 +58,7 @@ function Fishtank() {
       // sök efter fiskar med ord, tex username, fishtype eller messsage.
       const handleSearch = () => {
         setLoading(true);
-        fetch(`http://127.0.0.1:8000/api/fiskar?search=${searchTerm}`)
+        fetch(`http://127.0.0.1:8000/api/fiskar/?search=${searchTerm}`)
           .then((response) => {
             if (!response.ok) {
               throw new Error('Network response was not ok');

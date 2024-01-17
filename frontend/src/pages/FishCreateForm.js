@@ -41,13 +41,13 @@ const PostCreateFish = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
+      {/* <input
         type="text"
         name="title"
         value={fishData.title}
         onChange={handleInputChange}
         placeholder="Titel"
-      />
+      /> */}
       <input
         type="text"
         name="message"
@@ -62,9 +62,8 @@ const PostCreateFish = () => {
       >
         <option value="">Välj en fishtyp</option>
         <option value="goldfish">Guldfisk</option>
-        <option value="koi">Koi</option>
-        <option value="betta">Betta</option>
-        {/* Lägg till fler alternativ här baserat på dina fishtyper */}
+        <option value="clownfish">Clownfish</option>
+        <option value="anglerfish">Anglerfish</option>
       </select>
       <button type="submit">Skapa Fisk</button>
     </form>
