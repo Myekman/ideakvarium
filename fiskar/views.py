@@ -25,13 +25,12 @@ def like_unlike_fish(request, pk):
     existing_like = fish.likes.filter(user=user).first()
 
     if existing_like:
-        # User already liked the fish, unlike it
+        # user already liked teh fish, unlike it
         existing_like.delete()
-         # Decrement like_count
-        # Fish.objects.filter(pk=pk).update(like_count=F('like_count') - 1)
         fish.like_count = fish.likes.count()  # Update like_count after unliking
         fish.save(update_fields=['like_count'])
-        return Response({"detail": "Fish unliked"}, status=status.HTTP_200_OK)
+        liked = False
+        # return Response({"detail": "Fish unliked"}, status=status.HTTP_200_OK)
     else:
         # User did not like the fish, like it
         fish.likes.create(user=user)
@@ -39,8 +38,11 @@ def like_unlike_fish(request, pk):
         # Fish.objects.filter(pk=pk).update(like_count=F('like_count') + 1)
         fish.like_count = fish.likes.count()  # Update like_count after liking
         fish.save(update_fields=['like_count'])
-        return Response({"detail": "Fish liked"}, status=status.HTTP_201_CREATED)
-    
+        liked = True
+
+    return Response({"like_count": fish.like_count, "is_liked": liked}, status=status.HTTP_200_OK if existing_like else status.HTTP_201_CREATED)
+    # return Response({"detail": "Fish liked"}, status=status.HTTP_201_CREATED)
+
 
 
 class FishList(generics.ListCreateAPIView):

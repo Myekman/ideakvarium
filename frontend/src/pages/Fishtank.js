@@ -78,6 +78,17 @@ function Fishtank() {
 
       if (loading) return <div>Loading...</div>;
       if (error) return <div>Error: {error.message}</div>;
+
+
+    const handleLikeUpdate = (fishId, newLikeCount, isLiked) => {
+      setFishes(prevFishes =>
+        prevFishes.map(fish =>
+          fish.id === fishId
+            ? { ...fish, like_count: newLikeCount, isLiked: !isLiked }
+            : fish
+        )
+      );
+    };
     
       return (
         <div>
@@ -91,7 +102,7 @@ function Fishtank() {
 
           <SearchBigFishes onSearch={handleFilter} />
           {fishes.map(fish => (
-            <Fish key={fish.id} fish={fish} />
+            <Fish key={fish.id} fish={fish} onLikeUpdate={handleLikeUpdate}/>
           ))}
       </div>
       );
