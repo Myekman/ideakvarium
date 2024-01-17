@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axiosReq from './components/axiosReq';
 
 // Fish.js
 function Fish({ fish, onLikeUpdate }) {
-  const [isLiked, setIsLiked] = useState(fish.isLiked);
+  const [userHasLiked, setUserHasLiked] = useState(fish.isLiked);
+
+    
+  // useEffect(() => {
+  //   // Detta tvingar en omrendering när fish.likes_count ändras
+  // }, [fish.likes_count]);
 
   const handleLikeClick = async () => {
     try {
@@ -13,10 +18,13 @@ function Fish({ fish, onLikeUpdate }) {
          // Använd det nya like_count och is_liked från backend-svaret
          const newLikeCount = response.data.like_count;
          const isLiked = response.data.is_liked;
+
+          // Logga det nya likes_count värdet i konsolen
+          console.log(`New likes count for fish ${fish.id}:`, newLikeCount);
  
          // Uppdatera fiskens information i Fishtank-komponenten
-         setIsLiked(isLiked)
-         onLikeUpdate(fish.id, newLikeCount, isLiked);
+         setUserHasLiked(userHasLiked)
+         onLikeUpdate(fish.id, newLikeCount, userHasLiked);
       }
     } catch (error) {
       console.error('Error liking/unliking fish:', error);
@@ -36,7 +44,7 @@ function Fish({ fish, onLikeUpdate }) {
         <p>Likes: {fish.likes_count}</p>
         <p>{fish.user.username}</p>
         <button onClick={handleLikeClick}>
-          {fish.isLiked ? 'Unlike' : 'Like'}
+          {userHasLiked ? 'Unlike' : 'Like'}
         </button>
       </div>
     );
