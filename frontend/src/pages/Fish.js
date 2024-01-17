@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axiosReq from './components/axiosReq';
 
 // Fish.js
 function Fish({ fish, onLikeUpdate }) {
+  const [isLiked, setIsLiked] = useState(fish.isLiked);
+
   const handleLikeClick = async () => {
     try {
       const response = await axiosReq.post(`/fiskar/${fish.id}/like-unlike/`);
@@ -13,6 +15,7 @@ function Fish({ fish, onLikeUpdate }) {
          const isLiked = response.data.is_liked;
  
          // Uppdatera fiskens information i Fishtank-komponenten
+         setIsLiked(isLiked)
          onLikeUpdate(fish.id, newLikeCount, isLiked);
       }
     } catch (error) {

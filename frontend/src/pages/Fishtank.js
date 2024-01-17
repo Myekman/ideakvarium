@@ -84,7 +84,7 @@ function Fishtank() {
       setFishes(prevFishes =>
         prevFishes.map(fish =>
           fish.id === fishId
-            ? { ...fish, like_count: newLikeCount, isLiked: !isLiked }
+            ? { ...fish, like_count: newLikeCount, isLiked: isLiked }
             : fish
         )
       );
