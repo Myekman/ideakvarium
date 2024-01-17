@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { Link } from 'react-router-dom';
 import axiosReq from './components/axiosReq';
 
@@ -17,7 +17,7 @@ function Fish({ fish, onLikeUpdate }) {
       if (response.status === 200 || response.status === 201) {
          // Använd det nya like_count och is_liked från backend-svaret
          const newLikeCount = response.data.like_count;
-         const isLiked = response.data.is_liked;
+         const userHasLiked = response.data.is_liked;
 
           // Logga det nya likes_count värdet i konsolen
           console.log(`New likes count for fish ${fish.id}:`, newLikeCount);
