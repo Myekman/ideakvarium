@@ -34,8 +34,6 @@ def like_unlike_fish(request, pk):
     else:
         # User did not like the fish, like it
         fish.likes.create(user=user)
-         # Increment like_count
-        # Fish.objects.filter(pk=pk).update(like_count=F('like_count') + 1)
         fish.like_count = fish.likes.count()  # Update like_count after liking
         fish.save(update_fields=['like_count'])
         liked = True
@@ -43,7 +41,24 @@ def like_unlike_fish(request, pk):
     return Response({"like_count": fish.like_count, "is_liked": liked}, status=status.HTTP_200_OK if existing_like else status.HTTP_201_CREATED)
     # return Response({"detail": "Fish liked"}, status=status.HTTP_201_CREATED)
 
+# # Potentiell vy för QR-kod användare (icke-autentiserade)
+# @api_view(['POST'])
+# @permission_classes([AllowAny])
+# def like_fish_via_qr(request, pk):
+#     # Antag att vi har validerat QR-koden och att det är en giltig förfrågan
+#     try:
+#         fish = Fish.objects.get(pk=pk)
+#         # Öka like_count atomärt
+#         fish.like_count = F('like_count') + 1
+#         fish.save()
+#         # Uppdatera instansen för att få det nya värdet av like_count
+#         fish.refresh_from_db()
+#     except Fish.DoesNotExist:
+#         return Response({"detail": "Fish not found"}, status=status.HTTP_404_NOT_FOUND)
+#     return Response({"like_count": fish.like_count}, status=status.HTTP_201_CREATED)
 
+# # Observera att i ovanstående exempel kommer vi inte att kontrollera om en användare redan har gillat fisken,
+# # eftersom vi antar att icke-autentiserade användare inte har ett konto att associera med 'likes'.
 
 class FishList(generics.ListCreateAPIView):
     queryset = Fish.objects.all()

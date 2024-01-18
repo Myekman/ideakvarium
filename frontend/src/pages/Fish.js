@@ -6,11 +6,6 @@ import axiosReq from './components/axiosReq';
 function Fish({ fish, onLikeUpdate }) {
   const [userHasLiked, setUserHasLiked] = useState(fish.isLiked);
 
-    
-  // useEffect(() => {
-  //   // Detta tvingar en omrendering när fish.likes_count ändras
-  // }, [fish.likes_count]);
-
   const handleLikeClick = async () => {
     try {
       const response = await axiosReq.post(`/fiskar/${fish.id}/like-unlike/`);
@@ -21,14 +16,15 @@ function Fish({ fish, onLikeUpdate }) {
 
           // Logga det nya likes_count värdet i konsolen
           console.log(`New likes count for fish ${fish.id}:`, newLikeCount);
- 
+          // console.log(onLikeUpdate);
+          // console.log(handleLikeClick);
+
          // Uppdatera fiskens information i Fishtank-komponenten
-         setUserHasLiked(userHasLiked)
+         setUserHasLiked(userHasLiked);
          onLikeUpdate(fish.id, newLikeCount, userHasLiked);
       }
     } catch (error) {
       console.error('Error liking/unliking fish:', error);
-      // Hantera fel, t.ex. visa ett felmeddelande för användaren
     }
   };
 
