@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-// import axios from "axios";
+import styles from "../../styles/NavBar.module.css";
+
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -19,14 +20,14 @@ const Navbar = () => {
 
 
     return (
-        <div>
+        <div className={styles.Navbar}>
             <Link to='/register'>
                 <p>Register</p>
             </Link>
             <Link to='/login'>
                 <p>login</p>
             </Link>
-            <button onClick={handleSignOut}>
+            <button className={styles.LogOutBtn} onClick={handleSignOut}>
                 <p>logout</p>
             </button>
         </div>

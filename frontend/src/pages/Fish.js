@@ -4,7 +4,7 @@ import axiosReq from './components/axiosReq';
 
 // Fish.js
 function Fish({ fish, onLikeUpdate }) {
-  const [userHasLiked, setUserHasLiked] = useState(fish.isLiked);
+  const [userHasLiked, setUserHasLiked] = useState(fish.userHasLiked);
 
   const handleLikeClick = async () => {
     try {
