@@ -8,6 +8,8 @@ import LoginForm from './pages/auth/SigninForm';
 import Navbar from './pages/components/Navbar';
 import FishCreateForm from './pages/FishCreateForm';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 function App() {
   return (
     <Router>
