@@ -2,6 +2,11 @@ import React, { useState} from 'react';
 import { Link } from 'react-router-dom';
 import axiosReq from './components/axiosReq';
 
+import ClownfiskImage from '../assets/images/clownfisk.png';
+import SvärdfiskImage from '../assets/images/svärdfisk.png';
+import BlåsfiskImage from '../assets/images/blåsfisk.png';
+import BläckfiskImage from '../assets/images/bläckfisk.png';
+
 // Fish.js
 function Fish({ fish, onLikeUpdate }) {
   const [userHasLiked, setUserHasLiked] = useState(fish.userHasLiked);
@@ -29,13 +34,26 @@ function Fish({ fish, onLikeUpdate }) {
   };
 
 
+  let FishImage;
+  if (fish.fish_type === 'svärdfisk') {
+    FishImage = <img src={SvärdfiskImage} alt="Svärdfisk" />;
+  } else if (fish.fish_type === 'clownfisk') {
+    FishImage = <img src={ClownfiskImage} alt="Clownfisk" />;
+  } else if (fish.fish_type === 'bläckfisk') {
+    FishImage = <img src={BläckfiskImage} alt="Bläckfisk"/>;
+  } else if (fish.fish_type === 'blåsfisk') {
+    FishImage = <img src={BlåsfiskImage} alt="Blåsfisk"/>;
+  }
+
+
     return (
       <div className="fish">
         <h3>
           <Link to={`/fiskar/${fish.id}`}>
             {fish.fish_type}
           </Link>
-        </h3> 
+        </h3>
+        {FishImage}
         <p>{fish.message}</p> 
         <p>Likes: {fish.likes_count}</p>
         <p>{fish.user.username}</p>
