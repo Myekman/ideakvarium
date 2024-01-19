@@ -61,9 +61,10 @@ const PostCreateFish = () => {
         onChange={handleInputChange}
       >
         <option value="">Välj en fishtyp</option>
-        <option value="goldfish">Guldfisk</option>
-        <option value="clownfish">Clownfish</option>
-        <option value="anglerfish">Anglerfish</option>
+        <option value="svärdfisk">Svärdfisk</option>
+        <option value="clownfisk">Clownfish</option>
+        <option value="bläckfisk">Bläckfisk</option>
+        <option value="blåsfisk">Blåsfisk</option>
       </select>
       <button type="submit">Skapa Fisk</button>
     </form>

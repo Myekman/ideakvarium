@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../../styles/NavBar.module.css";
-// import { Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -27,9 +27,9 @@ const Navbar = () => {
             <Link to='/login'>
                 <p>login</p>
             </Link>
-            {/* <Button variant="secondary" onClick={handleSignOut}>
+            <Button variant="secondary" onClick={handleSignOut}>
                 <p>logout</p>
-            </Button> */}
+            </Button>
         </div>
     )
 }

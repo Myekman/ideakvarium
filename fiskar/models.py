@@ -3,9 +3,10 @@ from django.contrib.auth.models import User
 
 class Fish(models.Model):
     FISH_TYPES = [
-        ('goldfish', 'Goldfish'),
-        ('clownfish', 'Clownfish'),
-        ('anglerfish', 'Anglerfish'),
+        ('svärdfisk', 'Svärdfisk'),
+        ('clownfisk', 'Clownfisk'),
+        ('bläckfisk', 'Bläckfisk'),
+        ('blåsfisk', 'Blåsfisk'),
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
