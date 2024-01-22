@@ -1,0 +1,20 @@
+/* fish.module.css */
+.fish-default {
+    width: 100px;
+}
+  
+.fish-small {
+    width: 20px;
+}
+  
+.fish-medium {
+    width: 300px;
+}
+  
+.fish-large {
+    width: 400px;
+}
+
+/* .fishpost {
+    background-color: beige;
+} */

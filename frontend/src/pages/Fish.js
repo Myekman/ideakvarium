@@ -6,10 +6,30 @@ import ClownfiskImage from '../assets/images/clownfisk.png';
 import SvärdfiskImage from '../assets/images/svärdfisk.png';
 import BlåsfiskImage from '../assets/images/blåsfisk.png';
 import BläckfiskImage from '../assets/images/bläckfisk.png';
+import fishstyles from '../styles/Fish.module.css';
 
 // Fish.js
 function Fish({ fish, onLikeUpdate }) {
   const [userHasLiked, setUserHasLiked] = useState(fish.userHasLiked);
+
+  const getFishSizeClass = (likesCount) => {
+    if (likesCount > 30) {
+      return 'fish-large';
+    } else if (likesCount > 20) {
+      return 'fish-medium';
+    } else if (likesCount > 10) {
+      return 'fish-small';
+    } else {
+      return 'fish-default';
+    }
+  };
+
+  // Sedan använder vi funktionen för att få storleksklassen baserat på antal likes
+  const sizeClass = getFishSizeClass(fish.like_count);
+    // Lägg till dessa loggar för felsökning
+    console.log('sizeClass:', sizeClass);
+    console.log('fishstyles:', fishstyles);
+    console.log(`Klassnamn som appliceras: ${fishstyles[sizeClass]}`);
 
   const handleLikeClick = async () => {
     try {
@@ -21,8 +41,6 @@ function Fish({ fish, onLikeUpdate }) {
 
           // Logga det nya likes_count värdet i konsolen
           console.log(`New likes count for fish ${fish.id}:`, newLikeCount);
-          // console.log(onLikeUpdate);
-          // console.log(handleLikeClick);
 
          // Uppdatera fiskens information i Fishtank-komponenten
          setUserHasLiked(userHasLiked);
@@ -36,23 +54,23 @@ function Fish({ fish, onLikeUpdate }) {
 
   let FishImage;
   if (fish.fish_type === 'svärdfisk') {
-    FishImage = <img src={SvärdfiskImage} alt="Svärdfisk" />;
+    FishImage = <img src={SvärdfiskImage} alt="Svärdfisk" className={fishstyles[sizeClass]}/>;
   } else if (fish.fish_type === 'clownfisk') {
-    FishImage = <img src={ClownfiskImage} alt="Clownfisk" />;
+    FishImage = <img src={ClownfiskImage} alt="Clownfisk" className={fishstyles[sizeClass]}/>;
   } else if (fish.fish_type === 'bläckfisk') {
-    FishImage = <img src={BläckfiskImage} alt="Bläckfisk"/>;
+    FishImage = <img src={BläckfiskImage} alt="Bläckfisk" className={fishstyles[sizeClass]}/>;
   } else if (fish.fish_type === 'blåsfisk') {
-    FishImage = <img src={BlåsfiskImage} alt="Blåsfisk"/>;
+    FishImage = <img src={BlåsfiskImage} alt="Blåsfisk" className={fishstyles[sizeClass]}/>;
   }
 
 
     return (
-      <div className="fish">
-        <h3>
+      <div className={fishstyles.fishpost}>
+        <div>
           <Link to={`/fiskar/${fish.id}`}>
             {FishImage}
           </Link>
-        </h3>
+        </div>
         {fish.title}
         <p>{fish.message}</p> 
         <p>Likes: {fish.likes_count}</p>
