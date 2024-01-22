@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Fish from './Fish';
 import SearchBigFishes from './SearchFishes';
+import { Container } from 'react-bootstrap';
 
 
 function Fishtank() {
@@ -91,20 +92,22 @@ function Fishtank() {
     };
     
       return (
-        <div>
-           <input
-            type="text"
-            placeholder="Sök..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <button onClick={handleSearch}>Sök</button>
+        <Container>
+          <div>
+            <input
+              type="text"
+              placeholder="Sök..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <button onClick={handleSearch}>Sök</button>
 
-          <SearchBigFishes onSearch={handleFilter} />
-          {fishes.map(fish => (
-            <Fish key={fish.id} fish={fish} onLikeUpdate={handleLikeUpdate}/>
-          ))}
-      </div>
+            <SearchBigFishes onSearch={handleFilter} />
+            {fishes.map(fish => (
+              <Fish key={fish.id} fish={fish} onLikeUpdate={handleLikeUpdate}/>
+            ))}
+          </div>
+        </Container>
       );
     }
     

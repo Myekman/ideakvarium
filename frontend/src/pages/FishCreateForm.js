@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axiosReq from './components/axiosReq';
+import { Container } from 'react-bootstrap';
 
 const PostCreateFish = () => {
   const [fishData, setFishData] = useState({
@@ -40,34 +41,36 @@ const PostCreateFish = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-       <input
-        type="text"
-        name="title"
-        value={fishData.title}
-        onChange={handleInputChange}
-        placeholder="Rubrik"
-      />
-      <input
-        type="text"
-        name="message"
-        value={fishData.message}
-        onChange={handleInputChange}
-        placeholder="Meddelande"
-      />
-      <select
-        name="fish_type"
-        value={fishData.fish_type}
-        onChange={handleInputChange}
-      >
-        <option value="">Välj en fishtyp</option>
-        <option value="svärdfisk">Svärdfisk</option>
-        <option value="clownfisk">Clownfish</option>
-        <option value="bläckfisk">Bläckfisk</option>
-        <option value="blåsfisk">Blåsfisk</option>
-      </select>
-      <button type="submit">Skapa Fisk</button>
-    </form>
+    <Container>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="title"
+          value={fishData.title}
+          onChange={handleInputChange}
+          placeholder="Rubrik"
+        />
+        <input
+          type="text"
+          name="message"
+          value={fishData.message}
+          onChange={handleInputChange}
+          placeholder="Meddelande"
+        />
+        <select
+          name="fish_type"
+          value={fishData.fish_type}
+          onChange={handleInputChange}
+        >
+          <option value="">Välj en fishtyp</option>
+          <option value="svärdfisk">Svärdfisk</option>
+          <option value="clownfisk">Clownfish</option>
+          <option value="bläckfisk">Bläckfisk</option>
+          <option value="blåsfisk">Blåsfisk</option>
+        </select>
+        <button type="submit">Skapa Fisk</button>
+      </form>
+    </Container>
   );
 };
 
