@@ -10,13 +10,14 @@ class Fish(models.Model):
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.TextField(max_length=30, default='Title') 
     message = models.TextField()
     like_count = models.PositiveIntegerField(default=0)
     fish_type = models.CharField(max_length=20, choices=FISH_TYPES)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.get_fish_type_display()} #{self.id}: {self.message} {self.user}"
+        return f"{self.get_fish_type_display()} #{self.id}: {self.message} {self.title} {self.user}"
     
 
 class Like(models.Model):

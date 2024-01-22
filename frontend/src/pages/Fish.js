@@ -50,10 +50,10 @@ function Fish({ fish, onLikeUpdate }) {
       <div className="fish">
         <h3>
           <Link to={`/fiskar/${fish.id}`}>
-            {fish.fish_type}
+            {FishImage}
           </Link>
         </h3>
-        {FishImage}
+        {fish.title}
         <p>{fish.message}</p> 
         <p>Likes: {fish.likes_count}</p>
         <p>{fish.user.username}</p>

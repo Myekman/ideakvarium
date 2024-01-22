@@ -68,7 +68,7 @@ class FishList(generics.ListCreateAPIView):
 
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     filterset_class = FishFilter #för likes_count
-    search_fields = ('user__username', 'message', 'fish_type')
+    search_fields = ('user__username', 'message', 'title', 'fish_type')
 
 
     #     return queryset

@@ -41,13 +41,13 @@ const PostCreateFish = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* <input
+       <input
         type="text"
         name="title"
         value={fishData.title}
         onChange={handleInputChange}
-        placeholder="Titel"
-      /> */}
+        placeholder="Rubrik"
+      />
       <input
         type="text"
         name="message"
