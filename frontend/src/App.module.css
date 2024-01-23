@@ -1,5 +1,5 @@
 .appContainer {
     background-color: aqua;
-    /* height: 100vh; */
-    height: 2000px;
+    height: 100vh;
+    /* height: 2000px; */
 }

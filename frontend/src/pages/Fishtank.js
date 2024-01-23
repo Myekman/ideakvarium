@@ -11,26 +11,10 @@ function Fishtank() {
     const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
 
-// useEffect för att hämta alla fiskar
-    // useEffect(() => {
-    //     setLoading(true);
-    //     fetch('http://127.0.0.1:8000/api/fiskar/') 
-    //       .then(response => {
-    //         if (!response.ok) {
-    //           throw new Error('Network response was not ok');
-    //         }
-    //         return response.json();
-    //       })
-    //       .then(data => {
-    //         setFishes(data);
-    //         setLoading(false);
-    //       })
-    //       .catch(error => {
-    //         setError(error);
-    //         setLoading(false);
-    //       });
-    //   }, []);
+    // Anta att det tar 20 sekunder för en fisk att simma över skärmen
+    const fishAnimationDuration = 20000;
 
+  // useEffect för att hämta alla fiskar
   useEffect(() => {
     const fetchFishes = async () => {
       try {
@@ -51,6 +35,7 @@ function Fishtank() {
     fetchFishes();
   }, []);
 
+  // use effect för att hämta 5 fiskar åt gången 
   useEffect(() => {
     if (fishes.length > 0) {
       setDisplayedFishes(fishes.slice(0, 5));
@@ -63,7 +48,7 @@ function Fishtank() {
 
       return () => clearInterval(interval);
     }
-  }, [fishes]); // Den här useEffect beror på `fishes`
+  }, fishAnimationDuration); // Synkronisera med animationstiden
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
