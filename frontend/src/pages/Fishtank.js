@@ -31,25 +31,6 @@ function Fishtank() {
     //       });
     //   }, []);
 
-
-    // useEffect(() => {
-    //   if (fishes.length > 0) {
-    //     setDisplayedFishes(fishes.slice(0, 5));
-    //     const interval = setInterval(() => {
-    //       setDisplayedFishes(prevDisplayedFishes => {
-    //         const startIndex = (fishes.indexOf(prevDisplayedFishes[0]) + 5) % fishes.length;
-    //         return fishes.slice(startIndex, startIndex + 5);
-    //       });
-    //     }, 10000); // Byt ut fiskarna var 10:e sekund
-
-    //     return () => clearInterval(interval);
-    //   }
-    // }, [fishes]); // Den här useEffect beror på `fishes`
-    
-    //   if (loading) return <div>Loading...</div>;
-    //   if (error) return <div>Error: {error.message}</div>;
-
-      // Använd inte useEffect inuti några villkor eller tidiga returer
   useEffect(() => {
     const fetchFishes = async () => {
       try {
@@ -151,7 +132,7 @@ function Fishtank() {
     
       return (
         <Container>
-          <div>
+          <div className={fishstyles.fishtank}>
             <input
               type="text"
               placeholder="Sök..."

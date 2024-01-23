@@ -1,6 +1,7 @@
 import React, { useState} from 'react';
 import { Link } from 'react-router-dom';
 import axiosReq from './components/axiosReq';
+import FishAnimated from './components/FishAnnimation';
 
 import ClownfiskImage from '../assets/images/clownfisk.png';
 import SvärdfiskImage from '../assets/images/svärdfisk.png';
@@ -61,8 +62,15 @@ function Fish({ fish, onLikeUpdate }) {
   }
 
 
+  // const fishStyle = {
+  //   top: `${Math.random() * (500 - 100) + 100}px`, 
+  //   left: `${Math.random() * (500 - 100) + 100}px`, 
+  // };
+
+
     return (
-      <div className={fishstyles.fishpost}>
+      // <div className={fishstyles.fish} style={fishStyle}>
+      <FishAnimated style={{ position: 'absolute' }}>
         <div>
           <Link to={`/fiskar/${fish.id}`}>
             {FishImage}
@@ -75,7 +83,7 @@ function Fish({ fish, onLikeUpdate }) {
         <button onClick={handleLikeClick}>
           {userHasLiked ? 'Unlike' : 'Like'}
         </button>
-      </div>
+      </FishAnimated>
     );
   }
   
