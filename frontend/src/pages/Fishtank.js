@@ -3,6 +3,7 @@ import Fish from './Fish';
 import SearchBigFishes from './SearchFishes';
 import { Container } from 'react-bootstrap';
 import fishstyles from '../styles/Fish.module.css';
+import FishAnimated from './components/FishAnnimation';
 
 function Fishtank() {
     const [fishes, setFishes] = useState([]);
@@ -12,7 +13,7 @@ function Fishtank() {
     const [searchTerm, setSearchTerm] = useState('');
 
     // Anta att det tar 20 sekunder för en fisk att simma över skärmen
-    const fishAnimationDuration = 20000;
+    // const fishAnimationDuration = 20000;
 
   // useEffect för att hämta alla fiskar
   useEffect(() => {
@@ -44,11 +45,11 @@ function Fishtank() {
           const startIndex = (fishes.indexOf(prevDisplayedFishes[0]) + 5) % fishes.length;
           return fishes.slice(startIndex, startIndex + 5);
         });
-      }, 10000); // Byt ut fiskarna var 10:e sekund
+      }, 20000); // byt ut fiskar
 
       return () => clearInterval(interval);
     }
-  }, fishAnimationDuration); // Synkronisera med animationstiden
+  }, [fishes]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -127,8 +128,11 @@ function Fishtank() {
             <button onClick={handleSearch}>Sök</button>
 
             <SearchBigFishes onSearch={handleFilter} />
-            {displayedFishes.map(fish => (
-              <Fish key={fish.id} fish={fish} onLikeUpdate={handleLikeUpdate}/>
+
+            {displayedFishes.map((fish, index) => (
+              <FishAnimated key={fish.id} index={index}>
+                <Fish key={fish.id} fish={fish} onLikeUpdate={handleLikeUpdate}/>
+              </FishAnimated>
             ))}
           </div>
         </Container>

@@ -1,7 +1,6 @@
 import React, { useState} from 'react';
 import { Link } from 'react-router-dom';
 import axiosReq from './components/axiosReq';
-import FishAnimated from './components/FishAnnimation';
 
 import ClownfiskImage from '../assets/images/clownfisk.png';
 import SvärdfiskImage from '../assets/images/svärdfisk.png';
@@ -69,8 +68,7 @@ function Fish({ fish, onLikeUpdate }) {
 
 
     return (
-      // <div className={fishstyles.fish} style={fishStyle}>
-      <FishAnimated style={{ position: 'absolute' }}>
+      <div>
         <div>
           <Link to={`/fiskar/${fish.id}`}>
             {FishImage}
@@ -83,7 +81,7 @@ function Fish({ fish, onLikeUpdate }) {
         <button onClick={handleLikeClick}>
           {userHasLiked ? 'Unlike' : 'Like'}
         </button>
-      </FishAnimated>
+      </div>
     );
   }
   

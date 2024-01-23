@@ -1,49 +1,43 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSpring, animated } from '@react-spring/web';
 
-const FishAnimated = ({ children, style: additionalStyle, delay }) => {
-    const [style, api] = useSpring(() => ({
-        from: {
-          x: -100, // Starta utanför skärmen till vänster
-          y: Math.random() * window.innerHeight,
-        },
-        to: {
-          x: window.innerWidth + 100, // Slutposition utanför skärmen till höger
-        },
-        config: {
-          duration: 20000, // Animationens varaktighet på 20 sekunder
-        },
-        delay: delay, // Startfördröjning för varje fisk
-      }));
+const FishAnimated = ({ children, style: additionalStyle, index }) => {
+    // Beräkna en unik vertikal position och tidsförskjutning för varje fisk
+    const fishHeight = 600;
+     // Initiera en slumpmässig y-position inom tillåtna värden
+    const getRandomYPosition = () => Math.random() * (window.innerHeight - fishHeight);
 
-  useEffect(() => {
-    const moveFish = () => {
-      api.start({
-        x: window.innerWidth + 100, // Slutposition utanför skärmen till höger
-        y: Math.random() * window.innerHeight,
-        onRest: () => {
-          // När animationen är klar, börja om från vänster
-          api.start({
-            from: {
-              x: -100,
-              y: Math.random() * window.innerHeight,
-            }
-          });
-        },
-      });
+  
+    const [style] = useSpring(() => ({
+      from: {
+        x: -300, // Starta utanför skärmen till vänster
+        y: getRandomYPosition(), // Slumpmässig startposition i y-led
+      },
+      to: async (next) => {
+        // Använd en loop för att skapa oändlig animation
+        while (1) {
+            await next({ x: window.innerWidth + 100 }); // Simma till höger kant
+            await next({ x: -300, y: getRandomYPosition() }); // Återvänd till start och ändra y-position
+        }
+      },
+      config: {
+        duration: 20000,
+      },
+      delay: index * 4000, // Förskjutning baserat på index för att fiskarna ska starta vid olika tillfällen
+    }));
+
+     // Tillämpa additionalStyle för att positionera fiskarna inom appContainer
+    const combinedStyle = {
+        ...style,
+        ...additionalStyle,
+        position: 'absolute', // Lägg till denna för absolut positionering inom appContainer
     };
-
-    // Starta den första animationen direkt
-    moveFish();
-
-    // Du behöver inte längre ett interval här eftersom onRest tar hand om loopningen
-  }, [api]);
-
-  return (
-    <animated.div style={{ ...style, ...additionalStyle }}>
-      {children}
-    </animated.div>
-  );
-};
+  
+    return (
+      <animated.div style={combinedStyle}>
+        {children}
+      </animated.div>
+    );
+  };
 
 export default FishAnimated;
