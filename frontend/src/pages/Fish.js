@@ -26,10 +26,7 @@ function Fish({ fish, onLikeUpdate }) {
 
   // Sedan använder vi funktionen för att få storleksklassen baserat på antal likes
   const sizeClass = getFishSizeClass(fish.likes_count);
-    // Lägg till dessa loggar för felsökning
-    console.log('sizeClass:', sizeClass);
-    console.log('fishstyles:', fishstyles);
-    console.log(`Klassnamn som appliceras: ${fishstyles[sizeClass]}`);
+
 
   const handleLikeClick = async () => {
     try {
