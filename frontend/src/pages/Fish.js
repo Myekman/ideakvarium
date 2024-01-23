@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axiosReq from './components/axiosReq';
 
@@ -9,7 +9,7 @@ import BläckfiskImage from '../assets/images/bläckfisk.png';
 import fishstyles from '../styles/Fish.module.css';
 
 // Fish.js
-function Fish({ fish, onLikeUpdate }) {
+function Fish({ fish, onLikeUpdate, onSize }) {
   const [userHasLiked, setUserHasLiked] = useState(fish.userHasLiked);
 
   const getFishSizeClass = (likesCount) => {
@@ -59,12 +59,6 @@ function Fish({ fish, onLikeUpdate }) {
   } else if (fish.fish_type === 'blåsfisk') {
     FishImage = <img src={BlåsfiskImage} alt="Blåsfisk" className={fishstyles[sizeClass]}/>;
   }
-
-
-  // const fishStyle = {
-  //   top: `${Math.random() * (500 - 100) + 100}px`, 
-  //   left: `${Math.random() * (500 - 100) + 100}px`, 
-  // };
 
 
     return (

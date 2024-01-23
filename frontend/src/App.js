@@ -1,4 +1,4 @@
-import appstyles from '../src/App.module.css';
+// import appstyles from '../src/App.module.css';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Fishtank from './pages/Fishtank';
