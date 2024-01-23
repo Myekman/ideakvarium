@@ -12,8 +12,6 @@ function Fishtank() {
     const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
 
-    // Anta att det tar 20 sekunder för en fisk att simma över skärmen
-    // const fishAnimationDuration = 20000;
 
   // useEffect för att hämta alla fiskar
   useEffect(() => {

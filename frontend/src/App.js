@@ -8,13 +8,20 @@ import { UserProvider } from './pages/auth/UserContext';
 // import Register from './pages/auth/RegistrationForm';
 import NavigationBar from './pages/components/Navbar';
 import FishCreateForm from './pages/FishCreateForm';
-
+import background from '../src/assets/images/havet.jpg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
     <Router>
-      <div className={appstyles.appContainer}>
+      <div style={{ 
+        backgroundImage: `url(${background})`,
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center', 
+        backgroundRepeat: 'no-repeat', 
+        height: '100vh', 
+        overflow: 'hidden', 
+      }}>
       <UserProvider>
         <Routes>
             <Route path="/" element={
