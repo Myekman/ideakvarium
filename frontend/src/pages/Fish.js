@@ -13,11 +13,11 @@ function Fish({ fish, onLikeUpdate }) {
   const [userHasLiked, setUserHasLiked] = useState(fish.userHasLiked);
 
   const getFishSizeClass = (likesCount) => {
-    if (likesCount > 30) {
+    if (likesCount > 3) {
       return 'fish-large';
-    } else if (likesCount > 20) {
+    } else if (likesCount > 2) {
       return 'fish-medium';
-    } else if (likesCount > 10) {
+    } else if (likesCount > 1) {
       return 'fish-small';
     } else {
       return 'fish-default';
@@ -25,7 +25,7 @@ function Fish({ fish, onLikeUpdate }) {
   };
 
   // Sedan använder vi funktionen för att få storleksklassen baserat på antal likes
-  const sizeClass = getFishSizeClass(fish.like_count);
+  const sizeClass = getFishSizeClass(fish.likes_count);
     // Lägg till dessa loggar för felsökning
     console.log('sizeClass:', sizeClass);
     console.log('fishstyles:', fishstyles);

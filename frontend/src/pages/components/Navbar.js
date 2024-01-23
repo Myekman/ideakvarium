@@ -34,9 +34,9 @@ const NavigationBar = () => {
                 <Nav className="mr-auto">
                     {user ? (
                         <>
-                          <Nav.Item>
+                          {/* <Nav.Item>
                             <span className="navbar-text">Hej, {user.username}!</span>
-                          </Nav.Item>
+                          </Nav.Item> */}
                           <Nav.Item>
                             <Nav.Link onClick={handleSignOut}>Logga ut</Nav.Link>
                           </Nav.Item>
@@ -53,15 +53,6 @@ const NavigationBar = () => {
                     </Nav.Item>
                     </>
                     )}
-                {/* <Nav.Item>
-                    <Nav.Link as={NavLink} to="/Registrera">Registrera</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link as={NavLink} to="/login">Logga in</Nav.Link>
-                </Nav.Item> */}
-                {/* <Nav.Item>
-                    <Nav.Link onClick={handleSignOut}>Logga ut</Nav.Link>
-                </Nav.Item> */}
                 </Nav>
                 </Navbar.Collapse>
             </Navbar>

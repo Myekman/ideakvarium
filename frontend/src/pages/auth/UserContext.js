@@ -1,6 +1,7 @@
 // UserContext.js
 import React, { createContext, useContext, useState } from 'react';
-import axiosReq from '../components/axiosReq';
+// import axiosReq from '../components/axiosReq';
+import axios from 'axios';
 
 const UserContext = createContext(null);
 
@@ -11,7 +12,7 @@ export const UserProvider = ({ children }) => {
 
   const signIn = async (username, password) => {
     try {
-      const response = await axiosReq.post('/api/token/', {
+      const response = await axios.post('/api/token/', {
         username,
         password,
       });
