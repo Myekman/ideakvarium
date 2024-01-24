@@ -1,18 +1,22 @@
 /* fish.module.css */
 .fish-default {
-    width: 100px;
+    width: 80px;
+    overflow: hidden;
 }
   
 .fish-small {
-    width: 150px;
+    width: 120px;
+    overflow: hidden;
 }
   
 .fish-medium {
-    width: 200px;
+    width: 180px;
+    overflow: hidden;
 }
   
 .fish-large {
-    width: 350px;
+    width: 250px;
+    overflow: hidden;
 }
 
 .fish-tank {

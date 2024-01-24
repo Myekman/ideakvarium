@@ -43,7 +43,7 @@ function Fishtank() {
           const startIndex = (fishes.indexOf(prevDisplayedFishes[0]) + 5) % fishes.length;
           return fishes.slice(startIndex, startIndex + 5);
         });
-      }, 20000); // byt ut fiskar
+      }, 60000); // byt ut fiskar
 
       return () => clearInterval(interval);
     }
