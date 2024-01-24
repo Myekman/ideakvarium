@@ -8,6 +8,8 @@ from .models import Fish
 from .serializers import FishSerializer
 from backend.permissions import IsOwnerOrReadOnly
 from rest_framework import filters
+from django.db.models import Count
+
 
 from django_filters.rest_framework import DjangoFilterBackend
 from .filters import FishFilter
@@ -87,7 +89,35 @@ def like_unlike_fish(request, pk):
         fish.save(update_fields=['like_count'])
         return Response({"like_count": fish.like_count, "is_liked": liked}, status=status.HTTP_200_OK if existing_like else status.HTTP_201_CREATED)
 
+# class FishList(generics.ListCreateAPIView):
+#     queryset = Fish.objects.all()
+#     serializer_class = FishSerializer
+#     permission_classes = [permissions.AllowAny]  # Tillåt skapande och läsning för alla användare
 
+#     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+#     filterset_class = FishFilter
+#     search_fields = ('user__username', 'message', 'title', 'fish_type')
+
+#     def get_queryset(self):
+#         queryset = super().get_queryset()
+#         largest = self.request.query_params.get('largest', None)
+#         smallest = self.request.query_params.get('smallest', None)
+
+#         queryset = queryset.annotate(like_count=Count('likes'))
+
+#         if largest:
+#             ninetieth_percentile = queryset.aggregate(ninetieth_percentile=Percentile('like_count', 0.9))['ninetieth_percentile']
+#             queryset = queryset.filter(like_count__gt=ninetieth_percentile)
+#         elif smallest:
+#             tenth_percentile = queryset.aggregate(tenth_percentile=Percentile('like_count', 0.1))['tenth_percentile']
+#             queryset = queryset.filter(like_count__lte=tenth_percentile)
+
+#         return queryset
+
+#     def perform_create(self, serializer):
+#         # Om användaren är autentiserad, spara med den användaren, annars som None
+#         user = self.request.user if self.request.user.is_authenticated else None
+#         serializer.save(user=user)
 
 class FishList(generics.ListCreateAPIView):
     queryset = Fish.objects.all()
@@ -121,11 +151,9 @@ class FishList(generics.ListCreateAPIView):
         return queryset
 
 
-
     def get_queryset(self):
         return Fish.objects.all()
-        
-        
+
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 

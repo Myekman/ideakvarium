@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import axiosReq from './components/axiosReq';
-import { Container } from 'react-bootstrap';
+// import axios from 'axios';
+import { Container  } from 'react-bootstrap';
+import NavigationBar from './components/Navbar';
+
 
 const PostCreateFish = () => {
   const [fishData, setFishData] = useState({
@@ -20,15 +23,10 @@ const PostCreateFish = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Använd axiosReq-instansen för att göra POST-förfrågan
-      const token = localStorage.getItem('access_token');
-      console.log('Access token:', localStorage.getItem('access_token')); 
-      console.log('Refresh token:', localStorage.getItem('refresh_token')); 
-        if (!token) {
-        console.log('Ingen token hittades');
-        }
       const response = await axiosReq.post('/fiskar/', fishData);
       console.log(response.data);
+      console.log('Access token:', localStorage.getItem('access_token')); 
+      console.log('Refresh token:', localStorage.getItem('refresh_token')); 
       // Återställ formuläret eller hantera framgångsrik skapelse här
       setFishData({
         title: "",
@@ -42,6 +40,7 @@ const PostCreateFish = () => {
 
   return (
     <Container>
+      <NavigationBar />
       <form onSubmit={handleSubmit}>
         <input
           type="text"

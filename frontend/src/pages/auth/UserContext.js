@@ -1,5 +1,5 @@
 // UserContext.js
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 // import axiosReq from '../components/axiosReq';
 import axios from 'axios';
 
@@ -9,6 +9,12 @@ export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    console.log('User in NavBar:', user);
+    console.log('Access token:', localStorage.getItem('access_token')); 
+    console.log('Refresh token:', localStorage.getItem('refresh_token'));
+  }, [user]); // Logga användarstaten när den ändras
 
   const signIn = async (username, password) => {
     try {
@@ -20,7 +26,7 @@ export const UserProvider = ({ children }) => {
       localStorage.setItem('access_token', response.data.access);
       localStorage.setItem('refresh_token', response.data.refresh);
       console.log('Access token:', localStorage.getItem('access_token')); 
-      console.log('Refresh token:', localStorage.getItem('refresh_token')); 
+      console.log('Refresh token:', localStorage.getItem('refresh_token'));
       // Sätt användarstaten med relevant information
       setUser({ username });
       // Returnera true om inloggningen var framgångsrik
@@ -38,6 +44,7 @@ export const UserProvider = ({ children }) => {
     // Ta bort JWT från lokal lagring
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
+    console.log('User in NavBar:', user);
     console.log('Access token:', localStorage.getItem('access_token')); // bör vara null
     console.log('Refresh token:', localStorage.getItem('refresh_token')); // bör vara null
     setUser(null);
