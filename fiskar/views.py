@@ -9,6 +9,8 @@ from .serializers import FishSerializer
 from backend.permissions import IsOwnerOrReadOnly
 from rest_framework import filters
 from django.db.models import Count
+from django.db.models import F
+from django.db import IntegrityError 
 
 from .serializers import UserSerializer
 from django.contrib.auth.models import User
@@ -23,51 +25,16 @@ def get_user_info(request):
     # Användaren är redan autentiserad och `request.user` är användarobjektet
     serializer = UserSerializer(request.user)
     return Response(serializer.data)
-#----------------------------------------------------------------------LIKE/UNLIKE FISH
-# @api_view(['POST'])
-# @permission_classes([permissions.AllowAny])
-# def like_unlike_fish(request, pk):
-#     try:
-#         fish = Fish.objects.get(pk=pk)
-#     except Fish.DoesNotExist:
-#         return Response({"detail": "Fish not found"}, status=status.HTTP_404_NOT_FOUND)
 
-#     # Öka antalet likes för fisken
-#     fish.like_count += 1
-#     fish.save(update_fields=['like_count'])
 
-#     # Returnera det nya antalet likes
-#     return Response({"like_count": fish.like_count}, status=status.HTTP_200_OK)
+def get_user_or_guest(request):
+    if request.user.is_authenticated:
+        return request.user
+    else:
+        return User.objects.get(username='guestuser')
 
-#----------------------------------------------------------------------LIKE/UNLIKE FISH user
-# @api_view(['POST'])
-# @permission_classes([permissions.IsAuthenticated])
-# def like_unlike_fish(request, pk):
-#     try:
-#         fish = Fish.objects.get(pk=pk)
-#     except Fish.DoesNotExist:
-#         return Response({"detail": "Fish not found"}, status=status.HTTP_404_NOT_FOUND)
 
-#     user = request.user
-#     existing_like = fish.likes.filter(user=user).first()
-
-#     if existing_like:
-#         # user already liked teh fish, unlike it
-#         existing_like.delete()
-#         fish.like_count = fish.likes.count()  # Update like_count after unliking
-#         fish.save(update_fields=['like_count'])
-#         liked = False
-#         # return Response({"detail": "Fish unliked"}, status=status.HTTP_200_OK)
-#     else:
-#         # User did not like the fish, like it
-#         fish.likes.create(user=user)
-#         fish.like_count = fish.likes.count()  # Update like_count after liking
-#         fish.save(update_fields=['like_count'])
-#         liked = True
-   
-
-#     return Response({"like_count": fish.like_count, "is_liked": liked}, status=status.HTTP_200_OK if existing_like else status.HTTP_201_CREATED)
-
+    
 @api_view(['POST'])
 @permission_classes([permissions.AllowAny])
 def like_unlike_fish(request, pk):
@@ -76,56 +43,25 @@ def like_unlike_fish(request, pk):
     except Fish.DoesNotExist:
         return Response({"detail": "Fish not found"}, status=status.HTTP_404_NOT_FOUND)
 
-    if isinstance(request.user, AnonymousUser):
-        # --------------------------------------------------------------------------------------------------Logik för oautentiserade användare
-        fish.like_count += 1
-        fish.save(update_fields=['like_count'])
-        return Response({"like_count": fish.like_count}, status=status.HTTP_200_OK)
-    else:
-        # --------------------------------------------------------------------------------------------------Logik för autentiserade användare
-        user = request.user
-        existing_like = fish.likes.filter(user=user).first()
+    user = get_user_or_guest(request)
 
+    liked = False
+    if request.user.is_authenticated or user.username == 'guestuser':
+        existing_like = fish.likes.filter(user=user).first()
         if existing_like:
             existing_like.delete()
-            liked = False
         else:
             fish.likes.create(user=user)
             liked = True
+            print(f"User or guest attempting to like: {user.username}") 
 
+        # Uppdatera like_count direkt från databasen för att undvika race conditions
         fish.like_count = fish.likes.count()
         fish.save(update_fields=['like_count'])
-        return Response({"like_count": fish.like_count, "is_liked": liked}, status=status.HTTP_200_OK if existing_like else status.HTTP_201_CREATED)
 
-# class FishList(generics.ListCreateAPIView):
-#     queryset = Fish.objects.all()
-#     serializer_class = FishSerializer
-#     permission_classes = [permissions.AllowAny]  # Tillåt skapande och läsning för alla användare
+    return Response({"like_count": fish.like_count, "liked": liked}, status=status.HTTP_200_OK)
 
-#     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-#     filterset_class = FishFilter
-#     search_fields = ('user__username', 'message', 'title', 'fish_type')
 
-#     def get_queryset(self):
-#         queryset = super().get_queryset()
-#         largest = self.request.query_params.get('largest', None)
-#         smallest = self.request.query_params.get('smallest', None)
-
-#         queryset = queryset.annotate(like_count=Count('likes'))
-
-#         if largest:
-#             ninetieth_percentile = queryset.aggregate(ninetieth_percentile=Percentile('like_count', 0.9))['ninetieth_percentile']
-#             queryset = queryset.filter(like_count__gt=ninetieth_percentile)
-#         elif smallest:
-#             tenth_percentile = queryset.aggregate(tenth_percentile=Percentile('like_count', 0.1))['tenth_percentile']
-#             queryset = queryset.filter(like_count__lte=tenth_percentile)
-
-#         return queryset
-
-#     def perform_create(self, serializer):
-#         # Om användaren är autentiserad, spara med den användaren, annars som None
-#         user = self.request.user if self.request.user.is_authenticated else None
-#         serializer.save(user=user)
 
 class FishList(generics.ListCreateAPIView):
     queryset = Fish.objects.all()

@@ -12,6 +12,7 @@ import fishstyles from '../styles/Fish.module.css';
 function Fish({ fish, onLikeUpdate, onSize }) {
   const [userHasLiked, setUserHasLiked] = useState(fish.userHasLiked);
 
+
   const getFishSizeClass = (likesCount) => {
     if (likesCount > 3) {
       return 'fish-large';
@@ -35,8 +36,8 @@ function Fish({ fish, onLikeUpdate, onSize }) {
          // Använd det nya like_count och is_liked från backend-svaret
          const newLikeCount = response.data.like_count;
          const userHasLiked = response.data.is_liked;
-         console.log('Access token:', localStorage.getItem('access_token')); // bör vara null
-         console.log('Refresh token:', localStorage.getItem('refresh_token')); // bör vara null
+         console.log('Access token:', localStorage.getItem('access_token')); 
+         console.log('Refresh token:', localStorage.getItem('refresh_token')); 
 
           // Logga det nya likes_count värdet i konsolen
           console.log(`New likes count for fish ${fish.id}:`, newLikeCount);

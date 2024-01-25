@@ -54,8 +54,6 @@ export const UserProvider = ({ children }) => {
       // Spara JWT i localStorage eller på annat säkert sätt
       localStorage.setItem('access_token', response.data.access);
       localStorage.setItem('refresh_token', response.data.refresh);
-      console.log('Access token:', localStorage.getItem('access_token')); 
-      console.log('Refresh token:', localStorage.getItem('refresh_token'));
       // Sätt användarstaten med relevant information
       setUser({ username });
       // Returnera true om inloggningen var framgångsrik
@@ -73,10 +71,8 @@ export const UserProvider = ({ children }) => {
     // Ta bort JWT från lokal lagring
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
-    console.log('User in NavBar:', user);
-    console.log('Access token:', localStorage.getItem('access_token')); // bör vara null
-    console.log('Refresh token:', localStorage.getItem('refresh_token')); // bör vara null
     setUser(null);
+
   };
 
   return (
