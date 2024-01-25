@@ -25,9 +25,9 @@ class Like(models.Model):
     fish = models.ForeignKey(Fish, on_delete=models.CASCADE, related_name='likes')
     created_at = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
+    # class Meta:
         # Detta kommer att se till att en användare bara kan "like" en fisk en gång
-        unique_together = ('user', 'fish')
+        # unique_together = ('user', 'fish')
 
     def __str__(self):
         return f"{self.user.username} likes {self.fish.id}"

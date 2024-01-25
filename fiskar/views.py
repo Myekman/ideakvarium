@@ -34,7 +34,6 @@ def get_user_or_guest(request):
         return User.objects.get(username='guestuser')
 
 
-    
 @api_view(['POST'])
 @permission_classes([permissions.AllowAny])
 def like_unlike_fish(request, pk):
@@ -46,7 +45,11 @@ def like_unlike_fish(request, pk):
     user = get_user_or_guest(request)
 
     liked = False
-    if request.user.is_authenticated or user.username == 'guestuser':
+    if user.username == 'guestuser':
+        fish.likes.create(user=user)
+        liked = True
+        print(f"User or guest attempting to like: {user.username}")
+    elif request.user.is_authenticated:
         existing_like = fish.likes.filter(user=user).first()
         if existing_like:
             existing_like.delete()
@@ -54,10 +57,18 @@ def like_unlike_fish(request, pk):
             fish.likes.create(user=user)
             liked = True
             print(f"User or guest attempting to like: {user.username}") 
+    # if request.user.is_authenticated or user.username == 'guestuser':
+    #     existing_like = fish.likes.filter(user=user).first()
+    #     if existing_like:
+    #         existing_like.delete()
+    #     else:
+            # fish.likes.create(user=user)
+            # liked = True
+            # print(f"User or guest attempting to like: {user.username}") 
 
         # Uppdatera like_count direkt från databasen för att undvika race conditions
-        fish.like_count = fish.likes.count()
-        fish.save(update_fields=['like_count'])
+    fish.like_count = fish.likes.count()
+    fish.save(update_fields=['like_count'])
 
     return Response({"like_count": fish.like_count, "liked": liked}, status=status.HTTP_200_OK)
 
