@@ -3,9 +3,11 @@ import axiosReq from './components/axiosReq';
 // import axios from 'axios';
 import { Container  } from 'react-bootstrap';
 import NavigationBar from './components/Navbar';
+import { useUser } from './auth/UserContext';
 
 
 const PostCreateFish = () => {
+  const { user } = useUser();
   const [fishData, setFishData] = useState({
     title: "",
     message: "",
@@ -26,7 +28,11 @@ const PostCreateFish = () => {
       const response = await axiosReq.post('/fiskar/', fishData);
       console.log(response.data);
       console.log('Access token:', localStorage.getItem('access_token')); 
-      console.log('Refresh token:', localStorage.getItem('refresh_token')); 
+      console.log('Refresh token:', localStorage.getItem('refresh_token'));
+      console.log('User in NavBar:', user);
+      console.log('Fish created:', response.data);
+      // Logga fishData före återställning
+      console.log('Fish data before reset:', fishData);
       // Återställ formuläret eller hantera framgångsrik skapelse här
       setFishData({
         title: "",

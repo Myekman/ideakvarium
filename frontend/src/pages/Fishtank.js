@@ -3,11 +3,11 @@ import Fish from './Fish';
 import SearchBigFishes from './SearchFishes';
 import { Container } from 'react-bootstrap';
 import fishstyles from '../styles/Fish.module.css';
-import FishAnimated from './components/FishAnnimation';
+// import FishAnimated from './components/FishAnnimation';
 
 function Fishtank() {
     const [fishes, setFishes] = useState([]);
-    const [displayedFishes, setDisplayedFishes] = useState([]);
+    // const [displayedFishes, setDisplayedFishes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
@@ -35,19 +35,19 @@ function Fishtank() {
   }, []);
 
   // use effect för att hämta 5 fiskar åt gången 
-  useEffect(() => {
-    if (fishes.length > 0) {
-      setDisplayedFishes(fishes.slice(0, 5));
-      const interval = setInterval(() => {
-        setDisplayedFishes(prevDisplayedFishes => {
-          const startIndex = (fishes.indexOf(prevDisplayedFishes[0]) + 5) % fishes.length;
-          return fishes.slice(startIndex, startIndex + 5);
-        });
-      }, 60000); // byt ut fiskar
+  // useEffect(() => {
+  //   if (fishes.length > 0) {
+  //     setDisplayedFishes(fishes.slice(0, 5));
+  //     const interval = setInterval(() => {
+  //       setDisplayedFishes(prevDisplayedFishes => {
+  //         const startIndex = (fishes.indexOf(prevDisplayedFishes[0]) + 5) % fishes.length;
+  //         return fishes.slice(startIndex, startIndex + 5);
+  //       });
+  //     }, 60000); // byt ut fiskar
 
-      return () => clearInterval(interval);
-    }
-  }, [fishes]);
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [fishes]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -127,10 +127,10 @@ function Fishtank() {
 
             <SearchBigFishes onSearch={handleFilter} />
 
-            {displayedFishes.map((fish, index) => (
-              <FishAnimated key={fish.id} index={index}>
+            {fishes.map((fish, index) => (
+              // <FishAnimated key={fish.id} index={index}>
                 <Fish key={fish.id} fish={fish} onLikeUpdate={handleLikeUpdate}/>
-              </FishAnimated>
+              // </FishAnimated>
             ))}
           </div>
         </Container>

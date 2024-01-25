@@ -10,11 +10,19 @@ from backend.permissions import IsOwnerOrReadOnly
 from rest_framework import filters
 from django.db.models import Count
 
+from .serializers import UserSerializer
+from django.contrib.auth.models import User
+
 
 from django_filters.rest_framework import DjangoFilterBackend
 from .filters import FishFilter
 
-
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+def get_user_info(request):
+    # Användaren är redan autentiserad och `request.user` är användarobjektet
+    serializer = UserSerializer(request.user)
+    return Response(serializer.data)
 #----------------------------------------------------------------------LIKE/UNLIKE FISH
 # @api_view(['POST'])
 # @permission_classes([permissions.AllowAny])
@@ -122,7 +130,7 @@ def like_unlike_fish(request, pk):
 class FishList(generics.ListCreateAPIView):
     queryset = Fish.objects.all()
     serializer_class = FishSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly] # Allow GET for everyone, require authentication for POST
+    permission_classes = [permissions.AllowAny] # Allow GET for everyone, require authentication for POST
 
 
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
@@ -155,7 +163,10 @@ class FishList(generics.ListCreateAPIView):
         return Fish.objects.all()
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        user = self.request.user if self.request.user.is_authenticated else None
+        serializer.save(user=user)
+    # def perform_create(self, serializer):
+    #     serializer.save(user=self.request.user)
 
 
 class FishDetail(generics.RetrieveUpdateDestroyAPIView):
