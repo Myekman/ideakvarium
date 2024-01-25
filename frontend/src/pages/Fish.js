@@ -9,8 +9,8 @@ import BläckfiskImage from '../assets/images/bläckfisk.png';
 import fishstyles from '../styles/Fish.module.css';
 
 // Fish.js
-function Fish({ fish, onLikeUpdate, onSize }) {
-  const [userHasLiked, setUserHasLiked] = useState(fish.userHasLiked);
+function Fish({ fish, onLikeUpdate }) {
+  const [isLiked, setIsLiked] = useState(fish.isLiked);
 
 
   const getFishSizeClass = (likesCount) => {
@@ -35,7 +35,7 @@ function Fish({ fish, onLikeUpdate, onSize }) {
       if (response.status === 200 || response.status === 201) {
          // Använd det nya like_count och is_liked från backend-svaret
          const newLikeCount = response.data.like_count;
-         const userHasLiked = response.data.is_liked;
+         const isLiked = response.data.is_liked;
          console.log('Access token:', localStorage.getItem('access_token')); 
          console.log('Refresh token:', localStorage.getItem('refresh_token')); 
 
@@ -43,8 +43,8 @@ function Fish({ fish, onLikeUpdate, onSize }) {
           console.log(`New likes count for fish ${fish.id}:`, newLikeCount);
 
          // Uppdatera fiskens information i Fishtank-komponenten
-         setUserHasLiked(userHasLiked);
-         onLikeUpdate(fish.id, newLikeCount, userHasLiked);
+         setIsLiked(isLiked);
+         onLikeUpdate(fish.id, newLikeCount, isLiked);
       }
     } catch (error) {
       console.error('Error liking/unliking fish:', error);
@@ -76,7 +76,7 @@ function Fish({ fish, onLikeUpdate, onSize }) {
         <p>Likes: {fish.likes_count}</p>
         <p>{fish.user.username}</p>
         <button onClick={handleLikeClick}>
-          {userHasLiked ? 'Unlike' : 'Like'}
+          {isLiked ? 'Unlike' : 'Like'}
         </button>
       </div>
     );

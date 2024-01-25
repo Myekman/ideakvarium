@@ -61,7 +61,7 @@ def like_unlike_fish(request, pk):
     fish.like_count = fish.likes.count()
     fish.save(update_fields=['like_count'])
 
-    return Response({"like_count": fish.like_count, "liked": liked}, status=status.HTTP_200_OK)
+    return Response({"like_count": fish.like_count, "is_liked": liked}, status=status.HTTP_200_OK)
 
 
 
