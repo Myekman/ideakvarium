@@ -5,6 +5,7 @@ from rest_framework import generics,permissions
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Fish
+from .models import Like
 from .serializers import FishSerializer
 from backend.permissions import IsOwnerOrReadOnly
 from rest_framework import filters
@@ -25,6 +26,15 @@ def get_user_info(request):
     # Användaren är redan autentiserad och `request.user` är användarobjektet
     serializer = UserSerializer(request.user)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+ # Hämta alla 'Like'-objekt för den inloggade användaren
+def get_user_liked_fishes(request):
+    user = request.user
+    liked_fishes = Like.objects.filter(user=user).values_list('fish', flat=True)
+    return Response({"liked_fishes": list(liked_fishes)})
 
 
 def get_user_or_guest(request):

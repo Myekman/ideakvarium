@@ -20,7 +20,7 @@ from .views import root_route
 from rest_framework.authtoken.views import obtain_auth_token
 # from django.views.decorators.csrf import csrf_exempt
 from dj_rest_auth.views import LogoutView  # Import the built-in LogoutView
-from dj_rest_auth.views import LoginView
+# from dj_rest_auth.views import LoginView
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,

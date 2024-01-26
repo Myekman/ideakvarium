@@ -18,30 +18,65 @@ export const UserProvider = ({ children }) => {
   }, [user]); // Logga användarstaten när den ändras
 
 
+  // useEffect(() => {
+  //   const validateTokenAndSetUserState = async () => {
+  //     const accessToken = localStorage.getItem('access_token');
+  //     if (accessToken) {
+  //       try {
+  //         // Gör ett API-anrop för att validera access token.
+  //         const response = await axios.get('/api/user/', {
+  //           headers: { Authorization: `Bearer ${accessToken}` },
+  //         });
+  //         // Användarinformation hämtades framgångsrikt, uppdatera användarstaten.
+  //         setUser(response.data);
+  //       } catch (error) {
+  //         // Om token inte är giltig eller något annat fel inträffar, rensa tokens och sätt användarstaten till null.
+  //         localStorage.removeItem('access_token');
+  //         localStorage.removeItem('refresh_token');
+  //         setUser(null);
+  //       }
+  //     } else {
+  //       // Ingen access token finns, sätt användarstaten till null.
+  //       setUser(null);
+  //     }
+  //   };
+  
+  //   validateTokenAndSetUserState();
+  // }, []);
+
   useEffect(() => {
-    const validateTokenAndSetUserState = async () => {
+    const validateAndRefreshToken = async () => {
       const accessToken = localStorage.getItem('access_token');
-      if (accessToken) {
+      const refreshToken = localStorage.getItem('refresh_token');
+  
+      if (accessToken && refreshToken) {
         try {
-          // Gör ett API-anrop för att validera access token.
-          const response = await axios.get('/api/user/', {
-            headers: { Authorization: `Bearer ${accessToken}` },
+          // Validera access token genom att göra en förfrågan till en skyddad resurs
+          // Ersätt '/api/user/' med den faktiska resursen du vill använda för validering
+          await axios.get('/api/user/', {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
           });
-          // Användarinformation hämtades framgångsrikt, uppdatera användarstaten.
-          setUser(response.data);
+          // Om förfrågan lyckas, är access token fortfarande giltig
+          setUser({ token: accessToken });
         } catch (error) {
-          // Om token inte är giltig eller något annat fel inträffar, rensa tokens och sätt användarstaten till null.
-          localStorage.removeItem('access_token');
-          localStorage.removeItem('refresh_token');
-          setUser(null);
+          if (error.response && error.response.status === 401) {
+            // Om access token är utgånget, använd refresh token för att få ett nytt access token
+            try {
+              const response = await axios.post('/api/token/refresh/', { refresh: refreshToken });
+              localStorage.setItem('access_token', response.data.access);
+              setUser({ token: response.data.access });
+            } catch (refreshError) {
+              // Om förnyelse misslyckas, logga ut användaren
+              logOut();
+            }
+          }
         }
-      } else {
-        // Ingen access token finns, sätt användarstaten till null.
-        setUser(null);
       }
     };
   
-    validateTokenAndSetUserState();
+    validateAndRefreshToken();
   }, []);
 
 

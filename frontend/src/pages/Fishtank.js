@@ -124,6 +124,7 @@ function Fishtank() {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
             <button onClick={handleSearch}>Sök</button>
+            {/* <p>hej {user.username}!</p> */}
 
             <SearchBigFishes onSearch={handleFilter} />
 

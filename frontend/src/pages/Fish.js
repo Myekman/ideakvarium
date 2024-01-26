@@ -8,8 +8,11 @@ import BlåsfiskImage from '../assets/images/blåsfisk.png';
 import BläckfiskImage from '../assets/images/bläckfisk.png';
 import fishstyles from '../styles/Fish.module.css';
 
+import { useUser } from './auth/UserContext';
+
 // Fish.js
 function Fish({ fish, onLikeUpdate }) {
+  const { user } = useUser();
   const [isLiked, setIsLiked] = useState(fish.isLiked);
 
 
@@ -37,7 +40,8 @@ function Fish({ fish, onLikeUpdate }) {
          const newLikeCount = response.data.like_count;
          const isLiked = response.data.is_liked;
          console.log('Access token:', localStorage.getItem('access_token')); 
-         console.log('Refresh token:', localStorage.getItem('refresh_token')); 
+         console.log('Refresh token:', localStorage.getItem('refresh_token'));
+         console.log('User in NavBar:', user);
 
           // Logga det nya likes_count värdet i konsolen
           console.log(`New likes count for fish ${fish.id}:`, newLikeCount);
