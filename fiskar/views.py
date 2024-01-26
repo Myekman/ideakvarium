@@ -41,15 +41,16 @@ def like_unlike_fish(request, pk):
         fish = Fish.objects.get(pk=pk)
     except Fish.DoesNotExist:
         return Response({"detail": "Fish not found"}, status=status.HTTP_404_NOT_FOUND)
-
+  
     user = get_user_or_guest(request)
 
-    liked = False
+   
     if user.username == 'guestuser':
         fish.likes.create(user=user)
-        liked = True
+        # liked = True
         print(f"User or guest attempting to like: {user.username}")
     elif request.user.is_authenticated:
+        liked = False
         existing_like = fish.likes.filter(user=user).first()
         if existing_like:
             existing_like.delete()
@@ -57,11 +58,16 @@ def like_unlike_fish(request, pk):
             fish.likes.create(user=user)
             liked = True
             print(f"User or guest attempting to like: {user.username}") 
- 
+
+        fish.like_count = fish.likes.count()
+        fish.save(update_fields=['like_count'])
+        return Response({"like_count": fish.like_count, "is_liked": liked}, status=status.HTTP_200_OK)
+    
+    # Om vi når denna punkt är det en gästanvändare som har utfört åtgärden
     fish.like_count = fish.likes.count()
     fish.save(update_fields=['like_count'])
-
-    return Response({"like_count": fish.like_count, "is_liked": liked}, status=status.HTTP_200_OK)
+    # Skicka inte med 'is_liked' i svaret för gästanvändare
+    return Response({"like_count": fish.like_count}, status=status.HTTP_200_OK)
 
 
 
@@ -101,7 +107,7 @@ class FishList(generics.ListCreateAPIView):
         return Fish.objects.all()
 
     def perform_create(self, serializer):
-        user = self.request.user if self.request.user.is_authenticated else None
+        user = get_user_or_guest(self.request)
         serializer.save(user=user)
     # def perform_create(self, serializer):
     #     serializer.save(user=self.request.user)
