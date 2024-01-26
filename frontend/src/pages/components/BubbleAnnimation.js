@@ -1,31 +1,35 @@
 import React from 'react';
 import { useSpring, animated } from '@react-spring/web';
 
+import bubbelImage from '../../assets/images/bubblablå.png';
+
+
+const getRandomSize = () => Math.random() * (60 - 10) + 10;
+
 const BubbleAnimated = ({ index }) => {
-    const bubbleWidth = 20; // Bredden på bubblan
-  
-    // Initiera en slumpmässig x-position inom tillåtna värden
-    const getRandomXPosition = () => Math.random() * (window.innerWidth - bubbleWidth);
+    // const bubbelSize = 50; // Bredden på bubblan
+    const bubbelSize = getRandomSize();
+    const getRandomXPosition = () => Math.random() * (window.innerWidth - bubbelSize);
   
     const [style, api] = useSpring(() => ({
       from: {
         x: getRandomXPosition(), // Slumpmässig startposition i x-led
-        y: window.innerHeight + bubbleWidth, // Starta utanför skärmen nedtill
+        y: window.innerHeight + bubbelSize, // Starta utanför skärmen nedtill
       },
       to: {
-        y: -bubbleWidth, // Flytta bubblan uppåt tills den är utanför skärmen
+        y: -bubbelSize, // Flytta bubblan uppåt tills den är utanför skärmen
       },
       config: {
-        duration: 15000, // Varaktighet för att bubblan ska nå toppen
+        duration: 20000, // Varaktighet för att bubblan ska nå toppen
       },
-      delay: index * 2000, // Förskjutning baserat på index för att bubblorna ska starta vid olika tillfällen
+      delay: index * 600, // Förskjutning baserat på index för att bubblorna ska starta vid olika tillfällen
       onRest: () => {
         // Återställ animationen när den är färdig
         api.start({
-          from: { x: getRandomXPosition(), y: window.innerHeight + bubbleWidth },
-          to: { y: -bubbleWidth },
+          from: { x: getRandomXPosition(), y: window.innerHeight + bubbelSize },
+          to: { y: -bubbelSize },
           config: { duration: 15000 },
-          delay: 0, // Du kan välja att inte ha någon fördröjning efter återställningen om du vill
+          delay: index * 600,
         });
       },
     }));
@@ -35,10 +39,11 @@ const BubbleAnimated = ({ index }) => {
         style={{
           ...style,
           position: 'absolute',
-          width: `${bubbleWidth}px`,
-          height: `${bubbleWidth}px`,
-          borderRadius: '50%',
-          background: 'rgba(255,255,255,0.7)',
+          width: `${bubbelSize}px`,
+          height: `${bubbelSize}px`,
+          backgroundImage: `url(${bubbelImage})`,
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
           // Lägg till andra stilar du vill ha för din bubbla
         }}
       />
