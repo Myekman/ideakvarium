@@ -6,7 +6,6 @@ const FishAnimated = ({ children, style: additionalStyle, index }) => {
     const fishWidth = 600;
      // Initiera en slumpmässig y-position inom tillåtna värden
     const getRandomYPosition = () => Math.random() * (window.innerHeight - fishWidth);
-
   
     const [style, api] = useSpring(() => ({
       from: {
@@ -22,14 +21,15 @@ const FishAnimated = ({ children, style: additionalStyle, index }) => {
       delay: index * 4000, // Förskjutning baserat på index för att fiskarna ska starta vid olika tillfällen
       onRest: () => {
         // Återställ fisken till vänster sida när den når höger sida
-        api.start({
-          from: { x: -fishWidth, y: getRandomYPosition() },
-          to: { x: window.innerWidth },
-          config: { duration: 20000 },
-          delay: 0, // Du kan lägga till en fördröjning här om du vill
-        });
-      },
+          api.start({
+            from: { x: -fishWidth, y: getRandomYPosition() },
+            to: { x: window.innerWidth },
+            config: { duration: 20000 },
+            delay: 0, // Du kan lägga till en fördröjning här om du vill
+          });
+        },
     }));
+
 
      // Tillämpa additionalStyle för att positionera fiskarna inom appContainer
     const combinedStyle = {
@@ -39,7 +39,8 @@ const FishAnimated = ({ children, style: additionalStyle, index }) => {
     };
   
     return (
-      <animated.div style={combinedStyle}>
+      <animated.div style={combinedStyle}
+      >
         {children}
       </animated.div>
     );

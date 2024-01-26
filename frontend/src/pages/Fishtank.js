@@ -130,7 +130,7 @@ function Fishtank() {
 
             {displayedFishes.map((fish, index) => (
               <FishAnimated key={fish.id} index={index}>
-                <Fish key={fish.id} fish={fish} onLikeUpdate={handleLikeUpdate}/>
+                <Fish fish={fish} onLikeUpdate={handleLikeUpdate}/>
               </FishAnimated>
             ))}
           </div>

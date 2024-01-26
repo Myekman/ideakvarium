@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import axiosReq from './components/axiosReq';
 
 import ClownfiskImage from '../assets/images/clownfisk.png';
@@ -71,9 +71,9 @@ function Fish({ fish, onLikeUpdate }) {
     return (
       <div>
         <div>
-          <Link to={`/fiskar/${fish.id}`}>
+          {/* <Link to={`/fiskar/${fish.id}`}> */}
             {FishImage}
-          </Link>
+          {/* </Link> */}
         </div>
         {fish.title}
         <p>{fish.message}</p> 
