@@ -44,6 +44,40 @@ export const UserProvider = ({ children }) => {
   //   validateTokenAndSetUserState();
   // }, []);
 
+  // useEffect(() => {
+  //   const validateAndRefreshToken = async () => {
+  //     const accessToken = localStorage.getItem('access_token');
+  //     const refreshToken = localStorage.getItem('refresh_token');
+  
+  //     if (accessToken && refreshToken) {
+  //       try {
+  //         // Validera access token genom att göra en förfrågan till en skyddad resurs
+  //         await axios.get('/api/user/', {
+  //           headers: {
+  //             Authorization: `Bearer ${accessToken}`,
+  //           },
+  //         });
+  //         // Om förfrågan lyckas, är access token fortfarande giltig
+  //         setUser({ token: accessToken });
+  //       } catch (error) {
+  //         if (error.response && error.response.status === 401) {
+  //           // Om access token är utgånget, använd refresh token för att få ett nytt access token
+  //           try {
+  //             const response = await axios.post('/api/token/refresh/', { refresh: refreshToken });
+  //             localStorage.setItem('access_token', response.data.access);
+  //             setUser({ token: response.data.access });
+  //           } catch (refreshError) {
+  //             // Om förnyelse misslyckas, logga ut användaren
+  //             logOut();
+  //           }
+  //         }
+  //       }
+  //     }
+  //   };
+  
+  //   validateAndRefreshToken();
+  // }, []);
+
   useEffect(() => {
     const validateAndRefreshToken = async () => {
       const accessToken = localStorage.getItem('access_token');
@@ -52,21 +86,34 @@ export const UserProvider = ({ children }) => {
       if (accessToken && refreshToken) {
         try {
           // Validera access token genom att göra en förfrågan till en skyddad resurs
-          // Ersätt '/api/user/' med den faktiska resursen du vill använda för validering
-          await axios.get('/api/user/', {
+          const response = await axios.get('/api/user/', {
             headers: {
               Authorization: `Bearer ${accessToken}`,
             },
           });
           // Om förfrågan lyckas, är access token fortfarande giltig
-          setUser({ token: accessToken });
+          // Spara både token och användarinformation från serverns svar
+          setUser({ 
+            token: accessToken, 
+            ...response.data 
+          });
         } catch (error) {
           if (error.response && error.response.status === 401) {
             // Om access token är utgånget, använd refresh token för att få ett nytt access token
             try {
-              const response = await axios.post('/api/token/refresh/', { refresh: refreshToken });
-              localStorage.setItem('access_token', response.data.access);
-              setUser({ token: response.data.access });
+              const tokenResponse = await axios.post('/api/token/refresh/', { refresh: refreshToken });
+              const newAccessToken = tokenResponse.data.access;
+              localStorage.setItem('access_token', newAccessToken);
+              // Efter att ha fått en ny access token, hämta användarinformation igen
+              const userResponse = await axios.get('/api/user/', {
+                headers: {
+                  Authorization: `Bearer ${newAccessToken}`,
+                },
+              });
+              setUser({ 
+                token: newAccessToken, 
+                ...userResponse.data 
+              });
             } catch (refreshError) {
               // Om förnyelse misslyckas, logga ut användaren
               logOut();

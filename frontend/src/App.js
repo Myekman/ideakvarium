@@ -10,19 +10,24 @@ import NavigationBar from './pages/components/Navbar';
 import FishCreateForm from './pages/FishCreateForm';
 import background from '../src/assets/images/havet.jpg';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Bubbles from './pages/components/BubbleAnnimation';
+
 
 function App() {
   return (
     <Router>
-      <div style={{ 
+      <div id="bubbels-container" style={{ 
         backgroundImage: `url(${background})`,
         backgroundSize: 'cover', 
         backgroundPosition: 'center', 
         backgroundRepeat: 'no-repeat', 
-        height: '100vh', 
-        overflow: 'hidden', 
+        height: '100vh',
+        width: '100%',
+        overflow: 'hidden',
+        position: 'relative',
       }}>
       <UserProvider>
+      <Bubbles count={20} />
         <Routes>
             <Route path="/" element={
               <>

@@ -39,9 +39,9 @@ function Fish({ fish, onLikeUpdate }) {
          // Använd det nya like_count och is_liked från backend-svaret
          const newLikeCount = response.data.like_count;
          const isLiked = response.data.is_liked;
-         console.log('Access token:', localStorage.getItem('access_token')); 
-         console.log('Refresh token:', localStorage.getItem('refresh_token'));
-         console.log('User in NavBar:', user);
+        //  console.log('Access token:', localStorage.getItem('access_token')); 
+        //  console.log('Refresh token:', localStorage.getItem('refresh_token'));
+         console.log('User liked:', user);
 
           // Logga det nya likes_count värdet i konsolen
           console.log(`New likes count for fish ${fish.id}:`, newLikeCount);
