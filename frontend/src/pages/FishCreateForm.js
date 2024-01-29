@@ -4,11 +4,13 @@ import axiosReq from './components/axiosReq';
 import { Container  } from 'react-bootstrap';
 import NavigationBar from './components/Navbar';
 import { useUser } from './auth/UserContext';
+import Fish from './Fish';
 // import Bubbles from './components/BubbleAnnimation';
 
 
 const PostCreateFish = () => {
   const { user } = useUser();
+  const [createdFish, setCreatedFish] = useState(null);
   const [fishData, setFishData] = useState({
     title: "",
     message: "",
@@ -43,6 +45,13 @@ const PostCreateFish = () => {
     } catch (error) {
       console.error('Det gick inte att skapa fisk', error);
     }
+
+    setCreatedFish(fishData);
+  };
+
+  const handleLikeUpdate = (fishId, newLikeCount, isLiked) => {
+    // Om du inte vill hantera 'likes' här, kan du lämna den här tom eller logga till konsolen.
+    console.log(`Fish ${fishId} has ${newLikeCount} likes and isLiked is ${isLiked}.`);
   };
 
   return (
@@ -77,6 +86,9 @@ const PostCreateFish = () => {
         </select>
         <button type="submit">Skapa Fisk</button>
       </form>
+      {createdFish && (
+        <Fish fish={createdFish} onLikeUpdate={handleLikeUpdate}/>
+      )}
     </Container>
   );
 };
