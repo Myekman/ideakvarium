@@ -18,6 +18,13 @@ export const UserProvider = ({ children }) => {
   }, [user]); // Logga användarstaten när den ändras
 
 
+  useEffect(() => {
+    // Om ingen användare är inloggad, sätt en default 'guestuser'
+    if (!user) {
+      setUser({ username: 'guestuser' });
+    }
+  }, [user, setUser]);
+
   // useEffect(() => {
   //   const validateTokenAndSetUserState = async () => {
   //     const accessToken = localStorage.getItem('access_token');

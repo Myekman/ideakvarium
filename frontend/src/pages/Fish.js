@@ -19,11 +19,14 @@ function Fish({ fish, onLikeUpdate }) {
 
   useEffect(() => {
     const checkIfLiked = async () => {
+      // Om det är 'guestuser', sätt inte 'isLiked' eftersom 'guestuser' kan gilla obegränsat
+      if (user.username === 'guestuser') {
+        return;
+      }
+      // om användaren inte är guestuser, hämta listan och visa rätt värde på like/unlike
       try {
-        // Använd `axios` för att göra en GET-förfrågan till din 'liked-fishes' endpoint
         const response = await axios.get('/api/liked-fishes/');
         if (response.status === 200) {
-          // Kontrollera om den aktuella fisken finns i listan över 'liked' fiskar
           setIsLiked(response.data.liked_fishes.includes(fish.id));
         }
       } catch (error) {
@@ -31,10 +34,8 @@ function Fish({ fish, onLikeUpdate }) {
       }
     };
   
-    // Anropa funktionen när komponenten monteras
     checkIfLiked();
-    // Lägg till de variabler som `useEffect` är beroende av
-  }, [user, fish.id]);
+  }, [user, fish.id]); 
 
 
   const getFishSizeClass = (likesCount) => {
