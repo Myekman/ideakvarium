@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import { Link } from 'react-router-dom';
 import axiosReq from './components/axiosReq';
 
@@ -9,11 +9,32 @@ import BläckfiskImage from '../assets/images/bläckfisk.png';
 import fishstyles from '../styles/Fish.module.css';
 
 import { useUser } from './auth/UserContext';
+import axios from 'axios';
 
 // Fish.js
 function Fish({ fish, onLikeUpdate }) {
   const { user } = useUser();
   const [isLiked, setIsLiked] = useState(fish.isLiked);
+
+
+  useEffect(() => {
+    const checkIfLiked = async () => {
+      try {
+        // Använd `axios` för att göra en GET-förfrågan till din 'liked-fishes' endpoint
+        const response = await axios.get('/api/liked-fishes/');
+        if (response.status === 200) {
+          // Kontrollera om den aktuella fisken finns i listan över 'liked' fiskar
+          setIsLiked(response.data.liked_fishes.includes(fish.id));
+        }
+      } catch (error) {
+        console.error('Error checking if fish is liked:', error);
+      }
+    };
+  
+    // Anropa funktionen när komponenten monteras
+    checkIfLiked();
+    // Lägg till de variabler som `useEffect` är beroende av
+  }, [user, fish.id]);
 
 
   const getFishSizeClass = (likesCount) => {

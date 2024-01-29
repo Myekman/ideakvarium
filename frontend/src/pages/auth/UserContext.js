@@ -44,39 +44,6 @@ export const UserProvider = ({ children }) => {
   //   validateTokenAndSetUserState();
   // }, []);
 
-  // useEffect(() => {
-  //   const validateAndRefreshToken = async () => {
-  //     const accessToken = localStorage.getItem('access_token');
-  //     const refreshToken = localStorage.getItem('refresh_token');
-  
-  //     if (accessToken && refreshToken) {
-  //       try {
-  //         // Validera access token genom att göra en förfrågan till en skyddad resurs
-  //         await axios.get('/api/user/', {
-  //           headers: {
-  //             Authorization: `Bearer ${accessToken}`,
-  //           },
-  //         });
-  //         // Om förfrågan lyckas, är access token fortfarande giltig
-  //         setUser({ token: accessToken });
-  //       } catch (error) {
-  //         if (error.response && error.response.status === 401) {
-  //           // Om access token är utgånget, använd refresh token för att få ett nytt access token
-  //           try {
-  //             const response = await axios.post('/api/token/refresh/', { refresh: refreshToken });
-  //             localStorage.setItem('access_token', response.data.access);
-  //             setUser({ token: response.data.access });
-  //           } catch (refreshError) {
-  //             // Om förnyelse misslyckas, logga ut användaren
-  //             logOut();
-  //           }
-  //         }
-  //       }
-  //     }
-  //   };
-  
-  //   validateAndRefreshToken();
-  // }, []);
 
   useEffect(() => {
     const validateAndRefreshToken = async () => {

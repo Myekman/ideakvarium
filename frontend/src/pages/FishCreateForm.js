@@ -4,6 +4,7 @@ import axiosReq from './components/axiosReq';
 import { Container  } from 'react-bootstrap';
 import NavigationBar from './components/Navbar';
 import { useUser } from './auth/UserContext';
+// import Bubbles from './components/BubbleAnnimation';
 
 
 const PostCreateFish = () => {
@@ -47,6 +48,7 @@ const PostCreateFish = () => {
   return (
     <Container>
       <NavigationBar />
+      {/* <Bubbles count={20}/> */}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
