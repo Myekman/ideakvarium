@@ -15,8 +15,6 @@ import { useUser } from './auth/UserContext';
 function Fish({ fish, onLikeUpdate, isActive, showLikeButton = true }) {
   const { user } = useUser();
   const [isLiked, setIsLiked] = useState(fish.isLiked);
-  const [showAlert, setShowAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
 
 
   useEffect(() => {
@@ -79,20 +77,9 @@ function Fish({ fish, onLikeUpdate, isActive, showLikeButton = true }) {
          // Uppdatera fiskens information i Fishtank-komponenten
          setIsLiked(isLiked);
          onLikeUpdate(fish.id, newLikeCount, isLiked);
-
-          // Set the alert message and show the alert
-        setAlertMessage(isLiked ? 'You liked the fish!' : 'You unliked the fish.');
-        setShowAlert(true);
-          // Optionally, hide the alert after a few seconds
-        setTimeout(() => {
-          setShowAlert(false);
-        }, 3000);
       }
     } catch (error) {
       console.error('Error liking/unliking fish:', error);
-      // Set the error message and show the alert
-      setAlertMessage('An error occurred while updating the like status.');
-      setShowAlert(true);
     }
   };
 
@@ -113,32 +100,29 @@ function Fish({ fish, onLikeUpdate, isActive, showLikeButton = true }) {
     return (
       <div>
 
-      <div>
-        {FishImage}
-      </div>
-      <h3>{fish.title}</h3>
-
-      {isActive && (
         <div>
-          <p>{fish.message}</p>
-          <p>{fish.user ? fish.user.username : 'Gäst'}</p>
+          {FishImage}
+        </div>
 
-          {showLikeButton && ( 
-          <>
-          <p>Likes: {fish.likes_count}</p>
-          <button onClick={handleLikeClick}>
-            {isLiked ? 'Unlike' : 'Like'}
-          </button>
-          </>
+        <div className={fishstyles.pratbubbla}>
+          <h3>{fish.title}</h3>
+          {isActive && (
+            <div>
+              <p>{fish.message}</p>
+              <p>{fish.user ? fish.user.username : 'Gäst'}</p>
+
+              {showLikeButton && ( 
+              <>
+              <p>Likes: {fish.likes_count}</p>
+              <button onClick={handleLikeClick}>
+                {isLiked ? 'Unlike' : 'Like'}
+              </button>
+              </>
+              )}
+            </div>
           )}
+        </div>
 
-        {showAlert && (
-        <div className={'alert alert'} role="alert">
-        {alertMessage}
-        </div>
-    )}
-        </div>
-      )}
       </div>
     );
   }
