@@ -1,11 +1,9 @@
 import React from 'react';
 import { useSpring, animated } from '@react-spring/web';
 
-const FishAnimated = ({ children, style: additionalStyle, index, isPaused, setIsPaused,  setActiveFishId, fishId }) => {
+const FishAnimated = ({ children, style: additionalStyle, index, isPaused, setIsPaused, setActiveFishId, fishId }) => {
     // Beräkna en unik vertikal position och tidsförskjutning för varje fisk
     const fishWidth = 600;
-    // const [isPaused, setIsPaused] = useState(false);
-     // Initiera en slumpmässig y-position inom tillåtna värden
     const getRandomYPosition = () => Math.random() * (window.innerHeight - fishWidth);
 
   
@@ -32,6 +30,7 @@ const FishAnimated = ({ children, style: additionalStyle, index, isPaused, setIs
             });
           }
         },
+        paused: isPaused,
     }));
 
 
@@ -44,13 +43,27 @@ const FishAnimated = ({ children, style: additionalStyle, index, isPaused, setIs
 
 
     // Modifierad för att hantera både paus av fisk och visa innehåll för specifik fisk
-    const togglePauseAndSetActiveFish = () => {
-      // Växla paus-tillståndet
-      setIsPaused(prevIsPaused => !prevIsPaused);
+  //   const togglePauseAndSetActiveFish = () => {
+  //     // Växla paus-tillståndet
+  //     console.log(isPaused)
+  //     setIsPaused(prevIsPaused => !prevIsPaused);
+  //     console.log(isPaused)
       
+  //     // Växla den aktiva fisken baserat på om det är samma fisk som redan är aktiv
+  //     setActiveFishId(prevActiveFishId => prevActiveFishId === fishId ? null : fishId);
+  // };
+
+    // Använd det mottagna isPaused-tillståndet för att kontrollera animationen
+    const togglePauseAndSetActiveFish = () => {
+      setIsPaused(!isPaused); // Använd setIsPaused från props för att uppdatera tillståndet i Fishtank
+      if (isPaused) {
+        api.resume();
+      } else {
+        api.pause();
+      }
       // Växla den aktiva fisken baserat på om det är samma fisk som redan är aktiv
       setActiveFishId(prevActiveFishId => prevActiveFishId === fishId ? null : fishId);
-  };
+    };
 
 
 
