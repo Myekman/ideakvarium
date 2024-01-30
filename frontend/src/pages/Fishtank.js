@@ -7,6 +7,7 @@ import FishAnimated from './components/FishAnnimation';
 
 function Fishtank() {
     const [fishes, setFishes] = useState([]);
+    const [isPaused, setIsPaused] = useState(false);
     const [displayedFishes, setDisplayedFishes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -129,8 +130,8 @@ function Fishtank() {
             <SearchBigFishes onSearch={handleFilter} />
 
             {displayedFishes.map((fish, index) => (
-              <FishAnimated key={fish.id} index={index}>
-                <Fish fish={fish} onLikeUpdate={handleLikeUpdate}/>
+              <FishAnimated key={fish.id} index={index} isPaused={isPaused} setIsPaused={setIsPaused}>
+                <Fish fish={fish} onLikeUpdate={handleLikeUpdate} isPaused={isPaused} />
               </FishAnimated>
             ))}
           </div>

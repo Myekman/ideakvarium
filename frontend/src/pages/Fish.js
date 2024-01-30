@@ -12,10 +12,9 @@ import { useUser } from './auth/UserContext';
 import axios from 'axios';
 
 // Fish.js
-function Fish({ fish, onLikeUpdate }) {
+function Fish({ fish, onLikeUpdate, isPaused }) {
   const { user } = useUser();
   const [isLiked, setIsLiked] = useState(fish.isLiked);
-  const [showMore, setShowMore] = useState(false);
 
 
   useEffect(() => {
@@ -36,7 +35,7 @@ function Fish({ fish, onLikeUpdate }) {
     };
   
     checkIfLiked();
-  }, [user, fish.id]); 
+  }, [user, fish.id]);
 
 
   const getFishSizeClass = (likesCount) => {
@@ -100,10 +99,10 @@ function Fish({ fish, onLikeUpdate }) {
         {FishImage}
       </div>
       <h3>{fish.title}</h3>
-      <button onClick={() => setShowMore(!showMore)}>show more</button>
+      {/* <button onClick={() => setShowMore(!showMore)}>show more</button> */}
       
       {/* Här kontrollerar vi om showMore är true, då visar vi extra innehållet */}
-      {showMore && (
+      {isPaused && (
         <div>
           <p>{fish.message}</p>
           <p>Likes: {fish.likes_count}</p>
