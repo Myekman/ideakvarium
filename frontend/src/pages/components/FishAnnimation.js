@@ -42,27 +42,6 @@ const FishAnimated = ({ children, style: additionalStyle, index, isPaused, setIs
         position: 'absolute', 
     };
 
-    // const togglePause = () => {
-    //   console.log('Before toggling, isPaused is:', isPaused)
-    //   setIsPaused(!isPaused); // Växla isPaused state när användaren klickar på fisken
-    //   console.log('After toggling, isPaused will be set to:', !isPaused);
-
-    //   if (!isPaused) {
-    //       // Om animationen var pausad, återuppta den
-    //       api.pause();
-    //   } else {
-    //       // Annars, vänta 5 sekunder och återuppta animationen om ingen har klickat igen
-    //       setTimeout(() => {
-    //         if (isPaused) {
-    //             setIsPaused(false);
-    //             api.resume();
-    //         }
-    //     }, 2000); 
-    //       // Annars, pausa animationen
-    //       // api.pause();
-    //   }
-    // };
-
       // Använd det mottagna isPaused-tillståndet för att kontrollera animationen
     const togglePause = () => {
       setIsPaused(!isPaused); // Använd setIsPaused från props för att uppdatera tillståndet i Fishtank

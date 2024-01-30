@@ -8,7 +8,7 @@ import Fish from './Fish';
 // import Bubbles from './components/BubbleAnnimation';
 
 
-const PostCreateFish = () => {
+const PostCreateFish = (isPaused) => {
   const { user } = useUser();
   const [createdFish, setCreatedFish] = useState(null);
   const [fishData, setFishData] = useState({
@@ -49,10 +49,6 @@ const PostCreateFish = () => {
     setCreatedFish(fishData);
   };
 
-  const handleLikeUpdate = (fishId, newLikeCount, isLiked) => {
-    // Om du inte vill hantera 'likes' här, kan du lämna den här tom eller logga till konsolen.
-    console.log(`Fish ${fishId} has ${newLikeCount} likes and isLiked is ${isLiked}.`);
-  };
 
   return (
     <Container>
@@ -87,7 +83,7 @@ const PostCreateFish = () => {
         <button type="submit">Skapa Fisk</button>
       </form>
       {createdFish && (
-        <Fish fish={createdFish} onLikeUpdate={handleLikeUpdate}/>
+        <Fish fish={createdFish} isPaused={isPaused} showLikeButton={false}/>
       )}
     </Container>
   );

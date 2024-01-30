@@ -130,8 +130,8 @@ function Fishtank() {
             <SearchBigFishes onSearch={handleFilter} />
 
             {displayedFishes.map((fish, index) => (
-              <FishAnimated key={fish.id} index={index} isPaused={isPaused} setIsPaused={setIsPaused}>
-                <Fish fish={fish} onLikeUpdate={handleLikeUpdate} isPaused={isPaused} />
+              <FishAnimated key={fish.id} index={index} setIsPaused={setIsPaused} isPaused={isPaused}>
+                <Fish fish={fish} onLikeUpdate={handleLikeUpdate} isPaused={isPaused} setIsPaused={setIsPaused}/>
               </FishAnimated>
             ))}
           </div>

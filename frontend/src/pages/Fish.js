@@ -12,7 +12,7 @@ import { useUser } from './auth/UserContext';
 import axios from 'axios';
 
 // Fish.js
-function Fish({ fish, onLikeUpdate, isPaused }) {
+function Fish({ fish, onLikeUpdate, isPaused, showLikeButton = true }) {
   const { user } = useUser();
   const [isLiked, setIsLiked] = useState(fish.isLiked);
 
@@ -105,11 +105,19 @@ function Fish({ fish, onLikeUpdate, isPaused }) {
       {isPaused && (
         <div>
           <p>{fish.message}</p>
+          <p>{fish.user ? fish.user.username : 'Gäst'}</p>
+          {showLikeButton && ( // Använd showControls för att avgöra om följande ska renderas
+          <>
           <p>Likes: {fish.likes_count}</p>
           <button onClick={handleLikeClick}>
             {isLiked ? 'Unlike' : 'Like'}
           </button>
-          <p>{fish.user ? fish.user.username : 'Gäst'}</p>
+          </>
+          )}
+          {/* <button onClick={handleLikeClick}>
+            {isLiked ? 'Unlike' : 'Like'}
+          </button> */}
+          {/* <p>{fish.user ? fish.user.username : 'Gäst'}</p> */}
         </div>
       )}
         {/* <div> */}
