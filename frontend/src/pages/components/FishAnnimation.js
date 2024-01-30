@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSpring, animated } from '@react-spring/web';
 
 const FishAnimated = ({ children, style: additionalStyle, index }) => {
     // Beräkna en unik vertikal position och tidsförskjutning för varje fisk
     const fishWidth = 600;
+    const [isPaused, setIsPaused] = useState(false);
      // Initiera en slumpmässig y-position inom tillåtna värden
     const getRandomYPosition = () => Math.random() * (window.innerHeight - fishWidth);
+
   
     const [style, api] = useSpring(() => ({
       from: {
@@ -20,13 +22,15 @@ const FishAnimated = ({ children, style: additionalStyle, index }) => {
       },
       delay: index * 4000, // Förskjutning baserat på index för att fiskarna ska starta vid olika tillfällen
       onRest: () => {
-        // Återställ fisken till vänster sida när den når höger sida
-          api.start({
-            from: { x: -fishWidth, y: getRandomYPosition() },
-            to: { x: window.innerWidth },
-            config: { duration: 20000 },
-            delay: 0, // Du kan lägga till en fördröjning här om du vill
-          });
+        if (!isPaused) {
+             // Återställ fisken till vänster sida när den når höger sida
+             api.start({
+              from: { x: -fishWidth, y: getRandomYPosition() },
+              to: { x: window.innerWidth },
+              config: { duration: 20000 },
+              delay: 0, // Du kan lägga till en fördröjning här om du vill
+            });
+          }
         },
     }));
 
@@ -35,12 +39,32 @@ const FishAnimated = ({ children, style: additionalStyle, index }) => {
     const combinedStyle = {
         ...style,
         ...additionalStyle,
-        position: 'absolute', // Lägg till denna för absolut positionering inom appContainer
+        position: 'absolute', 
+    };
+
+    const togglePause = () => {
+      console.log('Before toggling, isPaused is:', isPaused)
+      setIsPaused(!isPaused); // Växla isPaused state när användaren klickar på fisken
+      console.log('After toggling, isPaused will be set to:', !isPaused);
+
+      if (!isPaused) {
+          // Om animationen var pausad, återuppta den
+          api.pause();
+      } else {
+          // Annars, vänta 5 sekunder och återuppta animationen om ingen har klickat igen
+          setTimeout(() => {
+            if (isPaused) {
+                setIsPaused(false);
+                api.resume();
+            }
+        }, 5000); 
+          // Annars, pausa animationen
+          // api.pause();
+      }
     };
   
     return (
-      <animated.div style={combinedStyle}
-      >
+      <animated.div style={combinedStyle} onClick={togglePause}>
         {children}
       </animated.div>
     );

@@ -15,6 +15,7 @@ import axios from 'axios';
 function Fish({ fish, onLikeUpdate }) {
   const { user } = useUser();
   const [isLiked, setIsLiked] = useState(fish.isLiked);
+  const [showMore, setShowMore] = useState(false);
 
 
   useEffect(() => {
@@ -90,22 +91,43 @@ function Fish({ fish, onLikeUpdate }) {
   }
 
 
+
     return (
       <div>
-        <div>
-          {/* <Link to={`/fiskar/${fish.id}`}> */}
-            {FishImage}
-          {/* </Link> */}
-        </div>
-        {fish.title}
-        <p>{fish.message}</p> 
-        <p>Likes: {fish.likes_count}</p>
 
-        <button onClick={handleLikeClick}>
+      <div>
+        {/* Här kan du lägga till din länk om du vill */}
+        {FishImage}
+      </div>
+      <h3>{fish.title}</h3>
+      <button onClick={() => setShowMore(!showMore)}>show more</button>
+      
+      {/* Här kontrollerar vi om showMore är true, då visar vi extra innehållet */}
+      {showMore && (
+        <div>
+          <p>{fish.message}</p>
+          <p>Likes: {fish.likes_count}</p>
+          <button onClick={handleLikeClick}>
+            {isLiked ? 'Unlike' : 'Like'}
+          </button>
+          <p>{fish.user ? fish.user.username : 'Gäst'}</p>
+        </div>
+      )}
+        {/* <div> */}
+          {/* <Link to={`/fiskar/${fish.id}`}> */}
+            {/* {FishImage} */}
+          {/* </Link> */}
+        {/* </div> */}
+        {/* {fish.title} */}
+
+        {/* <p>{fish.message}</p> 
+        <p>Likes: {fish.likes_count}</p> */}
+
+        {/* <button onClick={handleLikeClick}>
           {isLiked ? 'Unlike' : 'Like'}
-        </button>
+        </button> */}
         {/* <p>{fish.user.username}</p> */}
-        <p>{fish.user ? fish.user.username : 'Gäst'}</p>
+        {/* <p>{fish.user ? fish.user.username : 'Gäst'}</p> */}
       </div>
     );
   }
