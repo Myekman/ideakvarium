@@ -9,23 +9,31 @@ import BläckfiskImage from '../assets/images/bläckfisk.png';
 import fishstyles from '../styles/Fish.module.css';
 
 import { useUser } from './auth/UserContext';
-import axios from 'axios';
+// import axios from 'axios';
 
 // Fish.js
 function Fish({ fish, onLikeUpdate, isActive, showLikeButton = true }) {
   const { user } = useUser();
   const [isLiked, setIsLiked] = useState(fish.isLiked);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
 
 
   useEffect(() => {
     const checkIfLiked = async () => {
       // Om det är 'guestuser', sätt inte 'isLiked' eftersom 'guestuser' kan gilla obegränsat
-      if (user.username === 'guestuser') {
+      // if (user.username === 'guestuser') {
+      //   return;
+      // }
+        // Check if no user is logged in or if it's the 'guestuser'
+      if (!user || user.username === 'guestuser') {
+        // No need to check like status for guest users or when no one is logged in
         return;
       }
+
       // om användaren inte är guestuser, hämta listan och visa rätt värde på like/unlike
       try {
-        const response = await axios.get('/api/liked-fishes/');
+        const response = await axiosReq.get('/liked-fishes/');
         if (response.status === 200) {
           setIsLiked(response.data.liked_fishes.includes(fish.id));
         }
@@ -71,9 +79,20 @@ function Fish({ fish, onLikeUpdate, isActive, showLikeButton = true }) {
          // Uppdatera fiskens information i Fishtank-komponenten
          setIsLiked(isLiked);
          onLikeUpdate(fish.id, newLikeCount, isLiked);
+
+          // Set the alert message and show the alert
+        setAlertMessage(isLiked ? 'You liked the fish!' : 'You unliked the fish.');
+        setShowAlert(true);
+          // Optionally, hide the alert after a few seconds
+        setTimeout(() => {
+          setShowAlert(false);
+        }, 3000);
       }
     } catch (error) {
       console.error('Error liking/unliking fish:', error);
+      // Set the error message and show the alert
+      setAlertMessage('An error occurred while updating the like status.');
+      setShowAlert(true);
     }
   };
 
@@ -112,6 +131,12 @@ function Fish({ fish, onLikeUpdate, isActive, showLikeButton = true }) {
           </button>
           </>
           )}
+
+        {showAlert && (
+        <div className={'alert alert'} role="alert">
+        {alertMessage}
+        </div>
+    )}
         </div>
       )}
       </div>
