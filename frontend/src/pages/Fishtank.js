@@ -12,6 +12,13 @@ function Fishtank() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
+    const [activeFishId, setActiveFishId] = useState(null);
+
+
+      // Hanterar klick på en fisk för att visa mer innehåll för den fisken
+    // const toggleActiveFish = (fishId) => {
+    //   setActiveFishId(activeFishId === fishId ? null : fishId);
+    // };
 
 
   // useEffect för att hämta alla fiskar
@@ -130,8 +137,20 @@ function Fishtank() {
             <SearchBigFishes onSearch={handleFilter} />
 
             {displayedFishes.map((fish, index) => (
-              <FishAnimated key={fish.id} index={index} setIsPaused={setIsPaused} isPaused={isPaused}>
-                <Fish fish={fish} onLikeUpdate={handleLikeUpdate} isPaused={isPaused} setIsPaused={setIsPaused}/>
+              <FishAnimated 
+                key={fish.id} 
+                index={index}
+                setActiveFishId={setActiveFishId} // Se till att detta skickas som en prop
+                fishId={fish.id}
+                setIsPaused={setIsPaused} 
+                isPaused={isPaused}>
+                <Fish 
+                  fish={fish} 
+                  onLikeUpdate={handleLikeUpdate} 
+                  isPaused={isPaused} 
+                  setIsPaused={setIsPaused}
+                  isActive={activeFishId === fish.id} // Ny prop för att kontrollera om fisken är aktiv
+                  />
               </FishAnimated>
             ))}
           </div>
