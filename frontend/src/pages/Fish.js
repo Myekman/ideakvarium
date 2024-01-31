@@ -104,11 +104,13 @@ function Fish({ fish, onLikeUpdate, isActive, showLikeButton = true }) {
           {FishImage}
         </div>
 
-        <div className={fishstyles.pratbubbla}>
+        <div className="container">
+        <div className="row justify-content-center">
+        <div className={`col-12 col-md-8 col-lg-6 ${fishstyles.pratbubbla}`}>
           <h3>{fish.title}</h3>
           {isActive && (
             <div>
-              <p>{fish.message}</p>
+              <p className={fishstyles.message}>{fish.message}</p>
               <p>{fish.user ? fish.user.username : 'Gäst'}</p>
 
               {showLikeButton && ( 
@@ -121,6 +123,8 @@ function Fish({ fish, onLikeUpdate, isActive, showLikeButton = true }) {
               )}
             </div>
           )}
+        </div>
+        </div>
         </div>
 
       </div>

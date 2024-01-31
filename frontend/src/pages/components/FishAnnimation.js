@@ -6,6 +6,10 @@ const FishAnimated = ({ children, style: additionalStyle, index, isPaused, setIs
     const fishWidth = 600;
     const getRandomYPosition = () => Math.random() * (window.innerHeight - fishWidth);
 
+    // Randomize the duration to have a greater range of speeds
+    const minDuration = 10000; // 10 seconds for faster fishes
+    const maxDuration = 40000; // 40 seconds for slower fishes
+    const getRandomDuration = () => Math.random() * (maxDuration - minDuration) + minDuration;
   
     const [style, api] = useSpring(() => ({
       from: {
@@ -16,7 +20,7 @@ const FishAnimated = ({ children, style: additionalStyle, index, isPaused, setIs
         x: window.innerWidth, // Simma till höger kant av skärmen
       },
       config: {
-        duration: 20000,
+        duration: getRandomDuration(),
       },
       delay: index * 4000, // Förskjutning baserat på index för att fiskarna ska starta vid olika tillfällen
       onRest: () => {
@@ -25,7 +29,7 @@ const FishAnimated = ({ children, style: additionalStyle, index, isPaused, setIs
              api.start({
               from: { x: -fishWidth, y: getRandomYPosition() },
               to: { x: window.innerWidth },
-              config: { duration: 20000 },
+              config: {  duration: getRandomDuration() },
               delay: 0, // Du kan lägga till en fördröjning här om du vill
             });
           }

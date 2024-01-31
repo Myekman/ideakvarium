@@ -20,11 +20,33 @@
 }
 
 .pratbubbla {
+    position: relative;
     display: flex;          
     justify-content: center; 
     align-items: center;  
     flex-direction: column;  
-    background-color: aqua;
+    background-color: white;
     border-radius: 50%;
-    padding: 10px;
+    padding: 20px 30px 20px 30px;
+    text-align: center;
+    min-width: 200px;
+}
+
+.pratbubbla::after {
+    content: '';
+    position: absolute;
+    top: 0; /* Position at the bottom of the bubble */
+    left: 50%; /* Start at the horizontal center of the bubble */
+    border-width: 10px; /* Size of the tail */
+    border-style: solid;
+    border-color: transparent transparent white transparent;
+    /* Adjust the border color to match the bubble's background */
+    transform: translateX(-70%) translateY(-99%);
+    /* Center the tail and move it down so it's just outside the bubble */
+}
+
+.message {
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
