@@ -15,12 +15,6 @@ function Fishtank() {
     const [activeFishId, setActiveFishId] = useState(null);
 
 
-      // Hanterar klick på en fisk för att visa mer innehåll för den fisken
-    // const toggleActiveFish = (fishId) => {
-    //   setActiveFishId(activeFishId === fishId ? null : fishId);
-    // };
-
-
   // useEffect för att hämta alla fiskar
   useEffect(() => {
     const fetchFishes = async () => {
@@ -57,25 +51,9 @@ function Fishtank() {
     }
   }, [fishes]);
 
-  // Instead of changing the displayedFishes every minute,
-  // continuously add new fishes at a set interval
-  // useEffect(() => {
-  //   if (fishes.length > 0) {
-  //     const interval = setInterval(() => {
-  //       setDisplayedFishes(prevDisplayedFishes => {
-  //         const nextIndex = (prevDisplayedFishes.length + 1) % fishes.length;
-  //         const nextFish = fishes[nextIndex];
-  //         return [...prevDisplayedFishes, nextFish].slice(-5); // Keep only the last 5 fishes
-  //       });
-  //     }, 4000); // Add a new fish every 4 seconds
-
-  //     return () => clearInterval(interval);
-  //   }
-  // }, [fishes]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-
 
 
       // sök efter de största / minsta fskarna

@@ -1,16 +1,16 @@
 /* fish.module.css */
 .fish-default {
-    width: 50px;
-    overflow: hidden;
-}
-  
-.fish-small {
     width: 80px;
     overflow: hidden;
 }
   
-.fish-medium {
+.fish-small {
     width: 120px;
+    overflow: hidden;
+}
+  
+.fish-medium {
+    width: 150px;
     overflow: hidden;
 }
   

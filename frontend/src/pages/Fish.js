@@ -44,22 +44,6 @@ function Fish({ fish, onLikeUpdate, isActive, showLikeButton = true }) {
   }, [user, fish.id]);
 
 
-  const getFishSizeClass = (likesCount) => {
-    if (likesCount > 3) {
-      return 'fish-large';
-    } else if (likesCount > 2) {
-      return 'fish-medium';
-    } else if (likesCount > 1) {
-      return 'fish-small';
-    } else {
-      return 'fish-default';
-    }
-  };
-
-  // Sedan använder vi funktionen för att få storleksklassen baserat på antal likes
-  const sizeClass = getFishSizeClass(fish.likes_count);
-
-
   const handleLikeClick = async () => {
     try {
       const response = await axiosReq.post(`/fiskar/${fish.id}/like-unlike/`);
@@ -83,6 +67,21 @@ function Fish({ fish, onLikeUpdate, isActive, showLikeButton = true }) {
     }
   };
 
+  const getFishSizeClass = (likesCount) => {
+    if (likesCount > 3) {
+      return 'fish-large';
+    } else if (likesCount > 2) {
+      return 'fish-medium';
+    } else if (likesCount > 1) {
+      return 'fish-small';
+    } else {
+      return 'fish-default';
+    }
+  };
+
+  // Sedan använder vi funktionen för att få storleksklassen baserat på antal likes
+  const sizeClass = getFishSizeClass(fish.likes_count);
+
 
   let FishImage;
   if (fish.fish_type === 'svärdfisk') {
@@ -94,7 +93,6 @@ function Fish({ fish, onLikeUpdate, isActive, showLikeButton = true }) {
   } else if (fish.fish_type === 'blåsfisk') {
     FishImage = <img src={BlåsfiskImage} alt="Blåsfisk" className={fishstyles[sizeClass]}/>;
   }
-
 
 
     return (

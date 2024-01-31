@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import axiosReq from './components/axiosReq';
 // import axios from 'axios';
-import { Container  } from 'react-bootstrap';
+import { Col, Container, Row  } from 'react-bootstrap';
 import NavigationBar from './components/Navbar';
 import { useUser } from './auth/UserContext';
 import Fish from './Fish';
-// import Bubbles from './components/BubbleAnnimation';
+import Bubbles from './components/BubbleAnnimation';
+import formstyles from '../styles/Form.module.css';
 
 
 const PostCreateFish = (isPaused) => {
@@ -53,38 +54,45 @@ const PostCreateFish = (isPaused) => {
   return (
     <Container>
       <NavigationBar />
-      {/* <Bubbles count={20}/> */}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="title"
-          value={fishData.title}
-          onChange={handleInputChange}
-          placeholder="Rubrik"
-        />
-        <input
-          type="text"
-          name="message"
-          value={fishData.message}
-          onChange={handleInputChange}
-          placeholder="Meddelande"
-        />
-        <select
-          name="fish_type"
-          value={fishData.fish_type}
-          onChange={handleInputChange}
-        >
-          <option value="">Välj en fishtyp</option>
-          <option value="svärdfisk">Svärdfisk</option>
-          <option value="clownfisk">Clownfish</option>
-          <option value="bläckfisk">Bläckfisk</option>
-          <option value="blåsfisk">Blåsfisk</option>
-        </select>
-        <button type="submit">Skapa Fisk</button>
-      </form>
+      <Bubbles count={20}/>
+      <Row>
+        <Col>
+        <form className={formstyles.form} onSubmit={handleSubmit}>
+          <input className={formstyles.input}
+            type="text"
+            name="title"
+            value={fishData.title}
+            onChange={handleInputChange}
+            placeholder="Rubrik"
+          />
+          <input
+            type="text"
+            name="message"
+            value={fishData.message}
+            onChange={handleInputChange}
+            placeholder="Meddelande"
+          />
+          <select
+            name="fish_type"
+            value={fishData.fish_type}
+            onChange={handleInputChange}
+          >
+            <option value="">Välj en fishtyp</option>
+            <option value="svärdfisk">Svärdfisk</option>
+            <option value="clownfisk">Clownfish</option>
+            <option value="bläckfisk">Bläckfisk</option>
+            <option value="blåsfisk">Blåsfisk</option>
+          </select>
+          <button type="submit">Skapa Fisk</button>
+        </form>
+        </Col>
+      </Row>
+
+      <Col className={formstyles.displyfish}>
       {createdFish && (
-        <Fish fish={createdFish} isPaused={isPaused} showLikeButton={false}/>
+        <Fish fish={createdFish} isPaused={isPaused} showLikeButton={false} isActive={true}/>
       )}
+      </Col>
     </Container>
   );
 };
