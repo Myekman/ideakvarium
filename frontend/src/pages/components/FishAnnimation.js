@@ -3,7 +3,7 @@ import { useSpring, animated } from '@react-spring/web';
 
 const FishAnimated = ({ children, style: additionalStyle, index, isPaused, setIsPaused, setActiveFishId, fishId }) => {
     // Beräkna en unik vertikal position och tidsförskjutning för varje fisk
-    const getRandomYPosition = () => Math.random() * (window.innerHeight - 200) - 80; // minskar fiskarnas simutrymma med 200 px uppifrån och 80 px från botten
+    const getRandomYPosition = () => Math.random() * (window.innerHeight - 100) -100; // minskar fiskarnas simutrymma med 200 px uppifrån och 80 px från botten
 
     // Randomize the duration to have a greater range of speeds
     const minDuration = 10000; // 10 seconds for faster fishes

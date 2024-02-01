@@ -8,6 +8,12 @@ import Fish from './Fish';
 import Bubbles from './components/BubbleAnnimation';
 import formstyles from '../styles/Form.module.css';
 
+import ClownfiskImage from '../assets/images/clownfisk.png';
+import SvärdfiskImage from '../assets/images/svärdfisk.png';
+import BlåsfiskImage from '../assets/images/blåsfisk.png';
+import BläckfiskImage from '../assets/images/bläckfisk.png';
+// import fishstyles from '../styles/Fish.module.css';
+
 
 const PostCreateFish = (isPaused) => {
   const { user } = useUser();
@@ -78,10 +84,10 @@ const PostCreateFish = (isPaused) => {
             onChange={handleInputChange}
           >
             <option value="">Välj en fishtyp</option>
-            <option value="svärdfisk">Svärdfisk</option>
-            <option value="clownfisk">Clownfish</option>
-            <option value="bläckfisk">Bläckfisk</option>
-            <option value="blåsfisk">Blåsfisk</option>
+            <option value="svärdfisk">{SvärdfiskImage}</option>
+            <option value="clownfisk">{ClownfiskImage}</option>
+            <option value="bläckfisk">{BläckfiskImage}</option>
+            <option value="blåsfisk">{BlåsfiskImage}</option>
           </select>
           <button type="submit">Skapa Fisk</button>
         </form>

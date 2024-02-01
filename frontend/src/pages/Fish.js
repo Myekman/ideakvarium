@@ -67,6 +67,22 @@ function Fish({ fish, onLikeUpdate, isActive, showLikeButton = true }) {
     }
   };
 
+
+  const getBubbleSizeClass = (likesCount) => {
+    if (likesCount > 3) {
+      return 'bubble-large';
+    } else if (likesCount > 2) {
+      return 'bubble-medium';
+    } else if (likesCount > 1) {
+      return 'bubble-small';
+    } else {
+      return 'bubble-default';
+    }
+  };
+  
+  // Använd funktionen för att få storleksklassen för pratbubblan
+  const bubbleSizeClass = getBubbleSizeClass(fish.likes_count);
+
   const getFishSizeClass = (likesCount) => {
     if (likesCount > 3) {
       return 'fish-large';
@@ -102,27 +118,27 @@ function Fish({ fish, onLikeUpdate, isActive, showLikeButton = true }) {
           {FishImage}
         </div>
 
-        <div className="container">
-        <div className="row justify-content-center">
-        <div className={`col-12 col-md-8 col-lg-6 ${fishstyles.pratbubbla}`}>
-          <h3>{fish.title}</h3>
-          {isActive && (
-            <div>
-              <p className={fishstyles.message}>{fish.message}</p>
-              <p>{fish.user ? fish.user.username : 'Gäst'}</p>
+        <div className={`pratbubbla ${fishstyles[bubbleSizeClass]}`}>
+          <div className="row justify-content-center">
+            <div className={`col-12 col-md-8 col-lg-6 ${fishstyles.pratbubbla}`}>
+              <h5>{fish.title}</h5>
+              {isActive && (
+                <div>
+                  <p className={fishstyles.message}>{fish.message}</p>
+                  <p>{fish.user ? fish.user.username : 'Gäst'}</p>
 
-              {showLikeButton && ( 
-              <>
-              <p>Likes: {fish.likes_count}</p>
-              <button onClick={handleLikeClick}>
-                {isLiked ? 'Unlike' : 'Like'}
-              </button>
-              </>
+                  {showLikeButton && ( 
+                  <>
+                  <p>Likes: {fish.likes_count}</p>
+                  <button onClick={handleLikeClick}>
+                    {isLiked ? 'Unlike' : 'Like'}
+                  </button>
+                  </>
+                  )}
+                </div>
               )}
             </div>
-          )}
-        </div>
-        </div>
+          </div>
         </div>
 
       </div>
