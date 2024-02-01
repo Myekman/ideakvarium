@@ -7,11 +7,8 @@ import { useUser } from './auth/UserContext';
 import Fish from './Fish';
 import Bubbles from './components/BubbleAnnimation';
 import formstyles from '../styles/Form.module.css';
-
-import ClownfiskImage from '../assets/images/clownfisk.png';
-import SvärdfiskImage from '../assets/images/svärdfisk.png';
-import BlåsfiskImage from '../assets/images/blåsfisk.png';
-import BläckfiskImage from '../assets/images/bläckfisk.png';
+import CustomDropdown from './components/CustumDropDown';
+import { Form } from 'react-bootstrap';
 // import fishstyles from '../styles/Fish.module.css';
 
 
@@ -61,36 +58,53 @@ const PostCreateFish = (isPaused) => {
     <Container>
       <NavigationBar />
       <Bubbles count={20}/>
-      <Row>
-        <Col>
-        <form className={formstyles.form} onSubmit={handleSubmit}>
-          <input className={formstyles.input}
-            type="text"
-            name="title"
-            value={fishData.title}
-            onChange={handleInputChange}
-            placeholder="Rubrik"
-          />
-          <input
-            type="text"
-            name="message"
-            value={fishData.message}
-            onChange={handleInputChange}
-            placeholder="Meddelande"
-          />
-          <select
-            name="fish_type"
-            value={fishData.fish_type}
-            onChange={handleInputChange}
-          >
-            <option value="">Välj en fishtyp</option>
-            <option value="svärdfisk">{SvärdfiskImage}</option>
-            <option value="clownfisk">{ClownfiskImage}</option>
-            <option value="bläckfisk">{BläckfiskImage}</option>
-            <option value="blåsfisk">{BlåsfiskImage}</option>
-          </select>
-          <button type="submit">Skapa Fisk</button>
-        </form>
+      <Row className={formstyles.formcontainer}>
+        <Col md={6}>
+        <Form className={formstyles.form} onSubmit={handleSubmit}>
+        <Form.Group as={Row} className="mb-3">
+          <Col>
+            <Form.Control
+              type="text"
+              name="title"
+              value={fishData.title}
+              onChange={handleInputChange}
+              placeholder="Rubrik"
+            />
+          </Col>
+        </Form.Group>
+
+        {/* Meddelande */}
+        <Form.Group as={Row} className="mb-3">
+          <Col>
+            <Form.Control
+              type="text"
+              name="message"
+              value={fishData.message}
+              onChange={handleInputChange}
+              placeholder="Meddelande"
+            />
+          </Col>
+        </Form.Group>
+
+        {/* Dropdown */}
+        <Form.Group as={Row} className="mb-3">
+          <Col>
+            <CustomDropdown
+              fishData={fishData}
+              handleInputChange={(eventKey) => handleInputChange({ target: { name: 'fish_type', value: eventKey } })}
+            />
+          </Col>
+        </Form.Group>
+        <button type="submit">Posta</button>
+        </Form>
+        </Col>
+
+        <Col md={6}>
+          {/* Här kan du lägga till ytterligare innehåll */}
+          <div>
+            <h2 className='text-white'>Ytterligare Innehåll</h2>
+            <p className='text-white'>Här kan du lägga till mer text, bilder, widgets eller annat innehåll som du vill visa bredvid formuläret.</p>
+          </div>
         </Col>
       </Row>
 
