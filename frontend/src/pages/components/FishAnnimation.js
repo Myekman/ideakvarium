@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSpring, animated } from '@react-spring/web';
 
-const FishAnimated = ({ children, style: additionalStyle, index, isPaused, setIsPaused, setActiveFishId, fishId }) => {
+const FishAnimated = ({ 
+  children, 
+  style: additionalStyle, 
+  index, 
+  isPaused, 
+  setIsPaused, 
+  setActiveFishId, 
+  fishId,
+  onFishClick }) => {
     // Beräkna en unik vertikal position och tidsförskjutning för varje fisk
     const getRandomYPosition = () => Math.random() * (window.innerHeight - 100) -100; // minskar fiskarnas simutrymma med 200 px uppifrån och 80 px från botten
 
@@ -24,6 +32,7 @@ const FishAnimated = ({ children, style: additionalStyle, index, isPaused, setIs
       delay: index * 4000, // Förskjutning baserat på index för att fiskarna ska starta vid olika tillfällen
       onRest: () => {
         if (!isPaused) {
+          // api.resume();
              // Återställ fisken till vänster sida när den når höger sida
              api.start({
               from: { x: -300, y: getRandomYPosition() },
@@ -36,6 +45,18 @@ const FishAnimated = ({ children, style: additionalStyle, index, isPaused, setIs
         paused: isPaused,
     }));
 
+    useEffect(() => {
+      console.log(isPaused);
+    }, [isPaused])
+
+    useEffect(() => {
+      if (isPaused) {
+        api.pause();
+      } else {
+        api.resume();
+      }
+    }, [isPaused, api]);
+
 
      // Tillämpa additionalStyle för att positionera fiskarna inom appContainer
     const combinedStyle = {
@@ -44,22 +65,23 @@ const FishAnimated = ({ children, style: additionalStyle, index, isPaused, setIs
         position: 'absolute', 
     };
 
+
     // Använd det mottagna isPaused-tillståndet för att kontrollera animationen
-    const togglePauseAndSetActiveFish = () => {
-      setIsPaused(!isPaused); // Använd setIsPaused från props för att uppdatera tillståndet i Fishtank
-      if (isPaused) {
-        api.resume();
-      } else {
-        api.pause();
-      }
-      // Växla den aktiva fisken baserat på om det är samma fisk som redan är aktiv
-      setActiveFishId(prevActiveFishId => prevActiveFishId === fishId ? null : fishId);
-    };
+    // const togglePauseAndSetActiveFish = () => {
+    //   setIsPaused(!isPaused); // Använd setIsPaused från props för att uppdatera tillståndet i Fishtank
+    //   if (isPaused) {
+    //     api.resume();
+    //   } else {
+    //     api.pause();
+    //   }
+    //   // Växla den aktiva fisken baserat på om det är samma fisk som redan är aktiv
+    //   setActiveFishId(prevActiveFishId => prevActiveFishId === fishId ? null : fishId);
+    // };
 
 
 
     return (
-      <animated.div style={combinedStyle} onClick={togglePauseAndSetActiveFish}>
+      <animated.div style={combinedStyle} onClick={onFishClick}>
         {children}
       </animated.div>
     );

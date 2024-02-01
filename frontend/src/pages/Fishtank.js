@@ -13,6 +13,8 @@ function Fishtank() {
     const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [activeFishId, setActiveFishId] = useState(null);
+    const [pausedFishId, setPausedFishId] = useState(null);
+
 
 
   // useEffect för att hämta alla fiskar
@@ -115,6 +117,21 @@ function Fishtank() {
         )
       );
     };
+
+
+    const handleFishClick = (fishId) => {
+      if (pausedFishId === fishId) {
+          // Om fisken redan är pausad, återuppta den
+          setPausedFishId(null);
+      } else {
+          // Pausa den här fisken
+          setPausedFishId(fishId);
+      }
+      
+      // Aktivera fisken och visa dess innehåll om den inte redan är aktiv
+      setActiveFishId(prevActiveFishId => prevActiveFishId === fishId ? null : fishId);
+  };
+
     
       return (
         <Container>
@@ -137,12 +154,17 @@ function Fishtank() {
                 setActiveFishId={setActiveFishId} // Se till att detta skickas som en prop
                 fishId={fish.id}
                 setIsPaused={setIsPaused} 
-                isPaused={isPaused}>
+                // isPaused={isPaused}
+                isPaused={pausedFishId === fish.id}
+                setPausedFishId={setPausedFishId}
+                onFishClick={() => handleFishClick(fish.id)}
+                >
                 <Fish 
                   fish={fish} 
                   onLikeUpdate={handleLikeUpdate} 
                   isPaused={isPaused} 
                   setIsPaused={setIsPaused}
+                  setActiveFishId={setActiveFishId}
                   isActive={activeFishId === fish.id} // Ny prop för att kontrollera om fisken är aktiv
                   />
               </FishAnimated>
