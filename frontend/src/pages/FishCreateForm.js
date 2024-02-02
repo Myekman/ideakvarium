@@ -14,10 +14,11 @@ import { useNavigate } from 'react-router-dom';
 // import fishstyles from '../styles/Fish.module.css';
 
 
-const PostCreateFish = (isPaused, previewSize) => {
+const PostCreateFish = ( { isPaused }  ) => {
   const navigate = useNavigate();
   const { user } = useUser();
   const [createdFish, setCreatedFish] = useState(null);
+  const previewSize = { width: '200px', height: '200px' };
   const [fishData, setFishData] = useState({
     title: "",
     message: "",
@@ -120,7 +121,7 @@ const PostCreateFish = (isPaused, previewSize) => {
 
       <Col className={formstyles.displyfish}>
       {createdFish && (
-        <Fish fish={createdFish} isPaused={isPaused} showLikeButton={false} isActive={true} previewSize={{ width: '200px', height: '200px' }} />
+        <Fish fish={createdFish} isPaused={isPaused} showLikeButton={false} isActive={true} previewSize={previewSize} />
       )}
       
       </Col>
