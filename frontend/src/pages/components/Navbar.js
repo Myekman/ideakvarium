@@ -20,8 +20,8 @@ const NavigationBar = () => {
 
     return (
         <div>
-            <Navbar className={styles.Navbar} bg="red" expand="lg">
-                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar expand="lg">
+                 <Navbar.Toggle aria-controls="basic-navbar-nav" className={styles.Navbar}/>
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     {user ? (
@@ -30,7 +30,7 @@ const NavigationBar = () => {
                             <span className="navbar-text">Hej, {user.username}!</span>
                           </Nav.Item> */}
                           <Nav.Item>
-                            <Nav.Link onClick={handleSignOut}>Logga ut</Nav.Link>
+                            <Nav.Link className={styles.customnavlink} onClick={handleSignOut}>Logga ut</Nav.Link>
                           </Nav.Item>
                         </>
 
@@ -38,10 +38,10 @@ const NavigationBar = () => {
                     ) : (
                     <>
                     <Nav.Item>
-                        <Nav.Link as={NavLink} to="/Registrera">Registrera</Nav.Link>
+                        <Nav.Link as={NavLink} to="/Registrera" className={styles.customnavlink}>Registrera</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link as={NavLink} to="/login">Logga in</Nav.Link>
+                        <Nav.Link as={NavLink} to="/login" className={styles.customnavlink}>Logga in</Nav.Link>
                     </Nav.Item>
                     </>
                     )}

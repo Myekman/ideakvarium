@@ -14,16 +14,16 @@ function CustomDropdown({ fishData = {}, handleInputChange }) {
 
       <Dropdown.Menu>
         <Dropdown.Item eventKey="svärdfisk">
-          <img src={SvärdfiskImage} alt="Svärdskfish" style={{ width: '50px', height: 'auto' }}/> Svärdfisk
+          <img src={SvärdfiskImage} alt="Svärdskfish" style={{ width: '70px', height: 'auto' }}/>
         </Dropdown.Item>
         <Dropdown.Item eventKey="clownfisk">
-          <img src={ClownfiskImage} alt="Clownfisk" style={{ width: '50px', height: 'auto' }}/> Clownfisk
+          <img src={ClownfiskImage} alt="Clownfisk" style={{ width: '70px', height: 'auto' }}/>
         </Dropdown.Item>
         <Dropdown.Item eventKey="bläckfisk">
-          <img src={BläckfiskImage} alt="Bläckfisk" style={{ width: '50px', height: 'auto' }} /> Bläckfisk
+          <img src={BläckfiskImage} alt="Bläckfisk" style={{ width: '70px', height: 'auto' }} />
         </Dropdown.Item>
         <Dropdown.Item eventKey="blåsfisk">
-          <img src={BlåsfiskImage} alt="Blåsfisk" style={{ width: '50px', height: 'auto' }}/> Blåsfisk
+          <img src={BlåsfiskImage} alt="Blåsfisk" style={{ width: '70px', height: 'auto' }}/>
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>

@@ -9,10 +9,13 @@ import Bubbles from './components/BubbleAnnimation';
 import formstyles from '../styles/Form.module.css';
 import CustomDropdown from './components/CustumDropDown';
 import { Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 // import fishstyles from '../styles/Fish.module.css';
 
 
-const PostCreateFish = (isPaused) => {
+const PostCreateFish = (isPaused, previewSize) => {
+  const navigate = useNavigate();
   const { user } = useUser();
   const [createdFish, setCreatedFish] = useState(null);
   const [fishData, setFishData] = useState({
@@ -51,6 +54,11 @@ const PostCreateFish = (isPaused) => {
     }
 
     setCreatedFish(fishData);
+  };
+
+
+  const handleBackToFishTank = () => {
+    navigate('/');
   };
 
 
@@ -95,23 +103,26 @@ const PostCreateFish = (isPaused) => {
             />
           </Col>
         </Form.Group>
-        <button type="submit">Posta</button>
+        <Button type="submit" variant="success">Posta</Button>
         </Form>
         </Col>
 
         <Col md={6}>
-          {/* Här kan du lägga till ytterligare innehåll */}
           <div>
             <h2 className='text-white'>Ytterligare Innehåll</h2>
             <p className='text-white'>Här kan du lägga till mer text, bilder, widgets eller annat innehåll som du vill visa bredvid formuläret.</p>
           </div>
         </Col>
       </Row>
+      <Col className='mt-4'>
+          <Button variant="success" onClick={handleBackToFishTank}>Tillbaka till FishTank</Button>
+      </Col>
 
       <Col className={formstyles.displyfish}>
       {createdFish && (
-        <Fish fish={createdFish} isPaused={isPaused} showLikeButton={false} isActive={true}/>
+        <Fish fish={createdFish} isPaused={isPaused} showLikeButton={false} isActive={true} previewSize={{ width: '200px', height: '200px' }} />
       )}
+      
       </Col>
     </Container>
   );

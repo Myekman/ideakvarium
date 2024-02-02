@@ -1,9 +1,9 @@
-.form {
-    background-color: black;
-    height: 220px;
+/* .form { */
+    /* background-color: #125c5ec1; */
+    /* height: 220px; */
     /* padding-top: 20px; */
     /* opacity: 0.5; */
-}
+/* } */
 
 .input {
     background-color: white;
@@ -23,6 +23,9 @@
   }
 
 .formcontainer {
-    background-color: black;
+    background-color: #125c5e92;
     padding-top: 20px;
+    padding-bottom: 20px;
+    border: 1px solid white;
+    border-radius: 5px;
 }

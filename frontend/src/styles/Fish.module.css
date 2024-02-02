@@ -43,13 +43,13 @@
 
 
 .pratbubbla {
-    opacity: 0.7;
+    /* opacity: 0.7; */
     position: relative;
     display: flex;          
     justify-content: center; 
     align-items: center;  
     flex-direction: column;  
-    background-color: #1877ac;
+    background-color: #125c5e92;
     color: white;
     border-radius: 50%;
     border: 1px solid white;

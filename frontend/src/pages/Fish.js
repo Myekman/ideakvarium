@@ -12,9 +12,11 @@ import { useUser } from './auth/UserContext';
 // import axios from 'axios';
 
 // Fish.js
-function Fish({ fish, onLikeUpdate, isActive, showLikeButton = true }) {
+function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true }) {
   const { user } = useUser();
   const [isLiked, setIsLiked] = useState(fish.isLiked);
+
+  const fishPreviewStyle = previewSize ? { width: previewSize.width, height: previewSize.height } : {};
 
 
   useEffect(() => {
@@ -101,13 +103,13 @@ function Fish({ fish, onLikeUpdate, isActive, showLikeButton = true }) {
 
   let FishImage;
   if (fish.fish_type === 'svärdfisk') {
-    FishImage = <img src={SvärdfiskImage} alt="Svärdfisk" className={fishstyles[sizeClass]}/>;
+    FishImage = <img src={SvärdfiskImage} alt="Svärdfisk" style={fishPreviewStyle} className={fishstyles[sizeClass]}/>;
   } else if (fish.fish_type === 'clownfisk') {
-    FishImage = <img src={ClownfiskImage} alt="Clownfisk" className={fishstyles[sizeClass]}/>;
+    FishImage = <img src={ClownfiskImage} alt="Clownfisk" style={fishPreviewStyle} className={fishstyles[sizeClass]}/>;
   } else if (fish.fish_type === 'bläckfisk') {
-    FishImage = <img src={BläckfiskImage} alt="Bläckfisk" className={fishstyles[sizeClass]}/>;
+    FishImage = <img src={BläckfiskImage} alt="Bläckfisk" style={fishPreviewStyle} className={fishstyles[sizeClass]}/>;
   } else if (fish.fish_type === 'blåsfisk') {
-    FishImage = <img src={BlåsfiskImage} alt="Blåsfisk" className={fishstyles[sizeClass]}/>;
+    FishImage = <img src={BlåsfiskImage} alt="Blåsfisk" style={fishPreviewStyle} className={fishstyles[sizeClass]}/>;
   }
 
 
