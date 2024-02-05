@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 // import { Link } from 'react-router-dom';
 import axiosReq from './components/axiosReq';
 
@@ -15,6 +15,7 @@ import { useUser } from './auth/UserContext';
 function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true }) {
   const { user } = useUser();
   const [isLiked, setIsLiked] = useState(fish.isLiked);
+  const fishRef = useRef(null);
 
   const fishPreviewStyle = previewSize ? { width: previewSize.width, height: previewSize.height } : {};
 
@@ -116,7 +117,7 @@ function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true
     return (
       <div>
 
-        <div>
+        <div ref={fishRef}>
           {FishImage}
         </div>
 

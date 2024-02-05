@@ -135,16 +135,44 @@ function Fishtank() {
       setActiveFishId(prevActiveFishId => prevActiveFishId === fishId ? null : fishId);
   };
 
+
+  // const handleFishClick = (fishId) => {
+  //   if (pausedFishId === fishId) {
+  //       // Om fisken redan är pausad, återuppta den
+  //       setPausedFishId(null);
+  //   } else {
+  //       // Pausa den här fisken
+  //       setPausedFishId(fishId);
+  //   }
+    
+  //   // Aktivera fisken och justera dess y-position om den inte redan är aktiv
+  //   setActiveFishId(prevActiveFishId => {
+  //     if (prevActiveFishId === fishId) {
+  //       // Om fisken redan är aktiv, avaktivera den
+  //       return null;
+  //     } else {
+  //       // Kalkylera och justera y-positionen för fisken så att meddelandet inte går utanför tanken
+  //       const fishElement = document.getElementById(`fish-${fishId}`);
+  //       if (fishElement) {
+  //         const fishRect = fishElement.getBoundingClientRect();
+  //         const bottomSpace = window.innerHeight - fishRect.bottom;
+  //         const messageHeight = 200; // Anta att meddelandets höjd är 200px
+  //         if (bottomSpace < messageHeight) {
+  //           // Om det inte finns tillräckligt med utrymme under fisken, justera dess y-position
+  //           const newYPosition = fishRect.top - (messageHeight - bottomSpace);
+  //           fishElement.style.top = `${newYPosition}px`;
+           
+  //         }
+  //       }
+  //       return fishId;
+  //     }
+  //   });
+  // };
+
     
       return (
         <Container>
           <div className={fishstyles.fishtank}>
-            {/* <input
-              type="text"
-              placeholder="Sök..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            /> */}
             <Row>
             <Col>
               <InputGroup>
@@ -171,10 +199,10 @@ function Fishtank() {
               <FishAnimated 
                 key={fish.id} 
                 index={index}
+                isActive={activeFishId === fish.id}
                 setActiveFishId={setActiveFishId} // Se till att detta skickas som en prop
                 fishId={fish.id}
                 setIsPaused={setIsPaused} 
-                // isPaused={isPaused}
                 isPaused={pausedFishId === fish.id}
                 setPausedFishId={setPausedFishId}
                 onFishClick={() => handleFishClick(fish.id)}

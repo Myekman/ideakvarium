@@ -5,16 +5,17 @@ const FishAnimated = ({
   children, 
   style: additionalStyle, 
   index, 
-  isPaused, 
+  isPaused,
+  isActive,
   setIsPaused, 
   setActiveFishId, 
   fishId,
   onFishClick }) => {
     // Beräkna en unik vertikal position och tidsförskjutning för varje fisk
-    const getRandomYPosition = () => Math.random() * (window.innerHeight - 100) -100; // minskar fiskarnas simutrymma med 200 px uppifrån och 80 px från botten
+    const getRandomYPosition = () => Math.random() * (window.innerHeight - 200) -210; // minskar fiskarnas simutrymma med 200 px uppifrån och 80 px från botten
 
     // Randomize the duration to have a greater range of speeds
-    const minDuration = 10000; // 10 seconds for faster fishes
+    const minDuration = 10000; // 15 seconds for faster fishes
     const maxDuration = 40000; // 40 seconds for slower fishes
     const getRandomDuration = () => Math.random() * (maxDuration - minDuration) + minDuration;
   
@@ -29,26 +30,26 @@ const FishAnimated = ({
       config: {
         duration: getRandomDuration(),
       },
-      delay: index * 4000, // Förskjutning baserat på index för att fiskarna ska starta vid olika tillfällen
-      onRest: () => {
-        if (!isPaused) {
-          // api.resume();
-             // Återställ fisken till vänster sida när den når höger sida
-             api.start({
-              from: { x: -300, y: getRandomYPosition() },
-              to: { x: window.innerWidth },
-              config: {  duration: getRandomDuration() },
-              delay: index * 4000, // Du kan lägga till en fördröjning här om du vill
-            });
-          }
-        },
-        paused: isPaused,
+      delay: index * 4000, // Fördröjning mellan fiskar
+      // onRest: () => {
+      //   if (!isPaused) {
+      //        api.start({
+      //         from: { x: -300, y: getRandomYPosition() },
+      //         to: { x: window.innerWidth },
+      //         config: {  duration: getRandomDuration() },
+      //         delay: index * 4000, // Fördröjning mellan fiskar
+      //       });
+      //     }
+      //   },
+      //   paused: isPaused,
     }));
 
     useEffect(() => {
-      console.log(isPaused);
-    }, [isPaused])
+      console.log('paused' + isPaused);
+      console.log('active' + isActive);
+    }, [isPaused, isActive])
 
+    // -------------------------------------------hanterar pausning av fiskar
     useEffect(() => {
       if (isPaused) {
         api.pause();
@@ -56,6 +57,28 @@ const FishAnimated = ({
         api.resume();
       }
     }, [isPaused, api]);
+
+
+    useEffect(() => {
+      if (isActive) {
+        const centerY = window.innerHeight / 2;
+        console.log(`Moving fish to centerY: ${centerY}`);
+        
+        // Sätt fisken till mitten och pausa animationen
+        api.start({
+          y: centerY,
+          immediate: true, // Hoppa till den nya positionen omedelbart
+          // onRest: () => {
+          //   // När fisken har nått mitten, pausa animationen
+          //   api.pause();
+          // },
+        });
+      } else {
+        // Om fisken inte är aktiv, fortsätt animationen
+        api.resume();
+      }
+    }, [api, isActive]);
+
 
 
      // Tillämpa additionalStyle för att positionera fiskarna inom appContainer
@@ -66,22 +89,9 @@ const FishAnimated = ({
     };
 
 
-    // Använd det mottagna isPaused-tillståndet för att kontrollera animationen
-    // const togglePauseAndSetActiveFish = () => {
-    //   setIsPaused(!isPaused); // Använd setIsPaused från props för att uppdatera tillståndet i Fishtank
-    //   if (isPaused) {
-    //     api.resume();
-    //   } else {
-    //     api.pause();
-    //   }
-    //   // Växla den aktiva fisken baserat på om det är samma fisk som redan är aktiv
-    //   setActiveFishId(prevActiveFishId => prevActiveFishId === fishId ? null : fishId);
-    // };
-
-
-
+// id i return används för att hantera y position för fisk onclick (i handlefishclick fishtank)
     return (
-      <animated.div style={combinedStyle} onClick={onFishClick}>
+      <animated.div style={combinedStyle} id={`fish-${fishId}`} onClick={onFishClick}> 
         {children}
       </animated.div>
     );
