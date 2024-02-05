@@ -1,4 +1,6 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
+import fishstyles from '../../src/styles/Fish.module.css';
 
 function SearchBigFishes({ onSearch }) {
 
@@ -13,7 +15,7 @@ function SearchBigFishes({ onSearch }) {
 
     return (
       <div>
-        <button onClick={handleShowLargestClick}>Visa de största fiskarna</button>
+        <Button className={fishstyles.sökbtn2} variant="success" onClick={handleShowLargestClick}>Visa de största fiskarna</Button>
         {/* <button onClick={handleShowSmallestClick}>Visa de minsta fiskarna</button> */}
       </div>
       );

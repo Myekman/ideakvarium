@@ -2,14 +2,29 @@
     background-color: white !important;
 }
 
-/* a.nav-link { */
-    /* color: white !important; */
-/* } */
+nav {
+    margin-left: 20px;
+
+}
+
+.nav-link {
+    font-size: 100px;
+
+}
 
 .navbar-toggler {
     background-color: white !important;
+    padding-left: 20px;
 }
 
 .customnavlink {
     color: white !important;
+}
+
+.navbarcollapse {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(21, 56, 32, 0.616) !important;;
 }

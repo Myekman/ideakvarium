@@ -11,7 +11,6 @@ import CustomDropdown from './components/CustumDropDown';
 import { Form } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-// import fishstyles from '../styles/Fish.module.css';
 
 
 const PostCreateFish = ( { isPaused }  ) => {
@@ -116,7 +115,7 @@ const PostCreateFish = ( { isPaused }  ) => {
         </Col>
       </Row>
       <Col className='mt-4'>
-          <Button variant="success" onClick={handleBackToFishTank}>Tillbaka till FishTank</Button>
+          <Button className={formstyles.formbtn} variant="success" onClick={handleBackToFishTank}>Tillbaka till Fiskarna</Button>
       </Col>
 
       <Col className={formstyles.displyfish}>

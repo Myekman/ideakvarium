@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Fish from './Fish';
 import SearchBigFishes from './SearchFishes';
-import { Container } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 import fishstyles from '../styles/Fish.module.css';
 import FishAnimated from './components/FishAnnimation';
 
@@ -136,14 +139,31 @@ function Fishtank() {
       return (
         <Container>
           <div className={fishstyles.fishtank}>
-            <input
+            {/* <input
               type="text"
               placeholder="Sök..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <button onClick={handleSearch}>Sök</button>
+            /> */}
+            <Row>
+            <Col>
+              <InputGroup>
+                <InputGroup.Text>Sök efter Title/Fisktyp:</InputGroup.Text>
+                <Form.Control 
+                  as="textarea" 
+                  aria-label="Sök efter Title/Fisktyp:" 
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </InputGroup>
+            </Col>
+            <Col>
+              <Button className={fishstyles.sökbtn} variant="success" onClick={handleSearch}>Sök</Button>
+            </Col>
+              
             {/* <p>hej {user.username}!</p> */}
+           
+            </Row>
 
             <SearchBigFishes onSearch={handleFilter} />
 

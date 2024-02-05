@@ -23,15 +23,19 @@ const NavigationBar = () => {
             <Navbar expand="lg">
                  <Navbar.Toggle aria-controls="basic-navbar-nav" className={styles.Navbar}/>
                 <Navbar.Collapse id="basic-navbar-nav">
+                <div className={styles.navbarcollapse}>
                 <Nav className="mr-auto">
+                        <Nav.Item>
+                            <Nav.Link as={NavLink} to="/fiskar/create" className={styles.customnavlink}>Skapa fisk</Nav.Link>
+                        </Nav.Item>
                     {user ? (
                         <>
-                          {/* <Nav.Item>
-                            <span className="navbar-text">Hej, {user.username}!</span>
-                          </Nav.Item> */}
                           <Nav.Item>
                             <Nav.Link className={styles.customnavlink} onClick={handleSignOut}>Logga ut</Nav.Link>
                           </Nav.Item>
+                          {/* <Nav.Item className={styles.hellomessage}>
+                            <span className="navbar-text text-white">Hej, {user.username}!</span>
+                          </Nav.Item> */}
                         </>
 
 
@@ -46,6 +50,7 @@ const NavigationBar = () => {
                     </>
                     )}
                 </Nav>
+                </div>
                 </Navbar.Collapse>
             </Navbar>
         </div>

@@ -19,28 +19,18 @@
     overflow: hidden;
 }
 
-/* Grundläggande stilar för pratbubblan */
-.bubble-default .pratbubbla {
-    /* font-size: 2px; */
-    /* padding: 5px 10px; */
-    /* Andra grundläggande stilar för pratbubblan */
-  }
-  
-  .bubble-small .pratbubbla {
-    /* padding: 10px 20px; */
-    /* Anpassade stilar för en liten pratbubbla */
-  }
-  
-  .bubble-medium .pratbubbla {
-    /* padding: 15px 25px; */
-    /* Anpassade stilar för en medium pratbubbla */
-  }
-  
-  .bubble-large .pratbubbla {
-    /* padding: 20px 30px 20px 30px; */
-    /* Anpassade stilar för en stor pratbubbla */
-  }
+.sökbtn {
+  height: 60px;
+  width: 80px;
+  border: 1px solid white !important;
+  background-color: rgba(29, 78, 45, 0.616) !important;
+}
 
+.sökbtn2 {
+  border: 1px solid white !important;
+  background-color:   rgba(29, 78, 45, 0.616) !important;
+  margin-top: 10px;
+}
 
 .pratbubbla {
     /* opacity: 0.7; */

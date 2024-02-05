@@ -1,15 +1,3 @@
-/* .form { */
-    /* background-color: #125c5ec1; */
-    /* height: 220px; */
-    /* padding-top: 20px; */
-    /* opacity: 0.5; */
-/* } */
-
-.input {
-    background-color: white;
-    opacity: 1;
-}
-
 .displyfish {
     display: flex;
     justify-content: center;
@@ -29,3 +17,10 @@
     border: 1px solid white;
     border-radius: 5px;
 }
+
+
+.formbtn {
+    border: 1px solid white !important;
+    background-color:  rgba(21, 56, 32, 0.616) !important;
+    /* margin-top: 10px; */
+  }
