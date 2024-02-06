@@ -7,6 +7,7 @@ import SvärdfiskImage from '../assets/images/svärdfisk.png';
 import BlåsfiskImage from '../assets/images/blåsfisk.png';
 import BläckfiskImage from '../assets/images/bläckfisk.png';
 import fishstyles from '../styles/Fish.module.css';
+import { Button } from 'react-bootstrap';
 
 import { useUser } from './auth/UserContext';
 // import axios from 'axios';
@@ -128,16 +129,18 @@ function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true
               {isActive && (
                 <div>
                   <p className={fishstyles.message}>{fish.message}</p>
-                  <p>{fish.user ? fish.user.username : 'Gäst'}</p>
+                  {/* <p>Användare: {fish.user ? fish.user.username : 'Gäst'}</p> */}
 
                   {showLikeButton && ( 
                   <>
                   <p>Likes: {fish.likes_count}</p>
-                  <button onClick={handleLikeClick}>
+                  <Button variant="success" onClick={handleLikeClick}>
                     {isLiked ? 'Unlike' : 'Like'}
-                  </button>
+                  </Button>
                   </>
                   )}
+
+                <p>Användare: {fish.user ? fish.user.username : 'Gäst'}</p>
                 </div>
               )}
             </div>

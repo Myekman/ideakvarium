@@ -17,6 +17,7 @@ function Fishtank() {
     const [searchTerm, setSearchTerm] = useState('');
     const [activeFishId, setActiveFishId] = useState(null);
     const [pausedFishId, setPausedFishId] = useState(null);
+    const [isSearchingOrFiltering, setIsSearchingOrFiltering] = useState(false);
 
 
 
@@ -63,6 +64,7 @@ function Fishtank() {
 
       // sök efter de största / minsta fskarna
       const handleFilter = (searchFishes) => {
+        setIsSearchingOrFiltering(true);
         setLoading(true);
         let searchQuery = '';
         if (searchFishes === 'largest') {
@@ -78,16 +80,19 @@ function Fishtank() {
           .then((data) => {
             setFishes(data);
             setLoading(false);
+            setIsSearchingOrFiltering(false);
           })
           .catch((error) => {
             console.error('Error:', error);
             setError(error);
             setLoading(false);
+            setIsSearchingOrFiltering(false);
           });
       };
 
       // sök efter fiskar med ord, tex username, fishtype eller messsage.
       const handleSearch = () => {
+      setIsSearchingOrFiltering(true);
         setLoading(true);
         fetch(`http://127.0.0.1:8000/api/fiskar/?search=${searchTerm}`)
           .then((response) => {
@@ -99,15 +104,17 @@ function Fishtank() {
           .then((data) => {
             setFishes(data);
             setLoading(false);
+            setIsSearchingOrFiltering(false);
           })
           .catch((error) => {
             console.error('Error:', error);
             setError(error);
             setLoading(false);
+            setIsSearchingOrFiltering(false);
           });
       };
 
-      if (loading) return <div>Loading...</div>;
+      if (loading) return <div className='text-white'>Loading...</div>;
       if (error) return <div>Error: {error.message}</div>;
 
 
@@ -134,40 +141,6 @@ function Fishtank() {
       // Aktivera fisken och visa dess innehåll om den inte redan är aktiv
       setActiveFishId(prevActiveFishId => prevActiveFishId === fishId ? null : fishId);
   };
-
-
-  // const handleFishClick = (fishId) => {
-  //   if (pausedFishId === fishId) {
-  //       // Om fisken redan är pausad, återuppta den
-  //       setPausedFishId(null);
-  //   } else {
-  //       // Pausa den här fisken
-  //       setPausedFishId(fishId);
-  //   }
-    
-  //   // Aktivera fisken och justera dess y-position om den inte redan är aktiv
-  //   setActiveFishId(prevActiveFishId => {
-  //     if (prevActiveFishId === fishId) {
-  //       // Om fisken redan är aktiv, avaktivera den
-  //       return null;
-  //     } else {
-  //       // Kalkylera och justera y-positionen för fisken så att meddelandet inte går utanför tanken
-  //       const fishElement = document.getElementById(`fish-${fishId}`);
-  //       if (fishElement) {
-  //         const fishRect = fishElement.getBoundingClientRect();
-  //         const bottomSpace = window.innerHeight - fishRect.bottom;
-  //         const messageHeight = 200; // Anta att meddelandets höjd är 200px
-  //         if (bottomSpace < messageHeight) {
-  //           // Om det inte finns tillräckligt med utrymme under fisken, justera dess y-position
-  //           const newYPosition = fishRect.top - (messageHeight - bottomSpace);
-  //           fishElement.style.top = `${newYPosition}px`;
-           
-  //         }
-  //       }
-  //       return fishId;
-  //     }
-  //   });
-  // };
 
     
       return (
@@ -205,6 +178,7 @@ function Fishtank() {
                 setIsPaused={setIsPaused} 
                 isPaused={pausedFishId === fish.id}
                 setPausedFishId={setPausedFishId}
+                isSearchingOrFiltering={isSearchingOrFiltering}
                 onFishClick={() => handleFishClick(fish.id)}
                 >
                 <Fish 
