@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Importera useHistory hook från react-router-dom
 import { useUser } from './UserContext';
+import { Button, Col, Container } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import styles from '../../styles/Form.module.css';
 
 
 function LoginForm() {
@@ -38,23 +42,51 @@ function LoginForm() {
     }
   };
 
+  const handleBackToFishTank = () => {
+    navigate('/');
+  };
+
 
   return (
-    <form onSubmit={handleLogin}>
-      <input
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Username"
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-      />
-      <button type="submit">Log In</button>
-    </form>
+
+    <>
+    <Container>
+      <div className="d-flex justify-content-center align-items-center">
+        <Form className={styles.signinform} onSubmit={handleLogin}>
+          <InputGroup className="mb-3">
+            <InputGroup.Text id="inputGroup-sizing-default">
+              Användarnamn
+            </InputGroup.Text>
+            <Form.Control
+              aria-label="Default"
+              aria-describedby="inputGroup-sizing-default"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              // placeholder="Username"
+            />
+          </InputGroup>
+          <br />
+          <InputGroup className="mb-3">
+            <InputGroup.Text id="inputGroup-sizing-default">
+              Lösenord
+            </InputGroup.Text>
+            <Form.Control
+              type="password"
+              aria-label="Default"
+              aria-describedby="inputGroup-sizing-default"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              // placeholder="Password"
+            />
+          </InputGroup>
+          <Button variant="success" type="submit">Log In</Button>
+        </Form>
+      </div>
+      <Col className='mt-4'>
+          <Button className={styles.formbtn} variant="success" onClick={handleBackToFishTank}>Tillbaka till Fiskarna</Button>
+      </Col>
+  </Container>
+  </>
   );
 }
 
