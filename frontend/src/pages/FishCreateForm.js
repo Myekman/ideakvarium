@@ -17,7 +17,7 @@ const PostCreateFish = ( { isPaused }  ) => {
   const navigate = useNavigate();
   const { user } = useUser();
   const [createdFish, setCreatedFish] = useState(null);
-  const previewSize = { width: '200px', height: '200px' };
+  const previewSize = { width: '200px' };
   const [fishData, setFishData] = useState({
     title: "",
     message: "",
@@ -75,7 +75,7 @@ const PostCreateFish = ( { isPaused }  ) => {
             <Form.Control
               type="text"
               name="title"
-              value={fishData.title}
+              value={fishData.title || ''}
               onChange={handleInputChange}
               placeholder="Rubrik"
             />
@@ -100,7 +100,7 @@ const PostCreateFish = ( { isPaused }  ) => {
             <Form.Control
               type="text"
               name="name"
-              value={fishData.name}
+              value={fishData.name || ''}
               onChange={handleInputChange}
               placeholder="Ditt namn"
             />

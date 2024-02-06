@@ -5,17 +5,17 @@
 }
   
 .fish-small {
-    width: 120px;
+    width: 100px;
     overflow: hidden;
 }
   
 .fish-medium {
-    width: 150px;
+    width: 120px;
     overflow: hidden;
 }
   
 .fish-large {
-    width: 180px;
+    width: 150px;
     overflow: hidden;
 }
 
