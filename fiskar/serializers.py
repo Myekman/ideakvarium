@@ -17,7 +17,7 @@ class FishSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Fish
-        fields = ['id', 'fish_type', 'message', 'title', 'created_at', 'user', 'likes_count']
+        fields = ['id', 'fish_type', 'message', 'title', 'created_at', 'user', 'likes_count', 'name']
 
     def get_likes_count(self, obj):
         # Använder 'related_name' för att räkna "likes"

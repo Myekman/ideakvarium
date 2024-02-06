@@ -47,6 +47,7 @@ const PostCreateFish = ( { isPaused }  ) => {
       setFishData({
         title: "",
         message: "",
+        name: "",
         fish_type: "",
       });
     } catch (error) {
@@ -90,6 +91,18 @@ const PostCreateFish = ( { isPaused }  ) => {
               value={fishData.message}
               onChange={handleInputChange}
               placeholder="Meddelande"
+            />
+          </Col>
+        </Form.Group>
+
+        <Form.Group as={Row} className="mb-3">
+          <Col>
+            <Form.Control
+              type="text"
+              name="name"
+              value={fishData.name}
+              onChange={handleInputChange}
+              placeholder="Ditt namn"
             />
           </Col>
         </Form.Group>
