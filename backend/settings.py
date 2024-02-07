@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# tvinga HTTP till HTTPS-omdirigeringar.
+# SECURE_SSL_REDIRECT = True
 
 # Application definition
 
@@ -66,11 +68,15 @@ MIDDLEWARE = [
 
 APPEND_SLASH = False
 
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_ALL_ORIGINS = True
+# SESSION_COOKIE_SECURE = True
 
 CSRF_TRUSTED_ORIGINS = (
     'http://127.0.0.1:8000/', 'http://localhost:3000/'
 )
+
+# CSRF_COOKIE_SECURE = True
+
 
 #----------------------------------------------------------------Rekomenderas för produktion
 # CORS_ALLOW_ALL_ORIGINS = False

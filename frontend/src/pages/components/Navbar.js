@@ -33,17 +33,14 @@ const NavigationBar = () => {
                           <Nav.Item>
                             <Nav.Link className={styles.customnavlink} onClick={handleSignOut}>Logga ut</Nav.Link>
                           </Nav.Item>
-                          {/* <Nav.Item className={styles.hellomessage}>
-                            <span className="navbar-text text-white">Hej, {user.username}!</span>
-                          </Nav.Item> */}
                         </>
 
 
                     ) : (
                     <>
-                    <Nav.Item>
+                    {/* <Nav.Item>
                         <Nav.Link as={NavLink} to="/Registrera" className={styles.customnavlink}>Registrera</Nav.Link>
-                    </Nav.Item>
+                    </Nav.Item> */}
                     <Nav.Item>
                         <Nav.Link as={NavLink} to="/login" className={styles.customnavlink}>Logga in</Nav.Link>
                     </Nav.Item>
