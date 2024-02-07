@@ -104,6 +104,7 @@ function Fishtank() {
             setError(error);
             setLoading(false);
           });
+          setSearchTerm('');
       };
 
       if (loading) return <div className='text-white'>Loading...</div>;

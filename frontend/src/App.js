@@ -11,6 +11,7 @@ import FishCreateForm from './pages/FishCreateForm';
 import background from '../src/assets/images/havet.jpg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Bubbles from './pages/components/BubbleAnnimation';
+import RegistrationForm from './pages/auth/RegistrationForm';
 
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
             <Route path="/fiskar/:pk" element={<FishDetail />} />
             <Route path="/fiskar/create" element={<FishCreateForm />} />
             <Route path="/login" element={<LoginForm />} />
-            {/* <Route path="/register" element={<Register />} /> */}
+            <Route path="/register" element={<RegistrationForm />} />
         </Routes>
       </UserProvider>
       </div>
