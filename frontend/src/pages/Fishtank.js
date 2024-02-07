@@ -17,9 +17,7 @@ function Fishtank() {
     const [searchTerm, setSearchTerm] = useState('');
     const [activeFishId, setActiveFishId] = useState(null);
     const [pausedFishId, setPausedFishId] = useState(null);
-    const [isSearchingOrFiltering, setIsSearchingOrFiltering] = useState(false);
-
-
+   
 
   // useEffect för att hämta alla fiskar
   useEffect(() => {
@@ -64,7 +62,6 @@ function Fishtank() {
 
       // sök efter de största / minsta fskarna
       const handleFilter = (searchFishes) => {
-        setIsSearchingOrFiltering(true);
         setLoading(true);
         let searchQuery = '';
         if (searchFishes === 'largest') {
@@ -80,19 +77,16 @@ function Fishtank() {
           .then((data) => {
             setFishes(data);
             setLoading(false);
-            setIsSearchingOrFiltering(false);
           })
           .catch((error) => {
             console.error('Error:', error);
             setError(error);
             setLoading(false);
-            setIsSearchingOrFiltering(false);
           });
       };
 
       // sök efter fiskar med ord, tex username, fishtype eller messsage.
       const handleSearch = () => {
-      setIsSearchingOrFiltering(true);
         setLoading(true);
         fetch(`http://127.0.0.1:8000/api/fiskar/?search=${searchTerm}`)
           .then((response) => {
@@ -104,13 +98,11 @@ function Fishtank() {
           .then((data) => {
             setFishes(data);
             setLoading(false);
-            setIsSearchingOrFiltering(false);
           })
           .catch((error) => {
             console.error('Error:', error);
             setError(error);
             setLoading(false);
-            setIsSearchingOrFiltering(false);
           });
       };
 
@@ -178,7 +170,6 @@ function Fishtank() {
                 setIsPaused={setIsPaused} 
                 isPaused={pausedFishId === fish.id}
                 setPausedFishId={setPausedFishId}
-                isSearchingOrFiltering={isSearchingOrFiltering}
                 onFishClick={() => handleFishClick(fish.id)}
                 >
                 <Fish 

@@ -73,11 +73,11 @@ function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true
 
 
   const getBubbleSizeClass = (likesCount) => {
-    if (likesCount > 3) {
+    if (likesCount > 20) {
       return 'bubble-large';
-    } else if (likesCount > 2) {
+    } else if (likesCount > 10) {
       return 'bubble-medium';
-    } else if (likesCount > 1) {
+    } else if (likesCount > 5) {
       return 'bubble-small';
     } else {
       return 'bubble-default';
@@ -88,11 +88,11 @@ function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true
   const bubbleSizeClass = getBubbleSizeClass(fish.likes_count);
 
   const getFishSizeClass = (likesCount) => {
-    if (likesCount > 3) {
+    if (likesCount > 20) {
       return 'fish-large';
-    } else if (likesCount > 2) {
+    } else if (likesCount > 10) {
       return 'fish-medium';
-    } else if (likesCount > 1) {
+    } else if (likesCount > 5) {
       return 'fish-small';
     } else {
       return 'fish-default';

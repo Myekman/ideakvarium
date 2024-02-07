@@ -121,9 +121,9 @@ const PostCreateFish = ( { isPaused }  ) => {
         </Col>
 
         <Col md={6}>
-          <div>
-            <h2 className='text-white'>Ytterligare Innehåll</h2>
-            <p className='text-white'>Här kan du lägga till mer text, bilder, widgets eller annat innehåll som du vill visa bredvid formuläret.</p>
+          <div className={formstyles.fishcreatepadding}>
+            <h3 className='text-white'>Berätta, hur snurrar dina tankar och idéer idag?</h3>
+            <h6 className='text-white'>Dela med dig om vad som helst, allt från små funderingar till stora idéer!!</h6>
           </div>
         </Col>
       </Row>

@@ -9,7 +9,6 @@ const FishAnimated = ({
   isActive,
   setIsPaused, 
   setActiveFishId,
-  isSearchingOrFiltering,
   fishId,
   onFishClick }) => {
     // Beräkna en unik vertikal position och tidsförskjutning för varje fisk
@@ -23,17 +22,14 @@ const FishAnimated = ({
 
     const getRandomYPosition = useCallback(() => {
 
-      const minY = 100;
-      const maxY = window.innerHeight - 350; // 400px från botten
+      const minY = 80;
+      const maxY = window.innerHeight - 500; 
       return Math.random() * (maxY - minY) + minY;
     }, []); // Inga beroenden, så funktionen skapas inte om vid varje render
 
 
     const getCenterYPosition = () => window.innerHeight / 2;
 
-    // Sätt fördröjning till 0 för första fisken om en sökning/filtrering pågår,
-    // annars använd index * 4000 för att ge en fördröjning mellan fiskarna
-    // const delay = isSearchingOrFiltering && index === 0 ? 0 : index * 4000;
 
     // onRest inuti useSpring
     const onRestCallback = () => {
@@ -49,7 +45,7 @@ const FishAnimated = ({
     };
 
     const [styleX, apiX] = useSpring(() => ({
-      from: { x: -300, y: getRandomYPosition() },
+      from: { x: -200, y: getRandomYPosition() },
       to: { x: window.innerWidth },
       config: { duration: getRandomDuration() },
       delay:  index * 4000,
