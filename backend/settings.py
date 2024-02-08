@@ -27,8 +27,19 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# tvinga HTTP till HTTPS-omdirigeringar.
-# SECURE_SSL_REDIRECT = True
+# settings.py
+
+# # Sätt detta för att inaktivera e-postverifiering
+# ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+# # Om du inte vill att e-post ska vara obligatoriskt
+# ACCOUNT_EMAIL_REQUIRED = False
+
+# # Sätt detta för att tillåta registrering med endast användarnamn
+# ACCOUNT_AUTHENTICATION_METHOD = 'username'
+
+# # Sätt detta för att inaktivera e-post som användarnamn
+# ACCOUNT_UNIQUE_EMAIL = False
 
 # Application definition
 

@@ -5,13 +5,13 @@ import Fishtank from './pages/Fishtank';
 import FishDetail from './pages/FishDetail';
 import LoginForm from './pages/auth/SigninForm';
 import { UserProvider } from './pages/auth/UserContext';
-// import Register from './pages/auth/RegistrationForm';
 import NavigationBar from './pages/components/Navbar';
 import FishCreateForm from './pages/FishCreateForm';
 import background from '../src/assets/images/havet.jpg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Bubbles from './pages/components/BubbleAnnimation';
-// import RegistrationForm from './pages/auth/RegistrationForm';
+import RegisterForm from './pages/auth/RegistrationForm';
+
 
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
             <Route path="/fiskar/:pk" element={<FishDetail />} />
             <Route path="/fiskar/create" element={<FishCreateForm />} />
             <Route path="/login" element={<LoginForm />} />
-            {/* <Route path="/register" element={<RegistrationForm />} /> */}
+            <Route path="/register" element={<RegisterForm />} />
         </Routes>
       </UserProvider>
       </div>
