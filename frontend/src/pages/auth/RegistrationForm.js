@@ -11,6 +11,7 @@ import Container from "react-bootstrap/Container";
 import formstyles from '../../styles/Form.module.css';
 
 import axios from "axios";
+import Bubbles from '../components/BubbleAnnimation';
 // import { useRedirect } from "../../hooks/useRedirect";
 
 const RegisterForm = () => {
@@ -54,97 +55,12 @@ const handleBackToFishTank = () => {
 
 
   return (
-    // <Row>
-    //   <Col md={6}>
-    //     <Container>
-    //       <h1>sign up</h1>
-
-    //       <Form onSubmit={handleSubmit}>
-            // <Form.Group controlId="username">
-            //     <Form.Label className="d-none">Username</Form.Label>
-            //     <Form.Control 
-            //     type="text" 
-            //     placeholder="Username" 
-            //     name="username"
-            //     value={username}
-            //     onChange={handleChange}
-            //     />
-            // </Form.Group>
-            // {errors.username?.map((error, index) => (
-            // <Alert variant="warning" key={index}>
-            //     {error}
-            // </Alert>
-            // ))}
-
-            // <Form.Group controlId="password1">
-            //     <Form.Label className="d-none">Username</Form.Label>
-            //     <Form.Control 
-            //     type="password" 
-            //     placeholder="Password" 
-            //     name="password1" 
-            //     value={password1}
-            //     onChange={handleChange}
-            //     />
-            // </Form.Group>
-            // {errors.password1?.map((error, index) => (
-            // <Alert variant="warning" key={index}>
-            //     {error}
-            // </Alert>
-            // ))}
-
-    //         <Form.Group controlId="password2">
-    //             <Form.Label className="d-none">Username</Form.Label>
-    //             <Form.Control 
-    //             type="password" 
-    //             placeholder="Confirm password" 
-    //             name="password2" 
-    //             value={password2}
-    //             onChange={handleChange}
-    //             />
-    //         </Form.Group>
-    //         {errors.password2?.map((error, index) => (
-    //         <Alert variant="warning" key={index}>
-    //             {error}
-    //         </Alert>
-    //         ))}
-
-            // <Button 
-            //     type="submit">
-            //     Sign up
-            // </Button>
-
-            // <Container>
-            // <Link to="/login">
-            //     <p> Already have an account?</p>
-            //     <span>Sign in</span>
-            // </Link>
-            // </Container>
-    //     </Form>
-    
-    //     </Container>
-
-    //     <Col className='mt-4'>
-    //       <Button className={formstyles.formbtn} variant="success" onClick={handleBackToFishTank}>Tillbaka till Fiskarna</Button>
-    //     </Col>
-        
-    //   </Col>
-    //   {/* <Col md={6}>
-    //     <Image
-    //       className={`${appStyles.FillerImage}`}
-    //       src={
-    //         SignUpImage
-    //       }
-    //     />
-    //   </Col> */}
-    // </Row>
-
-    <Container>
-      {/* <NavigationBar /> */}
-      {/* <Bubbles count={20}/> */}
+    <Container className="mt-4">
+      <Bubbles count={20}/>
       <Row className={formstyles.formcontainer}>
         <Col md={6}>
         <Form className={formstyles.form} onSubmit={handleSubmit}>
-        <Form.Group controlId="username">
+        <Form.Group className="mt-4" controlId="username">
                 <Form.Label className="d-none">Username</Form.Label>
                 <Form.Control 
                 type="text" 
@@ -160,7 +76,7 @@ const handleBackToFishTank = () => {
             </Alert>
             ))}
 
-          <Form.Group controlId="password1">
+          <Form.Group className="mt-4" controlId="password1">
                 <Form.Label className="d-none">Username</Form.Label>
                 <Form.Control 
                 type="password" 
@@ -176,7 +92,7 @@ const handleBackToFishTank = () => {
             </Alert>
             ))}
 
-          <Form.Group controlId="password2">
+          <Form.Group className="mt-4" controlId="password2">
                 <Form.Label className="d-none">Username</Form.Label>
                 <Form.Control 
                 type="password" 
@@ -192,30 +108,30 @@ const handleBackToFishTank = () => {
             </Alert>
             ))}
 
-            <Button 
+            <Button variant="success" className="mt-4"
                 type="submit">
                 Sign up
             </Button>
 
-            <Container>
-            <Link to="/login">
-                <p> Already have an account?</p>
+            <Container className="mt-4">
+            <Link to="/login" className={formstyles.links}>
+                <p>Har du redan en användare?</p>
                 <span>Sign in</span>
             </Link>
             </Container>
         </Form>
         </Col>
 
-        <Col md={6}>
+        {/* <Col md={6} className="mt-4">
           <div className={formstyles.fishcreatepadding}>
             <h3 className='text-white'>Berätta, hur snurrar dina tankar och idéer idag?</h3>
             <h6 className='text-white'>Dela med dig om vad som helst, allt från små funderingar till stora idéer!!</h6>
           </div>
-        </Col>
+        </Col> */}
       </Row>
 
       <Col className='mt-4'>
-          <Button className={formstyles.formbtn} variant="success" onClick={handleBackToFishTank}>Tillbaka till Fiskarna</Button>
+          <Button variant="success" className={formstyles.formbtn} onClick={handleBackToFishTank}>Tillbaka till Fiskarna</Button>
       </Col>
     </Container>
 

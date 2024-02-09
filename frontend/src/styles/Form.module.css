@@ -36,3 +36,9 @@
 .fishcreatepadding {
   padding: 0px 30px 0px 30px;
 }
+
+
+.links {
+  text-decoration: none;
+  color: white;
+}
