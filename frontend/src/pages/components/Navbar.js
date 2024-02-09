@@ -38,9 +38,9 @@ const NavigationBar = () => {
 
                     ) : (
                     <>
-                    {/* <Nav.Item>
-                        <Nav.Link as={NavLink} to="/Registrera" className={styles.customnavlink}>Registrera</Nav.Link>
-                    </Nav.Item> */}
+                    <Nav.Item>
+                        <Nav.Link as={NavLink} to="/register" className={styles.customnavlink}>Registrera</Nav.Link>
+                    </Nav.Item>
                     <Nav.Item>
                         <Nav.Link as={NavLink} to="/login" className={styles.customnavlink}>Logga in</Nav.Link>
                     </Nav.Item>
