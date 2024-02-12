@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-*c55q@@i1ea0i$n)#k)2z4y)^@zm)16$$6*c2nd4p+8x^qiz03'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'https://model.sweco.se/innovation/']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://model.sweco.se/innovation/']
 
 # settings.py
 
@@ -78,7 +78,7 @@ CSRF_TRUSTED_ORIGINS = (
 
 
 #----------------------------------------------------------------Rekomenderas för produktion
-# CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Tillåt react att göra anrop till django under development (behövs inte för produktion)
 CORS_ALLOWED_ORIGINS = [

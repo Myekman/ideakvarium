@@ -1,9 +1,14 @@
 // axiosReq.js
 import axios from 'axios';
 
+// "proxy": "http://127.0.0.1:8000/",
+
+// const axiosReq = axios.create({
+//   baseURL: 'http://127.0.0.1:8000/api', 
+// });
 
 const axiosReq = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api', 
+  baseURL: '/api', 
 });
 
 // Lägg till en interceptor som sätter Authorization-headern

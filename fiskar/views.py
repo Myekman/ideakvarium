@@ -53,6 +53,7 @@ def like_unlike_fish(request, pk):
         return Response({"detail": "Fish not found"}, status=status.HTTP_404_NOT_FOUND)
   
     user = get_user_or_guest(request)
+    print(f"User or guestuser obtained: {user}")
 
    
     if user.username == 'guestuser':
