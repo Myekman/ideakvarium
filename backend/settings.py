@@ -30,20 +30,6 @@ ALLOWED_HOSTS = []
 
 # settings.py
 
-# # Sätt detta för att inaktivera e-postverifiering
-# ACCOUNT_EMAIL_VERIFICATION = 'none'
-
-# # Om du inte vill att e-post ska vara obligatoriskt
-# ACCOUNT_EMAIL_REQUIRED = False
-
-# # Sätt detta för att tillåta registrering med endast användarnamn
-# ACCOUNT_AUTHENTICATION_METHOD = 'username'
-
-# # Sätt detta för att inaktivera e-post som användarnamn
-# ACCOUNT_UNIQUE_EMAIL = False
-
-# Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -69,6 +55,7 @@ SITE_ID = 1
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -92,12 +79,16 @@ CSRF_TRUSTED_ORIGINS = (
 
 #----------------------------------------------------------------Rekomenderas för produktion
 # CORS_ALLOW_ALL_ORIGINS = False
+
+# Tillåt react att göra anrop till django under development (behövs inte för produktion)
 CORS_ALLOWED_ORIGINS = [
     # "https://example.com",
     # "https://sub.example.com",
-    "http://localhost:3000"  # React's default port
+    # "http://localhost:3000"  # React's default port
     # "http://127.0.0.1:9000",  # Some other port
 ]
+
+CORS_ALLOW_CREDENTIALS = True
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -124,7 +115,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'staticfiles', 'build')],
+        'DIRS': [os.path.join(BASE_DIR, 'frontend', 'build')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -183,13 +174,21 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
+# https://docs.djangoproject.com/en/5.0/howto/static-files/F
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'frontend' / 'build',
+# ]
+
 STATICFILES_DIRS = [
-    BASE_DIR / 'staticfiles' / 'build',
+    os.path.join(BASE_DIR, 'frontend', 'build', 'static'),
 ]
+
+# STATICFILES_DIRS = []
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

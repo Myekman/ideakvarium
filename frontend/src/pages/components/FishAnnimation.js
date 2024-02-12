@@ -28,7 +28,8 @@ const FishAnimated = ({
     }, []); // Inga beroenden, så funktionen skapas inte om vid varje render
 
 
-    const getCenterYPosition = () => window.innerHeight / 2;
+    const getCenterYPosition = () => window.innerHeight / 2 - 500;
+    console.log(getCenterYPosition());
 
 
     // onRest inuti useSpring

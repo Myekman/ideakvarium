@@ -16,11 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import root_route
+# from .views import root_route
 from rest_framework.authtoken.views import obtain_auth_token
 # from django.views.decorators.csrf import csrf_exempt
 from dj_rest_auth.views import LogoutView  # Import the built-in LogoutView
 # from dj_rest_auth.views import LoginView
+from django.views.generic import TemplateView
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -28,7 +29,8 @@ from rest_framework_simplejwt.views import (
 )
 
 urlpatterns = [
-    path('', root_route),
+    path('', TemplateView.as_view(template_name='index.html')),
+    # path('', root_route),
     path('admin/', admin.site.urls),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),

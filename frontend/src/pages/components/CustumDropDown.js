@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dropdown } from 'react-bootstrap';
 import ClownfiskImage from '../../assets/images/clownfisk.png';
-import SvärdfiskImage from '../../assets/images/svärdfisk.png';
+import SvärdfiskImage from '../../assets/images/svärdfisk2.png';
 import BlåsfiskImage from '../../assets/images/blåsfisk.png';
 import BläckfiskImage from '../../assets/images/bläckfisk.png';
 
