@@ -11,7 +11,8 @@ function FishDetail() {
 
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api/fiskar/${pk}`) // Använd 'pk' för att göra API-anropet
+      //  fetch(`http://127.0.0.1:8000/api/fiskar/${pk}`) 
+       fetch(`https://model.sweco.se/innovation/api/fiskar/${pk}`) // Använd 'pk' för att göra API-anropet
           .then(response => {
             if (!response.ok) {
               throw new Error('Network response was not ok');

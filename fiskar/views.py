@@ -11,7 +11,8 @@ from backend.permissions import IsOwnerOrReadOnly
 from rest_framework import filters
 from django.db.models import Count
 from django.db.models import F
-from django.db import IntegrityError 
+from django.db import IntegrityError
+# from django.views.decorators.csrf import csrf_exempt
 
 from .serializers import UserSerializer
 from django.contrib.auth.models import User
@@ -45,6 +46,7 @@ def get_user_or_guest(request):
 
 
 @api_view(['POST'])
+# @csrf_exempt
 @permission_classes([permissions.AllowAny])
 def like_unlike_fish(request, pk):
     try:
