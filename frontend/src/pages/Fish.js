@@ -17,6 +17,8 @@ function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true
   const { user } = useUser();
   const [isLiked, setIsLiked] = useState(fish.isLiked);
   const fishRef = useRef(null);
+  const [userMessage, setUserMessage] = useState('');
+  const [showMessage, setShowMessage] = useState(false);
 
   const fishPreviewStyle = previewSize ? { width: previewSize.width, height: previewSize.height } : {};
 
@@ -48,6 +50,15 @@ function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true
   }, [user, fish.id]);
 
 
+  const displayMessage = (message, duration = 3000) => {
+    setUserMessage(message);
+    setShowMessage(true);
+    setTimeout(() => {
+        setShowMessage(false);
+    }, duration);
+};
+
+
   const handleLikeClick = async () => {
     try {
       const response = await axiosReq.post(`/fiskar/${fish.id}/like-unlike/`);
@@ -65,9 +76,15 @@ function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true
          // Uppdatera fiskens information i Fishtank-komponenten
          setIsLiked(isLiked);
          onLikeUpdate(fish.id, newLikeCount, isLiked);
+
+        // Uppdatera meddelandet för användaren
+        displayMessage(`Du har ${isLiked ? 'gillat' : 'ogillat'} fisken! Nytt antal gillningar: ${newLikeCount}`)
       }
     } catch (error) {
       console.error('Error liking/unliking fish:', error);
+
+       // Visa felmeddelandet för användaren
+       displayMessage('Ett fel uppstod när du försökte gilla/ogilla fisken.');
     }
   };
 
@@ -117,6 +134,10 @@ function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true
 
     return (
       <div>
+        <div>
+         {showMessage && <div className={fishstyles.meddelande}>{userMessage}</div>}
+      </div>
+
 
         <div ref={fishRef}>
           {FishImage}

@@ -60,8 +60,6 @@ def like_unlike_fish(request, pk):
    
     if user.username == 'guestuser':
         fish.likes.create(user=user)
-        # liked = True
-        print(f"User or guest attempting to like: {user.username}")
     elif request.user.is_authenticated:
         liked = False
         existing_like = fish.likes.filter(user=user).first()
@@ -80,7 +78,6 @@ def like_unlike_fish(request, pk):
     fish.like_count = fish.likes.count()
     fish.save(update_fields=['like_count'])
     # Skicka inte med 'is_liked' i svaret för gästanvändare
-    # return Response({"like_count": fish.like_count}, status=status.HTTP_200_OK)
 
     # Skicka tillbaka relevant svar baserat på om det är 'guestuser' eller en autentiserad användare
     if user.username == 'guestuser':

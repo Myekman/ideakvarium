@@ -67,3 +67,13 @@
     padding-left: 10px;
     padding-right: 10px;
 }
+
+.meddelande {
+    color: white;
+    background-color: #125c5e92;
+    font-size: 20px;
+    padding: 5px;
+    border: 1px solid white;
+    border-radius: 2px;
+
+}

@@ -3,7 +3,6 @@ import { useSpring, animated } from '@react-spring/web';
 
 import bubbelImage from '../../assets/images/bubblablå.png';
 
-
 const getRandomSize = () => Math.random() * (60 - 10) + 10;
 
 const BubbleAnimated = ({ index }) => {

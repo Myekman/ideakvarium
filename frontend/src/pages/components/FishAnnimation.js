@@ -46,7 +46,7 @@ const FishAnimated = ({
     };
 
     const [styleX, apiX] = useSpring(() => ({
-      from: { x: -200, y: getRandomYPosition() },
+      from: { x: -300, y: getRandomYPosition() },
       to: { x: window.innerWidth },
       config: { duration: getRandomDuration() },
       delay:  index * 4000,
@@ -78,7 +78,7 @@ const FishAnimated = ({
       if (isActive) {
         apiY.start({
           y: 300,
-          immediate: true, // Använd immediate för att hoppa till positionen utan animation
+          immediate: true, // immediate för att hoppa till positionen utan animation
         });
       } else if (!isActive) {
         // När fisken inte längre är aktiv, återställ y-positionen till en slumpmässig position

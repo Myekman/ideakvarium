@@ -26,7 +26,7 @@ const NavigationBar = () => {
                 <div className={styles.navbarcollapse}>
                 <Nav className="mr-auto">
                         <Nav.Item>
-                            <Nav.Link as={NavLink} to="api/fiskar/create" className={styles.customnavlink}>Skapa fisk</Nav.Link>
+                            <Nav.Link as={NavLink} to="/fiskar/create" className={styles.customnavlink}>Skapa fisk</Nav.Link>
                         </Nav.Item>
                     {user ? (
                         <>
