@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Poiret+One&display=swap');
+
+h3, h1, h5, p, a {
+    font-family:  "Cormorant", sans-serif;
+
+}
+
+button {
+    font-family: "Oswald", sans-serif !important;
+}
+
 /* fish.module.css */
 .fish-default {
     width: 80px;
@@ -20,6 +32,7 @@
 }
 
 .sökbtn {
+  font-size: 20px !important;
   height: 60px;
   width: 80px;
   border: 1px solid white !important;
@@ -27,13 +40,13 @@
 }
 
 .resetbtn {
-    /* height: 60px;
-    width: 80px; */
+    font-size: 15px !important;
     border: 1px solid white !important;
     background-color: rgba(29, 78, 45, 0.616) !important;
 }
 
 .sökbtn2 {
+  font-size: 15px !important;
   border: 1px solid white !important;
   background-color:   rgba(29, 78, 45, 0.616) !important;
   margin-top: 10px;

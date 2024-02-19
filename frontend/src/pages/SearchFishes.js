@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Col, Row } from 'react-bootstrap';
 import fishstyles from '../../src/styles/Fish.module.css';
 
 function SearchBigFishes({ onSearch }) {
@@ -9,9 +9,14 @@ function SearchBigFishes({ onSearch }) {
     };
 
     return (
-      <div>
-        <Button className={fishstyles.sökbtn2} variant="success" onClick={handleShowLargestClick}>Visa de största fiskarna</Button>
+      <Row>
+      <Col xs={6}>
+      <div className={fishstyles.filtermessage}>
+        <h5>Vilka är de poppuläraste idéerna just nu?</h5>
+        <Button className={fishstyles.sökbtn2} variant="success" onClick={handleShowLargestClick}>Visa storbaddarna!</Button>
       </div>
+      </Col>
+      </Row>
       );
   }
   

@@ -6,6 +6,7 @@ import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import fishstyles from '../styles/Fish.module.css';
+import formstyles from '../styles/Form.module.css';
 import FishAnimated from './components/FishAnnimation';
 
 function Fishtank() {
@@ -96,7 +97,7 @@ function Fishtank() {
         let message = '';
         if (searchFishes === 'largest') {
           searchQuery = 'like_count__gt=1';
-          message = 'Just nu visas de största fiskarna'
+          message = 'Just nu visas de största fiskarna...'
         }
         fetch(`/api/fiskar/?${searchQuery}`)
           .then((response) => {
@@ -120,6 +121,7 @@ function Fishtank() {
       // sök efter fiskar med ord, tex username, fishtype eller messsage.
       const handleSearch = () => {
         setLoading(true);
+        let message = '';
         fetch(`/api/fiskar/?search=${searchTerm}`)
           .then((response) => {
             if (!response.ok) {
@@ -137,6 +139,8 @@ function Fishtank() {
             setLoading(false);
           });
           setSearchTerm('');
+          message = (`Just nu visas en fisksökning: "${searchTerm}" `)
+          setFilterMessage(message);
       };
 
       if (loading) return <div className='text-white'>Loading...</div>;
@@ -174,7 +178,7 @@ function Fishtank() {
             <Row>
             <Col>
               <InputGroup>
-                <InputGroup.Text>Sök efter Title/Fisktyp:</InputGroup.Text>
+                <InputGroup.Text className={formstyles.fontstyle}>Sök efter Title/Fisktyp:</InputGroup.Text>
                 <Form.Control 
                   as="textarea" 
                   aria-label="Sök efter Title/Fisktyp:" 
@@ -200,8 +204,8 @@ function Fishtank() {
                 {filterMessage && (
                   <>
                   <div className={fishstyles.filtermessage}>
-                    <p>{filterMessage}</p>
-                    <Button className={fishstyles.resetbtn} onClick={resetFilter}>Visa alla!</Button>
+                    <h5>{filterMessage}</h5>
+                    <Button className={fishstyles.resetbtn} onClick={resetFilter}>Tillbaka till visa alla</Button>
                     </div>
                   </>
                 )}
