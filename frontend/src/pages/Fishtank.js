@@ -17,28 +17,57 @@ function Fishtank() {
     const [searchTerm, setSearchTerm] = useState('');
     const [activeFishId, setActiveFishId] = useState(null);
     const [pausedFishId, setPausedFishId] = useState(null);
+
+    const [filterMessage, setFilterMessage] = useState(''); // Lägger till ett tillstånd för att visa meddelanden baserat på filtret
    
 
   // useEffect för att hämta alla fiskar
-  useEffect(() => {
-    const fetchFishes = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch('/api/fiskar/');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setFishes(data);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchFishes = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const response = await fetch('/api/fiskar/');
+  //       if (!response.ok) {
+  //         throw new Error('Network response was not ok');
+  //       }
+  //       const data = await response.json();
+  //       setFishes(data);
+  //     } catch (error) {
+  //       setError(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
+  //   fetchFishes();
+  // }, []);
+
+  const fetchFishes = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch('/api/fiskar/');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setFishes(data);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // useEffect för att hämta alla fiskar när komponenten monteras
+  useEffect(() => {
     fetchFishes();
   }, []);
+
+  // Funktion för att återställa filtret och hämta alla fiskar
+  const resetFilter = () => {
+    setFilterMessage('');
+    fetchFishes(); // Anropa den återanvändbara funktionen för att hämta fiskarna
+  };
 
   // use effect för att hämta 5 fiskar åt gången
   useEffect(() => {
@@ -60,12 +89,14 @@ function Fishtank() {
   if (error) return <div>Error: {error.message}</div>;
 
 
-      // sök efter de största / minsta fskarna
+      // sök efter de största fskarna
       const handleFilter = (searchFishes) => {
         setLoading(true);
         let searchQuery = '';
+        let message = '';
         if (searchFishes === 'largest') {
           searchQuery = 'like_count__gt=1';
+          message = 'Just nu visas de största fiskarna'
         }
         fetch(`/api/fiskar/?${searchQuery}`)
           .then((response) => {
@@ -83,6 +114,7 @@ function Fishtank() {
             setError(error);
             setLoading(false);
           });
+        setFilterMessage(message);
       };
 
       // sök efter fiskar med ord, tex username, fishtype eller messsage.
@@ -154,12 +186,27 @@ function Fishtank() {
             <Col>
               <Button className={fishstyles.sökbtn} variant="success" onClick={handleSearch}>Sök</Button>
             </Col>
-              
-            {/* <p>hej {user.username}!</p> */}
-           
             </Row>
 
-            <SearchBigFishes onSearch={handleFilter} />
+            <Row>
+              <Col className='mt-4'>
+                {/* <SearchBigFishes onSearch={handleFilter} /> */}
+                {!filterMessage && <SearchBigFishes onSearch={handleFilter} />}
+              </Col>
+            </Row>
+
+            <Row>
+              <Col xs={6} sm={6}>
+                {filterMessage && (
+                  <>
+                  <div className={fishstyles.filtermessage}>
+                    <p>{filterMessage}</p>
+                    <Button className={fishstyles.resetbtn} onClick={resetFilter}>Visa alla!</Button>
+                    </div>
+                  </>
+                )}
+              </Col>
+            </Row>
 
             {displayedFishes.map((fish, index) => (
               <FishAnimated 

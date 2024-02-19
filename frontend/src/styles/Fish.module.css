@@ -26,6 +26,13 @@
   background-color: rgba(29, 78, 45, 0.616) !important;
 }
 
+.resetbtn {
+    /* height: 60px;
+    width: 80px; */
+    border: 1px solid white !important;
+    background-color: rgba(29, 78, 45, 0.616) !important;
+}
+
 .sökbtn2 {
   border: 1px solid white !important;
   background-color:   rgba(29, 78, 45, 0.616) !important;
@@ -76,4 +83,11 @@
     border: 1px solid white;
     border-radius: 2px;
 
+}
+
+.filtermessage {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #125c5e92;
+    color: white;
 }
