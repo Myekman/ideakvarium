@@ -7,7 +7,7 @@ import SvärdfiskImage from '../assets/images/svärdfisk2.png';
 import BlåsfiskImage from '../assets/images/blåsfisk.png';
 import BläckfiskImage from '../assets/images/bläckfisk.png';
 import fishstyles from '../styles/Fish.module.css';
-import { Button } from 'react-bootstrap';
+import { Button, Container} from 'react-bootstrap';
 
 import { useUser } from './auth/UserContext';
 // import axios from 'axios';
@@ -133,42 +133,45 @@ function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true
 
 
     return (
-      <div>
-        <div>
-         {showMessage && <div className={fishstyles.meddelande}>{userMessage}</div>}
-      </div>
+      <Container style={{ position: 'relative' }}>
 
-
-        <div ref={fishRef}>
-          {FishImage}
-        </div>
-
-        <div className={`pratbubbla ${fishstyles[bubbleSizeClass]}`}>
-          <div className="row justify-content-center">
-            <div className={`col-12 col-md-8 col-lg-6 ${fishstyles.pratbubbla}`}>
-              <h5>{fish.title}</h5>
-              {isActive && (
-                <div>
-                  <p className={fishstyles.message}>{fish.message}</p>
-                  {/* <p>Användare: {fish.user ? fish.user.username : 'Gäst'}</p> */}
-
-                  {showLikeButton && ( 
-                  <>
-                  <p>Likes: {fish.likes_count}</p>
-                  <Button variant="success" onClick={handleLikeClick}>
-                    {isLiked ? 'Unlike' : 'Like'}
-                  </Button>
-                  </>
-                  )}
-
-                <p>Användare: {fish.user ? fish.user.username : 'Gäst'}</p>
-                </div>
-              )}
-            </div>
+          <div>
+          {showMessage && <div className={fishstyles.gillameddelande}>{userMessage}</div>}
           </div>
-        </div>
+    
+          <div>
+            <div ref={fishRef}>
+              {FishImage}
+            </div>
 
-      </div>
+            <div className={`pratbubbla ${fishstyles[bubbleSizeClass]}`}>
+              <div className="row justify-content-center">
+                <div className={`col-12 col-md-8 col-lg-6 ${fishstyles.pratbubbla}`}>
+                  <h5 className={fishstyles.fontstyle}>{fish.title}</h5>
+                  {isActive && (
+                    <div>
+                       <p className={fishstyles.postmessage}>{fish.message}</p>
+                      {/* <p className={fishstyles.postmessage}>{fish.message}</p> */}
+                      {/* <p>Användare: {fish.user ? fish.user.username : 'Gäst'}</p> */}
+
+                      {showLikeButton && ( 
+                      <>
+                      <p>Likes: {fish.likes_count}</p>
+                      <Button variant="success" onClick={handleLikeClick}>
+                        {isLiked ? 'Unlike' : 'Like'}
+                      </Button>
+                      </>
+                      )}
+
+                    <p>Användare: {fish.user ? fish.user.username : 'Gäst'}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+          </div>
+      </Container>
     );
   }
   

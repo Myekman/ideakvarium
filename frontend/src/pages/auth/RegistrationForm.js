@@ -68,6 +68,7 @@ const handleBackToFishTank = () => {
                 name="username"
                 value={username}
                 onChange={handleChange}
+                className={formstyles.fontstyle}
                 />
             </Form.Group>
             {errors.username?.map((error, index) => (
@@ -84,6 +85,7 @@ const handleBackToFishTank = () => {
                 name="password1" 
                 value={password1}
                 onChange={handleChange}
+                className={formstyles.fontstyle}
                 />
             </Form.Group>
             {errors.password1?.map((error, index) => (
@@ -100,6 +102,7 @@ const handleBackToFishTank = () => {
                 name="password2" 
                 value={password2}
                 onChange={handleChange}
+                className={formstyles.fontstyle}
                 />
             </Form.Group>
             {errors.password2?.map((error, index) => (
@@ -115,8 +118,8 @@ const handleBackToFishTank = () => {
 
             <Container className="mt-4">
             <Link to="/login" className={formstyles.links}>
-                <p>Har du redan en användare?</p>
-                <span>Sign in</span>
+                <p className="formstyles.fontstyle2">Har du redan en användare?</p>
+                <span  className="formstyles.fontstyle2">Sign in</span>
             </Link>
             </Container>
         </Form>

@@ -6,7 +6,6 @@ import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import fishstyles from '../styles/Fish.module.css';
-import formstyles from '../styles/Form.module.css';
 import FishAnimated from './components/FishAnnimation';
 
 function Fishtank() {
@@ -178,7 +177,7 @@ function Fishtank() {
             <Row>
             <Col>
               <InputGroup>
-                <InputGroup.Text className={formstyles.fontstyle}>Sök efter Title/Fisktyp:</InputGroup.Text>
+                <InputGroup.Text className={fishstyles.fontstyle}>Sök efter Title/Fisktyp:</InputGroup.Text>
                 <Form.Control 
                   as="textarea" 
                   aria-label="Sök efter Title/Fisktyp:" 

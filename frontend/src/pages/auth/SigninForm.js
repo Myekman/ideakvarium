@@ -54,7 +54,7 @@ function LoginForm() {
       <div className="d-flex justify-content-center align-items-center">
         <Form className={styles.signinform} onSubmit={handleLogin}>
           <InputGroup className="mb-3">
-            <InputGroup.Text id="inputGroup-sizing-default">
+            <InputGroup.Text className={styles.fontstyle} id="inputGroup-sizing-default">
               Användarnamn
             </InputGroup.Text>
             <Form.Control
@@ -67,7 +67,7 @@ function LoginForm() {
           </InputGroup>
           <br />
           <InputGroup className="mb-3">
-            <InputGroup.Text id="inputGroup-sizing-default">
+            <InputGroup.Text className={styles.fontstyle} id="inputGroup-sizing-default">
               Lösenord
             </InputGroup.Text>
             <Form.Control

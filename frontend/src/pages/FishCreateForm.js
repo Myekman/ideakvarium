@@ -78,6 +78,7 @@ const PostCreateFish = ( { isPaused }  ) => {
               value={fishData.title || ''}
               onChange={handleInputChange}
               placeholder="Rubrik"
+              className={formstyles.fontstyle}
             />
           </Col>
         </Form.Group>
@@ -91,6 +92,7 @@ const PostCreateFish = ( { isPaused }  ) => {
               value={fishData.message}
               onChange={handleInputChange}
               placeholder="Meddelande"
+              className={formstyles.fontstyle}
             />
           </Col>
         </Form.Group>
@@ -103,6 +105,7 @@ const PostCreateFish = ( { isPaused }  ) => {
               value={fishData.name || ''}
               onChange={handleInputChange}
               placeholder="Ditt namn"
+              className={formstyles.fontstyle}
             />
           </Col>
         </Form.Group>

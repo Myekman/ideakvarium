@@ -1,13 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Poiret+One&display=swap');
 
-h3, h1, h5, p, a {
+h3, h1, h5, h6, p, a {
     font-family:  "Cormorant", sans-serif;
 
 }
 
 button {
     font-family: "Oswald", sans-serif !important;
+}
+
+.fontstyle {
+    font-family: "Oswald", sans-serif !important;
+}
+
+.fontstyle2 {
+    font-family:  "Cormorant", sans-serif;
+
 }
 
 /* fish.module.css */
@@ -53,7 +62,6 @@ button {
 }
 
 .pratbubbla {
-    /* opacity: 0.7; */
     position: relative;
     display: flex;          
     justify-content: center; 
@@ -63,9 +71,10 @@ button {
     color: white;
     border-radius: 50%;
     border: 1px solid white;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
-    min-width: 100px;
+    max-width: 150px;
+   
 }
 
 .pratbubbla::after {
@@ -82,19 +91,25 @@ button {
     /* Center the tail and move it down so it's just outside the bubble */
 }
 
-.message {
+.postmessage {
     margin-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 70px;
+    padding-right: 70px;
+    font-size: 25px !important;
+   
 }
 
-.meddelande {
-    color: white;
-    background-color: #125c5e92;
+
+.gillameddelande {
+    color: #125c5e;
+    background-color: #f3af48d3;
     font-size: 20px;
-    padding: 5px;
+    padding: 10px;
     border: 1px solid white;
-    border-radius: 2px;
+    border-radius: 5px;
+    position: absolute;
+    top: 0;
+    z-index: 1000; 
 
 }
 
