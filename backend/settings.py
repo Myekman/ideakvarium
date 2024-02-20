@@ -28,7 +28,7 @@ DEBUG = False
 
 # ALLOWED_HOSTS = ['localhost', '127.0.0.1',]
 
-ALLOWED_HOSTS = ['20.240.203.148',  'ideakvarium.swedencentral.cloudapp.azure.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '20.240.203.148',  'ideakvarium.swedencentral.cloudapp.azure.com']
 
 # settings.py
 
@@ -73,7 +73,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 SESSION_COOKIE_SECURE = True
 
 CSRF_TRUSTED_ORIGINS = (
-    'http://127.0.0.1:8000/', 'http://localhost:3000/', 'http://20.240.203.148:8000/',
+    'http://127.0.0.1:8000/', 'http://localhost:3000/', 'http://20.240.203.148:8000/' 'http://ideakvarium.swedencentral.cloudapp.azure.com/',
 )
 
 # CSRF_COOKIE_SECURE = True
@@ -84,7 +84,7 @@ CORS_ALLOW_ALL_ORIGINS = False
 
 # Tillåt react att göra anrop till django under development (behövs inte för produktion)
 CORS_ALLOWED_ORIGINS = [
-    'http://ideakvarium.swedencentral.cloudapp.azure.com/'
+    'http://ideakvarium.swedencentral.cloudapp.azure.com'
 ]
 
 CORS_ALLOW_CREDENTIALS = True
