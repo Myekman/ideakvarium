@@ -127,7 +127,7 @@ const PostCreateFish = ( { isPaused }  ) => {
         </Form>
         </Col>
 
-        <Col md={6}>
+        <Col md={6} className='d-none d-md-block'>
           <div className={formstyles.fishcreatepadding}>
             <h3 className='text-white'>Berätta, hur snurrar dina tankar och idéer idag?</h3>
             <h6 className='text-white'>Dela med dig om vad som helst, allt från små funderingar till stora idéer!!</h6>

@@ -9,38 +9,17 @@ import fishstyles from '../styles/Fish.module.css';
 import FishAnimated from './components/FishAnnimation';
 
 function Fishtank() {
-    const [fishes, setFishes] = useState([]);
-    const [isPaused, setIsPaused] = useState(false);
-    const [displayedFishes, setDisplayedFishes] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [activeFishId, setActiveFishId] = useState(null);
-    const [pausedFishId, setPausedFishId] = useState(null);
+  const [fishes, setFishes] = useState([]);
+  const [isPaused, setIsPaused] = useState(false);
+  const [displayedFishes, setDisplayedFishes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [activeFishId, setActiveFishId] = useState(null);
+  const [pausedFishId, setPausedFishId] = useState(null);
 
-    const [filterMessage, setFilterMessage] = useState(''); // Lägger till ett tillstånd för att visa meddelanden baserat på filtret
+  const [filterMessage, setFilterMessage] = useState(''); // Lägger till ett tillstånd för att visa meddelanden baserat på filtret
    
-
-  // useEffect för att hämta alla fiskar
-  // useEffect(() => {
-  //   const fetchFishes = async () => {
-  //     try {
-  //       setLoading(true);
-  //       const response = await fetch('/api/fiskar/');
-  //       if (!response.ok) {
-  //         throw new Error('Network response was not ok');
-  //       }
-  //       const data = await response.json();
-  //       setFishes(data);
-  //     } catch (error) {
-  //       setError(error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchFishes();
-  // }, []);
 
   const fetchFishes = async () => {
     try {
@@ -175,7 +154,7 @@ function Fishtank() {
         <Container>
           <div className={fishstyles.fishtank}>
             <Row>
-            <Col>
+            <Col sm={12} md={6}>
               <InputGroup>
                 <InputGroup.Text className={fishstyles.fontstyle}>Sök efter Title/Fisktyp:</InputGroup.Text>
                 <Form.Control 
@@ -183,10 +162,11 @@ function Fishtank() {
                   aria-label="Sök efter Title/Fisktyp:" 
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
+                  rows = {1}
                 />
               </InputGroup>
             </Col>
-            <Col>
+            <Col sm={12} md={6}>
               <Button className={fishstyles.sökbtn} variant="success" onClick={handleSearch}>Sök</Button>
             </Col>
             </Row>
@@ -199,13 +179,13 @@ function Fishtank() {
             </Row>
 
             <Row>
-              <Col xs={6} sm={6}>
+              <Col xs={12} sm={8}>
                 {filterMessage && (
                   <>
                   <div className={fishstyles.filtermessage}>
                     <h5>{filterMessage}</h5>
                     <Button className={fishstyles.resetbtn} onClick={resetFilter}>Tillbaka till visa alla</Button>
-                    </div>
+                  </div>
                   </>
                 )}
               </Col>

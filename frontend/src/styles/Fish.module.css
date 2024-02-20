@@ -12,6 +12,7 @@ button {
 
 .fontstyle {
     font-family: "Oswald", sans-serif !important;
+    font-size: 15px !important;
 }
 
 .fontstyle2 {
@@ -41,8 +42,11 @@ button {
 }
 
 .sökbtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 20px !important;
-  height: 60px;
+  height: 40px;
   width: 80px;
   border: 1px solid white !important;
   background-color: rgba(29, 78, 45, 0.616) !important;
@@ -122,12 +126,16 @@ button {
     color: white;
 }
 
-
 @media (max-width: 768px) {
 
-    .displyfish {
+    .sökbtn {
         /* Dölj fiskbilden på små enheter */
-        display: none;
+        margin: 10px;
     }
+
+    .fontstyle {
+        font-size: 10px !important;
+    }
+    
   
   }
