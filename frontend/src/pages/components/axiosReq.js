@@ -2,10 +2,13 @@
 import axios from 'axios';
 
 
-const axiosReq = axios.create({
-  baseURL: `${window.location.hostname === 'localhost' ? 'http://127.0.0.1:8000' : window.location.origin}/api`,
-});
+// const axiosReq = axios.create({
+//   baseURL: `${window.location.hostname === 'localhost' ? 'http://127.0.0.1:8000' : window.location.origin}/api`,
+// });
 
+const axiosReq = axios.create({
+  baseURL: `${window.location.hostname === 'localhost' ? 'http://127.0.0.1:8000' : 'http://20.240.203.148:8000'}/api`,
+});
 
 // Lägg till en interceptor som sätter Authorization-headern
 axiosReq.interceptors.request.use(config => {
