@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-*c55q@@i1ea0i$n)#k)2z4y)^@zm)16$$6*c2nd4p+8x^qiz03
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '20.240.203.148']
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1',]
+
+ALLOWED_HOSTS = ['20.240.203.148',  'ideakvarium.swedencentral.cloudapp.azure.com']
 
 # settings.py
 
@@ -82,9 +84,7 @@ CORS_ALLOW_ALL_ORIGINS = False
 
 # Tillåt react att göra anrop till django under development (behövs inte för produktion)
 CORS_ALLOWED_ORIGINS = [
-    'https://127.0.0.1:8000',
-    'https://localhost:3000',
-    'https://20.240.203.148:8000',
+    'http://ideakvarium.swedencentral.cloudapp.azure.com/'
 ]
 
 CORS_ALLOW_CREDENTIALS = True
