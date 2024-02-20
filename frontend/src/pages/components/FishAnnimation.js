@@ -28,7 +28,7 @@ const FishAnimated = ({
     }, []); // Inga beroenden, så funktionen skapas inte om vid varje render
 
 
-    const getCenterYPosition = () => window.innerHeight / 2 - 500;
+    const getCenterYPosition = () => window.innerHeight / 2;
     console.log(getCenterYPosition());
 
 
@@ -77,7 +77,7 @@ const FishAnimated = ({
       console.log(`isActive: ${isActive}`);
       if (isActive) {
         apiY.start({
-          y: 300,
+          y: 100, 
           immediate: true, // immediate för att hoppa till positionen utan animation
         });
       } else if (!isActive) {

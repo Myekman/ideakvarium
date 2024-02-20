@@ -78,7 +78,7 @@ function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true
          onLikeUpdate(fish.id, newLikeCount, isLiked);
 
         // Uppdatera meddelandet för användaren
-        displayMessage(`Du har ${isLiked ? 'gillat' : 'ogillat'} fisken! Nytt antal gillningar: ${newLikeCount}`)
+        displayMessage(`Tack för din feedback! Nytt antal gillningar: ${newLikeCount}`)
       }
     } catch (error) {
       console.error('Error liking/unliking fish:', error);
