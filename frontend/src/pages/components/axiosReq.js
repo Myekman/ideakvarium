@@ -3,12 +3,10 @@ import axios from 'axios';
 
 
 const axiosReq = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api', 
+  // baseURL: 'http://127.0.0.1:8000/api',
+  baseURL: `${window.location.origin}/api`,
 });
 
-// const axiosReq = axios.create({
-//   baseURL: '/api', 
-// });
 
 // Lägg till en interceptor som sätter Authorization-headern
 axiosReq.interceptors.request.use(config => {

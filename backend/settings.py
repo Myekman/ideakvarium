@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-*c55q@@i1ea0i$n)#k)2z4y)^@zm)16$$6*c2nd4p+8x^qiz03
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://model.sweco.se/innovation/']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '20.240.203.148']
 
 # settings.py
 
@@ -71,7 +71,7 @@ APPEND_SLASH = False
 # SESSION_COOKIE_SECURE = True
 
 CSRF_TRUSTED_ORIGINS = (
-    'http://127.0.0.1:8000/', 'http://localhost:3000/', 'https://model.sweco.se/innovation/'
+    'http://127.0.0.1:8000/', 'http://localhost:3000/', 'http://20.240.203.148:8000/',
 )
 
 # CSRF_COOKIE_SECURE = True
