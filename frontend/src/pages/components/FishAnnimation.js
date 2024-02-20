@@ -77,7 +77,7 @@ const FishAnimated = ({
       console.log(`isActive: ${isActive}`);
       if (isActive) {
         apiY.start({
-          y: 100, 
+          y: 80, 
           immediate: true, // immediate för att hoppa till positionen utan animation
         });
       } else if (!isActive) {

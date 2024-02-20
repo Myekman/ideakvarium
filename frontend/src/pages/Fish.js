@@ -140,7 +140,7 @@ function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true
           </div>
     
           <div>
-            <div ref={fishRef}>
+            <div className={fishstyles.displyfish} ref={fishRef}>
               {FishImage}
             </div>
 

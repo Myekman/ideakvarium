@@ -17,6 +17,7 @@ const PostCreateFish = ( { isPaused }  ) => {
   const navigate = useNavigate();
   const { user } = useUser();
   const [createdFish, setCreatedFish] = useState(null);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const previewSize = { width: '200px' };
   const [fishData, setFishData] = useState({
     title: "",
@@ -55,6 +56,7 @@ const PostCreateFish = ( { isPaused }  ) => {
     }
 
     setCreatedFish(fishData);
+    setIsFormSubmitted(true);
   };
 
 
@@ -67,6 +69,8 @@ const PostCreateFish = ( { isPaused }  ) => {
     <Container>
       <NavigationBar />
       <Bubbles count={20}/>
+
+      {!isFormSubmitted && ( // Visa den skapade fisken om formuläret har skickats
       <Row className={formstyles.formcontainer}>
         <Col md={6}>
         <Form className={formstyles.form} onSubmit={handleSubmit}>
@@ -130,16 +134,21 @@ const PostCreateFish = ( { isPaused }  ) => {
           </div>
         </Col>
       </Row>
+      )}
+
       <Col className='mt-4'>
           <Button className={formstyles.formbtn} variant="success" onClick={handleBackToFishTank}>Tillbaka till Fiskarna</Button>
       </Col>
 
+      {isFormSubmitted && ( // Visa den skapade fisken om formuläret har skickats
       <Col className={formstyles.displyfish}>
       {createdFish && (
         <Fish fish={createdFish} isPaused={isPaused} showLikeButton={false} isActive={true} previewSize={previewSize} />
       )}
-      
       </Col>
+      )}
+
+
     </Container>
   );
 };

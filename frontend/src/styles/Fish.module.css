@@ -93,9 +93,11 @@ button {
 
 .postmessage {
     margin-top: 10px;
+    margin-bottom: 20px;
     padding-left: 70px;
     padding-right: 70px;
-    font-size: 25px !important;
+    overflow-wrap: break-word;
+    font-size: 15px !important;
    
 }
 
@@ -119,3 +121,13 @@ button {
     background-color: #125c5e92;
     color: white;
 }
+
+
+@media (max-width: 768px) {
+
+    .displyfish {
+        /* Dölj fiskbilden på små enheter */
+        display: none;
+    }
+  
+  }
