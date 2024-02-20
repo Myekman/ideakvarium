@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-*c55q@@i1ea0i$n)#k)2z4y)^@zm)16$$6*c2nd4p+8x^qiz03'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '20.240.203.148']
 
@@ -67,8 +67,8 @@ MIDDLEWARE = [
 
 APPEND_SLASH = False
 
-# CORS_ALLOW_ALL_ORIGINS = True
-# SESSION_COOKIE_SECURE = True
+CORS_ALLOW_ALL_ORIGINS = True
+SESSION_COOKIE_SECURE = True
 
 CSRF_TRUSTED_ORIGINS = (
     'http://127.0.0.1:8000/', 'http://localhost:3000/', 'http://20.240.203.148:8000/',
@@ -78,14 +78,13 @@ CSRF_TRUSTED_ORIGINS = (
 
 
 #----------------------------------------------------------------Rekomenderas för produktion
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
 
 # Tillåt react att göra anrop till django under development (behövs inte för produktion)
 CORS_ALLOWED_ORIGINS = [
-    # "https://example.com",
-    # "https://sub.example.com",
-    # "http://localhost:3000"  # React's default port
-    # "http://127.0.0.1:9000",  # Some other port
+    'https://127.0.0.1:8000',
+    'https://localhost:3000',
+    'https://20.240.203.148:8000',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
