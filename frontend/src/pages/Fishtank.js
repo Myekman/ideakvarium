@@ -108,7 +108,14 @@ function Fishtank() {
             return response.json();
           })
           .then((data) => {
-            setFishes(data);
+            if (data.length === 0) { // Kontrollerar om inga fiskar hittades
+              message = `Inga fiskar hittades med sökordet: "${searchTerm}"`;
+              setFilterMessage(message); // Sätt meddelandet om inga fiskar hittades
+            } else {
+              setFishes(data);
+              message = (`Just nu visas en fisksökning: "${searchTerm}"`);
+              setFilterMessage(message); // Sätt meddelandet om fiskar hittades
+            }
             setLoading(false);
           })
           .catch((error) => {
@@ -117,8 +124,6 @@ function Fishtank() {
             setLoading(false);
           });
           setSearchTerm('');
-          message = (`Just nu visas en fisksökning: "${searchTerm}" `)
-          setFilterMessage(message);
       };
 
       if (loading) return <div className='text-white'>Loading...</div>;

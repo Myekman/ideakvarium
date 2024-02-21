@@ -67,9 +67,9 @@ button {
 
 .pratbubbla {
     position: relative;
-    display: flex;          
+    /* display: flex;          
     justify-content: center; 
-    align-items: center;  
+    align-items: center;   */
     flex-direction: column;  
     background-color: #125c5e92;
     color: white;
@@ -78,6 +78,9 @@ button {
     padding: 10px;
     text-align: center;
     max-width: 500px;
+    max-height: 250px;
+    overflow-y: auto;
+    scrollbar-width: none;
    
 }
 
@@ -100,17 +103,22 @@ button {
     display: flex; 
     flex-direction: column;
     align-items: center; 
-    justify-content: center; 
+    justify-content: center;
+    
 }
 
 .messagecontainer {
     width: 60%; 
-    overflow-y: auto; 
+    /* overflow-y: scroll;  */
 }
 
 .postmessage {
     word-wrap: break-word;
 }
+
+/* .pratcontainer {
+    overflow-y: auto;
+} */
 
 
 .gillameddelande {

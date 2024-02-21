@@ -37,16 +37,17 @@ const FishAnimated = ({
       console.log('Animation completed, resetting position...');
       if (!isPaused && !isActive) {
         apiX.start({
-          from: { x: -300, y: getRandomYPosition() },
+          from: { x: -200, y: getRandomYPosition() },
           to: { x: window.innerWidth },
           config: { duration: getRandomDuration() },
-          delay: index * 4000, // Fördröjning mellan fiskar
+          delay: index * 4000,
         });
+        console.log('hallå');
       }
     };
 
     const [styleX, apiX] = useSpring(() => ({
-      from: { x: -300, y: getRandomYPosition() },
+      from: { x: -200, y: getRandomYPosition() },
       to: { x: window.innerWidth },
       config: { duration: getRandomDuration() },
       delay:  index * 4000,
@@ -62,7 +63,7 @@ const FishAnimated = ({
     }));
 
     const [activePausedStyle, activePausedApi] = useSpring(() => ({
-      from: { x: -300 }, // Startar från vänsterkanten
+      from: { x: -200 }, // Startar från vänsterkanten
       immediate: false
     }));
 
@@ -83,12 +84,11 @@ const FishAnimated = ({
       console.log(`isActive: ${isActive}`);
       if (isActive) {
         apiY.start({
-          y: 80, 
+          y: 10, 
           immediate: true, // immediate för att hoppa till positionen utan animation
         });
-      activePausedApi.start({ x: window.innerWidth / 2 - 200, immediate: true });
+      activePausedApi.start({ x: window.innerWidth / 2 - 230, immediate: true });
       } else if (!isActive) {
-        // När fisken inte längre är aktiv, återställ y-positionen till en slumpmässig position
         apiY.start({
           y: getRandomYPosition(),
           immediate: true,
@@ -96,7 +96,6 @@ const FishAnimated = ({
         apiX.resume();
         console.log(`random Y: ${getRandomYPosition()}`);
       }
-      // Inget behov av att hantera återupptagning här eftersom det hanteras i den första useEffect ovan
     }, [isActive, apiY, apiX, getRandomYPosition, activePausedApi]);
 
 

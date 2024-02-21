@@ -144,8 +144,8 @@ function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true
               {FishImage}
             </div>
 
-            <div className={`pratbubbla ${fishstyles.pratbubbla}`}>
-              <div className="row justify-content-center">
+            <div className={fishstyles.pratbubbla}>
+              <div className={`row justify-content-center ${fishstyles.pratcontainer}`}>
                 <div className={`col-12 ${fishstyles.bubbleContent}`}>
                   <h5 className={fishstyles.fontstyle}>{fish.title}</h5>
                   {isActive && (

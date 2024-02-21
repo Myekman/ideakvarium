@@ -9,7 +9,7 @@ function CustomDropdown({ fishData = {}, handleInputChange }) {
   return (
     <Dropdown onSelect={handleInputChange}>
       <Dropdown.Toggle variant="success" id="dropdown-basic">
-        {fishData.fish_type || "Välj en fishtyp"}
+        {fishData.fish_type || "Välj en fisktyp"}
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
