@@ -89,20 +89,20 @@ function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true
   };
 
 
-  const getBubbleSizeClass = (likesCount) => {
-    if (likesCount > 20) {
-      return 'bubble-large';
-    } else if (likesCount > 10) {
-      return 'bubble-medium';
-    } else if (likesCount > 5) {
-      return 'bubble-small';
-    } else {
-      return 'bubble-default';
-    }
-  };
+  // const getBubbleSizeClass = (likesCount) => {
+  //   if (likesCount > 20) {
+  //     return 'bubble-large';
+  //   } else if (likesCount > 10) {
+  //     return 'bubble-medium';
+  //   } else if (likesCount > 5) {
+  //     return 'bubble-small';
+  //   } else {
+  //     return 'bubble-default';
+  //   }
+  // };
   
   // Använd funktionen för att få storleksklassen för pratbubblan
-  const bubbleSizeClass = getBubbleSizeClass(fish.likes_count);
+  // const bubbleSizeClass = getBubbleSizeClass(fish.likes_count);
 
   const getFishSizeClass = (likesCount) => {
     if (likesCount > 20) {
@@ -138,21 +138,49 @@ function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true
           <div>
           {showMessage && <div className={fishstyles.gillameddelande}>{userMessage}</div>}
           </div>
-    
+
           <div>
             <div ref={fishRef}>
               {FishImage}
             </div>
 
-            <div className={`pratbubbla ${fishstyles[bubbleSizeClass]}`}>
+            <div className={`pratbubbla ${fishstyles.pratbubbla}`}>
               <div className="row justify-content-center">
-                <div className={`col-12 col-md-8 col-lg-6 ${fishstyles.pratbubbla}`}>
+                <div className={`col-12 ${fishstyles.bubbleContent}`}>
                   <h5 className={fishstyles.fontstyle}>{fish.title}</h5>
                   {isActive && (
-                    <div>
+                    <div className={fishstyles.messagecontainer}>
+                      <p className={fishstyles.postmessage}>{fish.message}</p>
+
+                      {showLikeButton && (
+                        <>
+                          <p>Likes: {fish.likes_count}</p>
+                          <Button variant="success" onClick={handleLikeClick}>
+                            {isLiked ? 'Unlike' : 'Like'}
+                          </Button>
+                        </>
+                      )}
+                      <p>Användare: {fish.user ? fish.user.username : 'Gäst'}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+    
+          {/* <div>
+            <div ref={fishRef}>
+              {FishImage}
+            </div>
+
+            <div className={fishstyles.pratbubbla}>
+              <div>
+                <div className={`col-6 col-sm-6 col-md-6 col-lg-6 ${fishstyles.bubbleContent}`}>
+                  <h5 className={fishstyles.fontstyle}>{fish.title}</h5>
+                  {isActive && (
+                      <div className={fishstyles.messagecontainer}>
                        <p className={fishstyles.postmessage}>{fish.message}</p>
-                      {/* <p className={fishstyles.postmessage}>{fish.message}</p> */}
-                      {/* <p>Användare: {fish.user ? fish.user.username : 'Gäst'}</p> */}
+                     
 
                       {showLikeButton && ( 
                       <>
@@ -162,7 +190,6 @@ function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true
                       </Button>
                       </>
                       )}
-
                     <p>Användare: {fish.user ? fish.user.username : 'Gäst'}</p>
                     </div>
                   )}
@@ -170,7 +197,7 @@ function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true
               </div>
             </div>
 
-          </div>
+          </div> */}
       </Container>
     );
   }
