@@ -79,8 +79,8 @@ button {
     text-align: center;
     max-width: 500px;
     max-height: 250px;
-    overflow-y: auto;
-    scrollbar-width: none;
+    /* overflow-y: auto; */
+    /* scrollbar-width: none; */
    
 }
 
@@ -99,6 +99,7 @@ button {
     /* Center the tail and move it down so it's just outside the bubble */
 }
 
+
 .bubbleContent {
     display: flex; 
     flex-direction: column;
@@ -106,6 +107,13 @@ button {
     justify-content: center;
     
 }
+
+.scrollContent {
+    max-height: 200px;
+    overflow-y: auto;
+
+}
+
 
 .messagecontainer {
     width: 60%; 
@@ -116,14 +124,10 @@ button {
     word-wrap: break-word;
 }
 
-/* .pratcontainer {
-    overflow-y: auto;
-} */
-
 
 .gillameddelande {
     color: #125c5e;
-    background-color: #f3af48d3;
+    background-color: #f5f1ecd3;
     font-size: 20px;
     padding: 10px;
     border: 1px solid white;

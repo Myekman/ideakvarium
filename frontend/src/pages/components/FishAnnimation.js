@@ -17,9 +17,8 @@ const FishAnimated = ({
     const maxDuration = 40000; // 40 seconds for slower fishes
     const getRandomDuration = () => Math.random() * (maxDuration - minDuration) + minDuration;
 
-    // const [pausedXPosition, setPausedXPosition] = useState(null);
 
-
+    // ge fiskarna en slumpmässig y-position vid start och efter att de har varit aktiva
     const getRandomYPosition = useCallback(() => {
 
       const minY = 80;
@@ -27,7 +26,7 @@ const FishAnimated = ({
       return Math.random() * (maxY - minY) + minY;
     }, []); // Inga beroenden, så funktionen skapas inte om vid varje render
 
-
+    // centrera fiskarna i y-led när de är aktiva och pausade.
     const getCenterYPosition = () => window.innerHeight / 2;
     console.log(getCenterYPosition());
 
@@ -37,7 +36,7 @@ const FishAnimated = ({
       console.log('Animation completed, resetting position...');
       if (!isPaused && !isActive) {
         apiX.start({
-          from: { x: -200, y: getRandomYPosition() },
+          from: { x: -300, y: getRandomYPosition() },
           to: { x: window.innerWidth },
           config: { duration: getRandomDuration() },
           delay: index * 4000,
@@ -47,7 +46,7 @@ const FishAnimated = ({
     };
 
     const [styleX, apiX] = useSpring(() => ({
-      from: { x: -200, y: getRandomYPosition() },
+      from: { x: -300, y: getRandomYPosition() },
       to: { x: window.innerWidth },
       config: { duration: getRandomDuration() },
       delay:  index * 4000,
@@ -87,7 +86,7 @@ const FishAnimated = ({
           y: 10, 
           immediate: true, // immediate för att hoppa till positionen utan animation
         });
-      activePausedApi.start({ x: window.innerWidth / 2 - 230, immediate: true });
+      activePausedApi.start({ x: window.innerWidth / 2 - 210, immediate: true }); // bestämmer x position när pausad
       } else if (!isActive) {
         apiY.start({
           y: getRandomYPosition(),

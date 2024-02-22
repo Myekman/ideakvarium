@@ -145,8 +145,8 @@ function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true
             </div>
 
             <div className={fishstyles.pratbubbla}>
-              <div className={`row justify-content-center ${fishstyles.pratcontainer}`}>
-                <div className={`col-12 ${fishstyles.bubbleContent}`}>
+              <div className={fishstyles.scrollContent}>
+                <div className={fishstyles.bubbleContent}>
                   <h5 className={fishstyles.fontstyle}>{fish.title}</h5>
                   {isActive && (
                     <div className={fishstyles.messagecontainer}>
@@ -164,40 +164,10 @@ function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true
                     </div>
                   )}
                 </div>
-              </div>
+            </div>
             </div>
           </div>
-    
-          {/* <div>
-            <div ref={fishRef}>
-              {FishImage}
-            </div>
 
-            <div className={fishstyles.pratbubbla}>
-              <div>
-                <div className={`col-6 col-sm-6 col-md-6 col-lg-6 ${fishstyles.bubbleContent}`}>
-                  <h5 className={fishstyles.fontstyle}>{fish.title}</h5>
-                  {isActive && (
-                      <div className={fishstyles.messagecontainer}>
-                       <p className={fishstyles.postmessage}>{fish.message}</p>
-                     
-
-                      {showLikeButton && ( 
-                      <>
-                      <p>Likes: {fish.likes_count}</p>
-                      <Button variant="success" onClick={handleLikeClick}>
-                        {isLiked ? 'Unlike' : 'Like'}
-                      </Button>
-                      </>
-                      )}
-                    <p>Användare: {fish.user ? fish.user.username : 'Gäst'}</p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-
-          </div> */}
       </Container>
     );
   }
