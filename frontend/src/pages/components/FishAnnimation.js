@@ -4,7 +4,7 @@ import { useSpring, animated } from '@react-spring/web';
 const FishAnimated = ({ 
   children, 
   // style: additionalStyle, 
-  index, 
+  index,
   isPaused,
   isActive,
   setIsPaused, 
@@ -41,7 +41,6 @@ const FishAnimated = ({
           config: { duration: getRandomDuration() },
           delay: index * 4000,
         });
-        console.log('hallå');
       }
     };
 
@@ -97,14 +96,6 @@ const FishAnimated = ({
       }
     }, [isActive, apiY, apiX, getRandomYPosition, activePausedApi]);
 
-
-     // Tillämpa additionalStyle för att positionera fiskarna inom appContainer
-    // const combinedStyle = {
-    //     ...styleX,
-    //     ...styleY,
-    //     // ...additionalStyle,
-    //     position: 'absolute', 
-    // };
 
     const combinedStyle = isActive && isPaused
     ? { ...styleY, ...activePausedStyle, position: 'absolute' }

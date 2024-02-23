@@ -7,20 +7,25 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import fishstyles from '../styles/Fish.module.css';
 import FishAnimated from './components/FishAnnimation';
+import Spinner from 'react-bootstrap/Spinner';
 
 function Fishtank() {
   const [fishes, setFishes] = useState([]);
   const [isPaused, setIsPaused] = useState(false);
   const [displayedFishes, setDisplayedFishes] = useState([]);
+
   const [loading, setLoading] = useState(true);
+  const [spinnerLoading, setSpinnerLoading] = useState(false);
+
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFishId, setActiveFishId] = useState(null);
   const [pausedFishId, setPausedFishId] = useState(null);
 
   const [filterMessage, setFilterMessage] = useState(''); // Lägger till ett tillstånd för att visa meddelanden baserat på filtret
-   
 
+
+  //  ------------------------------------------------hämta alla fiskar 
   const fetchFishes = async () => {
     try {
       setLoading(true);
@@ -37,18 +42,23 @@ function Fishtank() {
     }
   };
 
-  // useEffect för att hämta alla fiskar när komponenten monteras
+  
   useEffect(() => {
     fetchFishes();
   }, []);
 
-  // Funktion för att återställa filtret och hämta alla fiskar
+  // -----------------------------------------------------------------
+
+
+  // --------------------------------- Funktion för att återställa filtret och hämta alla fiskar
   const resetFilter = () => {
     setFilterMessage('');
-    fetchFishes(); // Anropa den återanvändbara funktionen för att hämta fiskarna
+    fetchFishes(); 
   };
 
-  // use effect för att hämta 5 fiskar åt gången
+  // -------------------------------------------------------------------------------------------
+
+  // ---------------------------------------------------use effect för att hämta 5 fiskar åt gången
   useEffect(() => {
     if (fishes.length > 0) {
       setDisplayedFishes(fishes.slice(0, 5));
@@ -64,8 +74,35 @@ function Fishtank() {
   }, [fishes]);
 
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  useEffect(() => {
+    if (fishes.length > 0 && loading === false) {
+      // Starta "Loading..."-meddelandet för animationen
+      setSpinnerLoading(true);
+
+      // Ställ in en timer för att vänta 3 sekunder
+      const timer = setTimeout(() => {
+        // Efter 3 sekunder, dölj "Loading..."-meddelandet
+        setSpinnerLoading(false);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [fishes, loading]);
+
+
+  // if (loading) return <div className='text-white'>Loading...</div>;
+  // if (error) return <div>Error: {error.message}</div>;
+
+  //-------------------------------------------------------------------------------------------------
+
+  if (loading) {
+    return <div className='text-white'>Loading...</div>;
+  }
+
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
 
       // sök efter de största fskarna
@@ -126,8 +163,8 @@ function Fishtank() {
           setSearchTerm('');
       };
 
-      if (loading) return <div className='text-white'>Loading...</div>;
-      if (error) return <div>Error: {error.message}</div>;
+      // if (loading) return <div className='text-white'>Loading...</div>;
+      // if (error) return <div>Error: {error.message}</div>;
 
 
     const handleLikeUpdate = (fishId, newLikeCount, isLiked) => {
@@ -157,6 +194,7 @@ function Fishtank() {
     
       return (
         <Container>
+          {/* {spinnerLoading && <div className='text-white'>Loading..</div>} */}
           <div className={fishstyles.fishtank}>
             <Row>
             <Col sm={12} md={6}>
@@ -194,6 +232,17 @@ function Fishtank() {
                   </>
                 )}
               </Col>
+            </Row>
+            
+            <Row>
+                {spinnerLoading && 
+                <div className={fishstyles.spinner}>
+                  <Spinner animation="border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </Spinner>
+                  <p>fiskar simmar in...</p>
+                </div>
+                }
             </Row>
 
             {displayedFishes.map((fish, index) => (

@@ -145,6 +145,20 @@ button {
     color: white;
 }
 
+.spinner {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    flex-direction: column;
+}
+
+.spinner p {
+    font-size: 25px;
+    font-family: "Oswald", sans-serif !important;
+}
+
 @media (max-width: 768px) {
 
     .sökbtn {
