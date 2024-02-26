@@ -13,7 +13,7 @@ import { useUser } from './auth/UserContext';
 // import axios from 'axios';
 
 // Fish.js
-function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true }) {
+function Fish({ fish, onLikeUpdate, setSpinnerLoading, isActive, previewSize, showLikeButton = true }) {
   const { user } = useUser();
   const [isLiked, setIsLiked] = useState(fish.isLiked);
   const fishRef = useRef(null);
@@ -86,6 +86,7 @@ function Fish({ fish, onLikeUpdate, isActive, previewSize, showLikeButton = true
        // Visa felmeddelandet för användaren
        displayMessage('Ett fel uppstod när du försökte gilla/ogilla fisken.');
     }
+  setSpinnerLoading(false);
   };
 
 

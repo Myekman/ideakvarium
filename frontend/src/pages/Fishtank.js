@@ -73,25 +73,19 @@ function Fishtank() {
     }
   }, [fishes]);
 
-
+// Visa en spinner loading innan fiskar kommer in i bild
   useEffect(() => {
-    if (fishes.length > 0 && loading === false) {
-      // Starta "Loading..."-meddelandet för animationen
+    if (loading === false) {
       setSpinnerLoading(true);
 
-      // Ställ in en timer för att vänta 3 sekunder
       const timer = setTimeout(() => {
-        // Efter 3 sekunder, dölj "Loading..."-meddelandet
         setSpinnerLoading(false);
       }, 3000);
 
       return () => clearTimeout(timer);
     }
-  }, [fishes, loading]);
+  }, [loading]);
 
-
-  // if (loading) return <div className='text-white'>Loading...</div>;
-  // if (error) return <div>Error: {error.message}</div>;
 
   //-------------------------------------------------------------------------------------------------
 
@@ -162,9 +156,6 @@ function Fishtank() {
           });
           setSearchTerm('');
       };
-
-      // if (loading) return <div className='text-white'>Loading...</div>;
-      // if (error) return <div>Error: {error.message}</div>;
 
 
     const handleLikeUpdate = (fishId, newLikeCount, isLiked) => {
@@ -263,6 +254,7 @@ function Fishtank() {
                   isPaused={isPaused} 
                   setIsPaused={setIsPaused}
                   setActiveFishId={setActiveFishId}
+                  setSpinnerLoading={setSpinnerLoading}
                   isActive={activeFishId === fish.id} // Ny prop för att kontrollera om fisken är aktiv
                   />
               </FishAnimated>

@@ -1,21 +1,21 @@
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import styles from "../../styles/NavBar.module.css";
 import Nav from 'react-bootstrap/Nav';
 import { Navbar } from "react-bootstrap";
 import { NavLink } from 'react-router-dom';
 
-import { useUser } from "../auth/UserContext";
+// import { useUser } from "../auth/UserContext";
 
 
 const NavigationBar = () => {
-    const navigate = useNavigate();
-    const { user, logOut } = useUser();
+    // const navigate = useNavigate();
+    // const { user, logOut } = useUser();
 
-    const handleSignOut = () => {
-        logOut();
+    // const handleSignOut = () => {
+    //     logOut();
 
-        navigate('/'); 
-    };
+    //     navigate('/'); 
+    // };
 
 
     return (
