@@ -28,7 +28,8 @@ const NavigationBar = () => {
                         <Nav.Item>
                             <Nav.Link as={NavLink} to="/fiskar/create" className={styles.customnavlink}>Skapa fisk</Nav.Link>
                         </Nav.Item>
-                    {user ? (
+                </Nav>
+                    {/* {user ? (
                         <>
                           <Nav.Item>
                             <Nav.Link className={styles.customnavlink} onClick={handleSignOut}>Logga ut</Nav.Link>
@@ -45,8 +46,8 @@ const NavigationBar = () => {
                         <Nav.Link as={NavLink} to="/login" className={styles.customnavlink}>Logga in</Nav.Link>
                     </Nav.Item>
                     </>
-                    )}
-                </Nav>
+                    )} */}
+                
                 </div>
                 </Navbar.Collapse>
             </Navbar>
