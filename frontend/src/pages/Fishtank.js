@@ -188,7 +188,7 @@ function Fishtank() {
           {/* {spinnerLoading && <div className='text-white'>Loading..</div>} */}
           <div className={fishstyles.fishtank}>
             <Row>
-            <Col sm={12}>
+            <Col sm={12} md={6}>
               <InputGroup>
                 <InputGroup.Text className={fishstyles.fontstyle}>Sök efter Title/Fisktyp:</InputGroup.Text>
                 <Form.Control 
