@@ -67,7 +67,7 @@ const PostCreateFish = ( { isPaused }  ) => {
 
   return (
     <Container>
-      <NavigationBar />
+      {/* <NavigationBar /> */}
       <Bubbles count={20}/>
 
       {!isFormSubmitted && ( // Visa den skapade fisken om formuläret har skickats

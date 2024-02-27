@@ -21,9 +21,9 @@ const NavigationBar = () => {
     return (
         <div>
             <Navbar expand="lg">
-                 <Navbar.Toggle aria-controls="basic-navbar-nav" className={styles.Navbar}/>
-                <Navbar.Collapse id="basic-navbar-nav">
-                <div className={styles.navbarcollapse}>
+                 {/* <Navbar.Toggle aria-controls="basic-navbar-nav" className={styles.Navbar}/> */}
+                {/* <Navbar.Collapse id="basic-navbar-nav"> */}
+                {/* <div className={styles.navbarcollapse}> */}
                 <Nav className="mr-auto">
                         <Nav.Item>
                             <Nav.Link as={NavLink} to="/fiskar/create" className={styles.customnavlink}>Skapa fisk</Nav.Link>
@@ -48,8 +48,8 @@ const NavigationBar = () => {
                     </>
                     )} */}
                 
-                </div>
-                </Navbar.Collapse>
+                {/* </div>
+                </Navbar.Collapse> */}
             </Navbar>
         </div>
     )

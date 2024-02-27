@@ -188,7 +188,7 @@ function Fishtank() {
           {/* {spinnerLoading && <div className='text-white'>Loading..</div>} */}
           <div className={fishstyles.fishtank}>
             <Row>
-            <Col sm={12} md={6}>
+            <Col sm={12}>
               <InputGroup>
                 <InputGroup.Text className={fishstyles.fontstyle}>Sök efter Title/Fisktyp:</InputGroup.Text>
                 <Form.Control 
@@ -200,7 +200,7 @@ function Fishtank() {
                 />
               </InputGroup>
             </Col>
-            <Col sm={12} md={6}>
+            <Col sm={12}>
               <Button className={fishstyles.sökbtn} variant="success" onClick={handleSearch}>Sök</Button>
             </Col>
             </Row>
