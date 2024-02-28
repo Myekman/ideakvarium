@@ -11,11 +11,15 @@ import background from '../src/assets/images/havet.jpg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Bubbles from './pages/components/BubbleAnnimation';
 import RegisterForm from './pages/auth/RegistrationForm';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 
 
 function App() {
   return (
+    <QueryClientProvider client={queryClient}>
     <Router>
       <div id="bubbels-container" style={{ 
         backgroundImage: `url(${background})`,
@@ -44,6 +48,7 @@ function App() {
       </UserProvider>
       </div>
     </Router>
+    </QueryClientProvider>
   );
 }
 

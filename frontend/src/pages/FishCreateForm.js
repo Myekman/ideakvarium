@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axiosReq from './components/axiosReq';
 // import axios from 'axios';
 import { Col, Container, Row  } from 'react-bootstrap';
-import NavigationBar from './components/Navbar';
+// import NavigationBar from './components/Navbar';
 import { useUser } from './auth/UserContext';
 import Fish from './Fish';
 import Bubbles from './components/BubbleAnnimation';
