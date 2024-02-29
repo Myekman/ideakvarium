@@ -103,26 +103,33 @@ function Fishtank() {
     }, [isLoading]);
   
     // ---------------------------------------------------use effect för att hämta 5 fiskar åt gången
-   
+    const fishnumber = Math.round(window.innerWidth / 100);
+    console.log('fishnumber before' + fishnumber);
+    console.log('innerwidth: ' + window.innerWidth);
     useEffect(() => {
       if (fishes && fishes.length > 0) {
-        setDisplayedFishes(fishes.slice(0, 5));
+        setDisplayedFishes(fishes.slice(0, fishnumber));
+
         const interval = setInterval(() => {
           setDisplayedFishes(prevDisplayedFishes => {
-            const startIndex = (fishes.indexOf(prevDisplayedFishes[0]) + 5) % fishes.length;
-            return fishes.slice(startIndex, startIndex + 5);
+            const startIndex = (fishes.indexOf(prevDisplayedFishes[0]) + fishnumber) % fishes.length;
+            return fishes.slice(startIndex, startIndex + fishnumber);
           });
-        }, 60000); // byt ut fiskar
+        }, 30000); // byt ut fiskar
+        console.log(fishnumber);
+        console.log('innerwidth: ' + window.innerWidth);
   
         return () => clearInterval(interval);
       }
-    }, [fishes]);
+    }, [fishes, fishnumber]);
       // fisk A, fisk B, fisk C, fisk E fisk G
       const recentlyCreatedFishes = fishes.filter((fish) => (new Date().getTime() - new Date(fish.created_at).getTime()) < 5*60*1000);
       // fisk G, fisk J och fisk Z
-      const actuallyDisplayedFishes = [...recentlyCreatedFishes, ...displayedFishes.filter((fish) => !recentlyCreatedFishes.some((f) => f.id === fish.id))].slice(0, 5);
+      const actuallyDisplayedFishes = [...recentlyCreatedFishes, ...displayedFishes.filter((fish) => !recentlyCreatedFishes.some((f) => f.id === fish.id))].slice(0, fishnumber);
       // fisk G, fisk J och fisk Z    fisk A, fisk B
-  // -----------------------------------------------------------------
+
+      
+  // -------------------------------------------------------
       if (isLoading) return 'Loading...'
 
       if (error) return 'An error has occurred: ' + error.message
