@@ -66,18 +66,14 @@ function Fish({ fish, onLikeUpdate, setSpinnerLoading, isActive, previewSize, sh
          // Använd det nya like_count och is_liked från backend-svaret
          const newLikeCount = response.data.like_count;
          const isLiked = response.data.is_liked;
-        //  console.log('Access token:', localStorage.getItem('access_token')); 
-        //  console.log('Refresh token:', localStorage.getItem('refresh_token'));
          console.log('User liked:', user);
 
-          // Logga det nya likes_count värdet i konsolen
           console.log(`New likes count for fish ${fish.id}:`, newLikeCount);
 
          // Uppdatera fiskens information i Fishtank-komponenten
          setIsLiked(isLiked);
          onLikeUpdate(fish.id, newLikeCount, isLiked);
 
-        // Uppdatera meddelandet för användaren
         displayMessage(`Tack för din feedback! Nytt antal gillningar: ${newLikeCount}`)
       }
     } catch (error) {
@@ -88,22 +84,6 @@ function Fish({ fish, onLikeUpdate, setSpinnerLoading, isActive, previewSize, sh
     }
   setSpinnerLoading(false);
   };
-
-
-  // const getBubbleSizeClass = (likesCount) => {
-  //   if (likesCount > 20) {
-  //     return 'bubble-large';
-  //   } else if (likesCount > 10) {
-  //     return 'bubble-medium';
-  //   } else if (likesCount > 5) {
-  //     return 'bubble-small';
-  //   } else {
-  //     return 'bubble-default';
-  //   }
-  // };
-  
-  // Använd funktionen för att få storleksklassen för pratbubblan
-  // const bubbleSizeClass = getBubbleSizeClass(fish.likes_count);
 
   const getFishSizeClass = (likesCount) => {
     if (likesCount > 20) {

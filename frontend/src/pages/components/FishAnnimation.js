@@ -36,7 +36,7 @@ const FishAnimated = ({
       console.log('Animation completed, resetting position...');
       if (!isPaused && !isActive) {
         apiX.start({
-          from: { x: -180, y: getRandomYPosition() },
+          from: { x: -250, y: getRandomYPosition() },
           to: { x: window.innerWidth },
           config: { duration: getRandomDuration() },
           delay: index * 4000,
@@ -45,7 +45,7 @@ const FishAnimated = ({
     };
 
     const [styleX, apiX] = useSpring(() => ({
-      from: { x: -180, y: getRandomYPosition() },
+      from: { x: -250, y: getRandomYPosition() },
       to: { x: window.innerWidth },
       config: { duration: getRandomDuration() },
       delay:  index * 4000,
@@ -61,7 +61,7 @@ const FishAnimated = ({
     }));
 
     const [activePausedStyle, activePausedApi] = useSpring(() => ({
-      from: { x: -180 }, // Startar från vänsterkanten
+      from: { x: -250 }, // Startar från vänsterkanten
       immediate: false
     }));
 

@@ -10,7 +10,7 @@ function SearchBigFishes({ onSearch }) {
 
     return (
       <Row>
-      <Col xs={12} sm={8}>
+      <Col xs={12} md={6}>
       <div className={fishstyles.filtermessage}>
         <h5>Vilka är de populäraste idéerna just nu?</h5>
         <Button className={fishstyles.sökbtn2} variant="success" onClick={handleShowLargestClick}>Visa storbaddarna!</Button>
