@@ -8,7 +8,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import fishstyles from '../styles/Fish.module.css';
 import FishAnimated from './components/FishAnnimation';
 import Spinner from 'react-bootstrap/Spinner';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 function Fishtank() {
   // const [fishes, setFishes] = useState([]);
@@ -26,52 +26,29 @@ function Fishtank() {
 
   const [filterMessage, setFilterMessage] = useState(''); 
 
-  // const queryClient = useQueryClient();
-  // const likeMutation = useMutation(
-  //   ({ fishId, isLiked }) => {
-  //     const method = isLiked ? 'POST' : 'DELETE'; 
-  //     return fetch(`/api/fiskar/${fishId}/like`, {
-  //       method: method,
+  const queryClient = useQueryClient();
+  const likeMutation = useMutation(
+    ({ fishId, isLiked }) => {
+      const method = isLiked ? 'POST' : 'DELETE'; 
+      return fetch(`/api/fiskar/${fishId}/like`, {
+        method: method,
        
-  //     });
-  //   },
-  //   {
-  //     onSuccess: () => {
-  //       // Om uppdateringen lyckades, invalidisera och omhämta fisklistan
-  //       queryClient.invalidateQueries('fiskar');
-  //     },
-  //   }
-  // );
+      });
+    },
+    {
+      onSuccess: () => {
+        // Om uppdateringen lyckades, invalidisera och omhämta fisklistan
+        queryClient.invalidateQueries('fiskar');
+      },
+    }
+  );
 
-  // const handleLikeUpdate = (fishId, isLiked) => {
-  //   likeMutation.mutate({ fishId, isLiked });
-  // };
-
-  //  ------------------------------------------------hämta alla fiskar 
-  // const fetchFishes = async () => {
-  //   try {
-  //     setLoading(true);
-  //     const response = await fetch('/api/fiskar/');
-  //     if (!response.ok) {
-  //       throw new Error('Network response was not ok');
-  //     }
-  //     const data = await response.json();
-  //     setFishes(data);
-  //   } catch (error) {
-  //     setError(error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  
-  // useEffect(() => {
-  //   fetchFishes();
-  // }, []);
+  const handleLikeUpdate = (fishId, isLiked) => {
+    likeMutation.mutate({ fishId, isLiked });
+  };
 
 
   //  ------------------------------------------------hämta alla fiskar 
-  // const fishes = data;
   const { isLoading, error, data: fishes } = useQuery({
     queryKey: ["fiskar", searchFishes, searchTerm],
     queryFn: () => {
@@ -112,19 +89,6 @@ function Fishtank() {
     }
   };
 
-
-  // Övrig logik för handleLikeUpdate, handleFishClick och useEffects kan vara densamma
-  // ...
-
-  // if (isLoading) {
-  //   return <div className='text-white'>Loading...</div>;
-  // }
-
-  // if (error) {
-  //   return <div>Error: {error.message}</div>;
-  // }
-
-
     // --------------------------------------------------Visa en spinner loading innan fiskar kommer in i bild
     useEffect(() => {
       if (isLoading === false) {
@@ -132,7 +96,7 @@ function Fishtank() {
   
         const timer = setTimeout(() => {
           setSpinnerLoading(false);
-        }, 3000);
+        }, 5000);
   
         return () => clearTimeout(timer);
       }
@@ -162,99 +126,7 @@ function Fishtank() {
       if (isLoading) return 'Loading...'
 
       if (error) return 'An error has occurred: ' + error.message
-
-  // --------------------------------- Funktion för att återställa filtret och hämta alla fiskar
-  // const resetFilter = () => {
-  //   setFilterMessage('');
-  //   // fetchFishes(); 
-  // };
-
-  // -------------------------------------------------------------------------------------------
-
-
-  //-------------------------------------------------------------------------------------------------
-
-  // if (loading) {
-  //   return <div className='text-white'>Loading...</div>;
-  // }
-
-
-  // if (error) {
-  //   return <div>Error: {error.message}</div>;
-  // }
-
-
-      // sök efter de största fskarna
-      // const handleFilter = (searchFishes) => {
-      //   setLoading(true);
-      //   let searchQuery = '';
-      //   let message = '';
-      //   if (searchFishes === 'largest') {
-      //     searchQuery = 'like_count__gt=1';
-      //     message = 'Just nu visas de största fiskarna...'
-      //   }
-      //   fetch(`/api/fiskar/?${searchQuery}`)
-      //     .then((response) => {
-      //       if (!response.ok) {
-      //         throw new Error('Network response was not ok');
-      //       }
-      //       return response.json();
-      //     })
-      //     .then((data) => {
-      //       setFishes(data);
-      //       setLoading(false);
-      //     })
-      //     .catch((error) => {
-      //       console.error('Error:', error);
-      //       setError(error);
-      //       setLoading(false);
-      //     });
-      //   setFilterMessage(message);
-      // };
-
-      // sök efter fiskar med ord, tex username, fishtype eller messsage.
-      // const handleSearch = () => {
-      //   setLoading(true);
-      //   let message = '';
-      //   fetch(`/api/fiskar/?search=${searchTerm}`)
-      //     .then((response) => {
-      //       if (!response.ok) {
-      //         throw new Error('Network response was not ok');
-      //       }
-      //       return response.json();
-      //     })
-      //     .then((data) => {
-      //       if (data.length === 0) { // Kontrollerar om inga fiskar hittades
-      //         message = `Inga fiskar hittades med sökordet: "${searchTerm}"`;
-      //         setFilterMessage(message); // Sätt meddelandet om inga fiskar hittades
-      //       } else {
-      //         setFishes(data);
-      //         message = (`Just nu visas en fisksökning: "${searchTerm}"`);
-      //         setFilterMessage(message); // Sätt meddelandet om fiskar hittades
-      //       }
-      //       setLoading(false);
-      //     })
-      //     .catch((error) => {
-      //       console.error('Error:', error);
-      //       setError(error);
-      //       setLoading(false);
-      //     });
-      //     setSearchTerm('');
-      // };
-
-
-    // const handleLikeUpdate = (fishId, newLikeCount, isLiked) => {
-    //   setFishes(prevFishes =>
-    //     prevFishes.map(fish =>
-    //       fish.id === fishId
-    //         ? { ...fish, likes_count: newLikeCount, isLiked: isLiked }
-    //         : fish
-    //     )
-    //   );
-    // };
-    
   
-
 
     const handleFishClick = (fishId) => {
       if (pausedFishId === fishId) {
@@ -272,7 +144,6 @@ function Fishtank() {
     
       return (
         <Container>
-          {/* {spinnerLoading && <div className='text-white'>Loading..</div>} */}
           <div className={fishstyles.fishtank}>
             <Row>
             <Col sm={12} md={6}>
@@ -294,7 +165,6 @@ function Fishtank() {
 
             <Row>
               <Col className='mt-4'>
-                {/* <SearchBigFishes onSearch={handleFilter} /> */}
                 {!filterMessage && <SearchBigFishes onSearch={handleFilter} />}
               </Col>
             </Row>
@@ -337,7 +207,7 @@ function Fishtank() {
                 >
                 <Fish 
                   fish={fish} 
-                  // onLikeUpdate={handleLikeUpdate} 
+                  onLikeUpdate={handleLikeUpdate} 
                   isPaused={isPaused} 
                   setIsPaused={setIsPaused}
                   setActiveFishId={setActiveFishId}
