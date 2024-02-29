@@ -105,8 +105,12 @@ function Fishtank() {
     // ---------------------------------------------------use effect för att hämta 5 fiskar åt gången
     const fishnumber = Math.round(window.innerWidth / 100);
     console.log('fishnumber before' + fishnumber);
-    console.log('innerwidth: ' + window.innerWidth);
+
+    const intervalTime = window.innerWidth < 500 ? 10000 : 30000;
+   
     useEffect(() => {
+      console.log('useEffect körs med fishes och fishnumber:', fishes, fishnumber);
+
       if (fishes && fishes.length > 0) {
         setDisplayedFishes(fishes.slice(0, fishnumber));
 
@@ -115,13 +119,11 @@ function Fishtank() {
             const startIndex = (fishes.indexOf(prevDisplayedFishes[0]) + fishnumber) % fishes.length;
             return fishes.slice(startIndex, startIndex + fishnumber);
           });
-        }, 30000); // byt ut fiskar
-        console.log(fishnumber);
-        console.log('innerwidth: ' + window.innerWidth);
+        }, intervalTime); // byt ut fiskar
   
         return () => clearInterval(interval);
       }
-    }, [fishes, fishnumber]);
+    }, [fishes, fishnumber, intervalTime]);
       // fisk A, fisk B, fisk C, fisk E fisk G
       const recentlyCreatedFishes = fishes.filter((fish) => (new Date().getTime() - new Date(fish.created_at).getTime()) < 5*60*1000);
       // fisk G, fisk J och fisk Z

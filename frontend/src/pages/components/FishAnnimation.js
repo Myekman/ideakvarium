@@ -39,7 +39,7 @@ const FishAnimated = ({
           from: { x: -200, y: getRandomYPosition() },
           to: { x: window.innerWidth },
           config: { duration: getRandomDuration() },
-          delay: index * 4000,
+          delay: index * 3000,
         });
       }
     };
@@ -48,7 +48,7 @@ const FishAnimated = ({
       from: { x: -200, y: getRandomYPosition() },
       to: { x: window.innerWidth },
       config: { duration: getRandomDuration() },
-      delay:  index * 4000,
+      delay:  index * 3000,
       onRest: onRestCallback,
       paused: isPaused,
     }));
