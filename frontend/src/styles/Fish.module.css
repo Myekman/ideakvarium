@@ -10,6 +10,7 @@ button {
     font-family: "Oswald", sans-serif !important;
 }
 
+
 .fontstyle {
     font-family: "Oswald", sans-serif !important;
     font-size: 15px !important;
@@ -49,21 +50,27 @@ button {
   height: 35px;
   width: 80px;
   border: 1px solid white !important;
-  background-color: rgba(29, 78, 45, 0.616) !important;
+  /* background-color: rgba(29, 78, 45, 0.616) !important; */
+  background-color: rgb(95 147 145) !important;
   margin-top: 10px;
 }
 
 .resetbtn {
     font-size: 15px !important;
     border: 1px solid white !important;
-    background-color: rgba(29, 78, 45, 0.616) !important;
+    /* background-color: rgba(29, 78, 45, 0.616) !important; */
+    background-color: rgb(95 147 145) !important;
 }
 
 .sökbtn2 {
   font-size: 15px !important;
   border: 1px solid white !important;
-  background-color:   rgba(29, 78, 45, 0.616) !important;
+  background-color: rgb(95 147 145) !important;
   margin-top: 10px;
+}
+
+.sökbtn:hover, .sökbtn2:hover, .resetbtn:hover {
+    background-color: #125c5e !important;
 }
 
 .pratbubbla {

@@ -179,7 +179,7 @@ function Fishtank() {
             </Row>
 
             <Row>
-              <Col xs={12} sm={8}>
+              <Col xs={12} sm={8} md={6}>
                 {filterMessage && (
                   <>
                   <div className={fishstyles.filtermessage}>

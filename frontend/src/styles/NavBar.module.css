@@ -3,14 +3,14 @@
 }
 
 nav {
-    margin-left: 20px;
+    margin-left: 15px;
 
 }
 
-.nav-link {
+/* .nav-link {
     font-size: 100px;
 
-}
+} */
 
 /* .navbar-toggler {
     background-color: white !important;
@@ -18,13 +18,18 @@ nav {
 } */
 
 .customnavlink {
-    color: white !important;
     /* border: 1px solid white !important; */
     color: white !important;
     border-radius: 5px !important;
-    padding: 10px !important;
-    background-color: rgba(29, 78, 45, 0.616) !important;
+    padding: 5px !important;
+    /* background-color: rgba(29, 78, 45, 0.616) !important; */
+    background-color: rgb(136 134 84 / 88%) !important;
     /* font-family: "Oswald", sans-serif !important; */
+}
+
+.customnavlink:hover {
+    background-color: rgb(95 147 145) !important;
+
 }
 
 /* .navbarcollapse {

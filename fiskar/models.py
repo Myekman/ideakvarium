@@ -17,6 +17,9 @@ class Fish(models.Model):
     fish_type = models.CharField(max_length=20, choices=FISH_TYPES)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['-created_at']
+
     def __str__(self):
         return f"{self.get_fish_type_display()} #{self.id}: {self.message} {self.title} {self.user} {self.name}"
     
@@ -26,9 +29,6 @@ class Like(models.Model):
     fish = models.ForeignKey(Fish, on_delete=models.CASCADE, related_name='likes')
     created_at = models.DateTimeField(auto_now_add=True)
 
-    # class Meta:
-        # Detta kommer att se till att en användare bara kan "like" en fisk en gång
-        # unique_together = ('user', 'fish')
 
     def __str__(self):
         return f"{self.user.username} likes {self.fish.id}"
