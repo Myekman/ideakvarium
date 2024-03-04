@@ -33,23 +33,6 @@ const FishAnimated = ({
     const getCenterYPosition = () => window.innerHeight / 2;
     console.log(getCenterYPosition());
 
-    // funktion som tar bort en fisk och lägger till en ny
-    // const replaceFish = (fishId) => {
-    //   setDisplayedFishes((prevDisplayedFishes) => {
-    //     console.log('Current displayed fishes:', prevDisplayedFishes.map(f => f.id));
-
-    //     // Ta bort den fisk som har färdigställt sin animation
-    //     const filteredFishes = prevDisplayedFishes.filter((fish) => fish.id !== fishId);
-
-    //     const nextFish = fishes.find((fish) => !filteredFishes.some(f => f.id === fish.id));
-    //       if (nextFish) {
-    //         return [...filteredFishes, nextFish]; // Lägg till den nya fisken
-    //       } else {
-    //         return filteredFishes; // Om ingen ny fisk hittades, bara returnera de filtrerade fiskarna
-    //       }
-    //   });
-    // };
-
    
     const onRestCallback = () => {
       console.log('Animation completed, resetting position...');
