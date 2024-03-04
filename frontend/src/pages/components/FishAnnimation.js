@@ -7,7 +7,7 @@ const FishAnimated = ({
   index,
   isPaused,
   isActive,
-  replaceFish,
+  handleAnimationComplete,
   setDisplayedFishes,
   fishes,
   setIsPaused, 
@@ -15,11 +15,24 @@ const FishAnimated = ({
   fishId,
   onFishClick }) => {
 
-    // Randomize the duration to have a greater range of speeds
-    const minDuration = 20000; // 15 seconds for faster fishes
-    const maxDuration = 40000; // 40 seconds for slower fishes
-    const getRandomDuration = () => Math.random() * (maxDuration - minDuration) + minDuration;
+    // Random hastighet för fiskarna
+    // const minDuration = 20000; // 20 sekunder
+    // const maxDuration = 40000; // 40 sekunder
+    // const getRandomDuration = () => Math.random() * (maxDuration - minDuration) + minDuration;
 
+      // Funktion för att anpassa hastigheten baserat på skärmstorlek
+    const getRandomDuration = useCallback(() => {
+      const screenWidth = window.innerWidth;
+      const isMobileScreen = screenWidth < 768; // Antag att skärmar mindre än 768px är mobila
+
+      // Bestäm minsta och högsta varaktighet baserat på skärmstorlek
+      const minDuration = isMobileScreen ? 10000 : 20000; // 10 sekunder för snabbare fiskar på mobil
+      const maxDuration = isMobileScreen ? 20000 : 40000; // 20 sekunder för långsammare fiskar på mobil
+
+      // Returnera en slumpmässig varaktighet inom det angivna intervallet
+      return Math.random() * (maxDuration - minDuration) + minDuration;
+    }, []);
+  
 
     // ge fiskarna en slumpmässig y-position vid start och efter att de har varit aktiva
     const getRandomYPosition = useCallback(() => {
@@ -37,8 +50,6 @@ const FishAnimated = ({
     const onRestCallback = () => {
       console.log('Animation completed, resetting position...');
       if (!isPaused && !isActive) {
-        replaceFish(fishId);
-
 
         apiX.start({
           from: { x: -200, y: getRandomYPosition() },
