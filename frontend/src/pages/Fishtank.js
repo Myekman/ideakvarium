@@ -106,7 +106,7 @@ function Fishtank() {
     const fishnumber = Math.round(window.innerWidth / 100);
     console.log('fishnumber before' + fishnumber);
 
-    const intervalTime = window.innerWidth < 500 ? 10000 : 30000;
+    // const intervalTime = window.innerWidth < 500 ? 20000 : 30000;
    
     useEffect(() => {
       console.log('useEffect körs med fishes och fishnumber:', fishes, fishnumber);
@@ -114,16 +114,16 @@ function Fishtank() {
       if (fishes && fishes.length > 0) {
         setDisplayedFishes(fishes.slice(0, fishnumber));
 
-        const interval = setInterval(() => {
-          setDisplayedFishes(prevDisplayedFishes => {
-            const startIndex = (fishes.indexOf(prevDisplayedFishes[0]) + fishnumber) % fishes.length;
-            return fishes.slice(startIndex, startIndex + fishnumber);
-          });
-        }, intervalTime); // byt ut fiskar
+        // const interval = setInterval(() => {
+        //   setDisplayedFishes(prevDisplayedFishes => {
+        //     const startIndex = (fishes.indexOf(prevDisplayedFishes[0]) + fishnumber) % fishes.length;
+        //     return fishes.slice(startIndex, startIndex + fishnumber);
+        //   });
+        // }, 60000); // byt ut fiskar
   
-        return () => clearInterval(interval);
+        // return () => clearInterval(interval);
       }
-    }, [fishes, fishnumber, intervalTime]);
+    }, [fishes, fishnumber]);
       // fisk A, fisk B, fisk C, fisk E fisk G
       const recentlyCreatedFishes = fishes.filter((fish) => (new Date().getTime() - new Date(fish.created_at).getTime()) < 5*60*1000);
       // fisk G, fisk J och fisk Z
@@ -213,6 +213,8 @@ function Fishtank() {
                 isPaused={pausedFishId === fish.id}
                 setPausedFishId={setPausedFishId}
                 onFishClick={() => handleFishClick(fish.id)}
+                setDisplayedFishes={setDisplayedFishes}
+                fishes={fishes}
                 >
                 <Fish 
                   fish={fish} 

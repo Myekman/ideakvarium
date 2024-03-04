@@ -7,6 +7,8 @@ const FishAnimated = ({
   index,
   isPaused,
   isActive,
+  setDisplayedFishes,
+  fishes,
   setIsPaused, 
   setActiveFishId,
   fishId,
@@ -30,16 +32,36 @@ const FishAnimated = ({
     const getCenterYPosition = () => window.innerHeight / 2;
     console.log(getCenterYPosition());
 
+    // funktion som tar bort en fisk och lägger till en ny
+    const replaceFish = (fishId) => {
+      setDisplayedFishes((prevDisplayedFishes) => {
+        // Ta bort den fisk som har färdigställt sin animation
+        const filteredFishes = prevDisplayedFishes.filter((fish) => fish.id !== fishId);
 
-    // onRest inuti useSpring
+        const nextFish = fishes.find((fish) => !filteredFishes.some(f => f.id === fish.id));
+          if (nextFish) {
+            return [...filteredFishes, nextFish]; // Lägg till den nya fisken
+          } else {
+            return filteredFishes; // Om ingen ny fisk hittades, bara returnera de filtrerade fiskarna
+          }
+        // Lägg till en ny fisk från den totala listan som inte redan visas
+        // const nextFish = fishes.find((fish) => !filteredFishes.includes(fish));
+        // return [...filteredFishes, nextFish];
+      });
+    };
+
+   
     const onRestCallback = () => {
       console.log('Animation completed, resetting position...');
       if (!isPaused && !isActive) {
+        replaceFish(fishId);
+
+
         apiX.start({
           from: { x: -200, y: getRandomYPosition() },
           to: { x: window.innerWidth },
           config: { duration: getRandomDuration() },
-          delay: index * 3000,
+          // delay: index * 3000,
         });
       }
     };
