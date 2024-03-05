@@ -23,9 +23,7 @@ function Fishtank() {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFishId, setActiveFishId] = useState(null);
   const [pausedFishId, setPausedFishId] = useState(null);
-
   const [filterMessage, setFilterMessage] = useState(''); 
-  // const [lastAddedFishIndex, setLastAddedFishIndex] = useState(0);
 
 
 // ----------------------------------------------------------hantera likes
@@ -92,26 +90,6 @@ function Fishtank() {
     }
   };
 
-  // const handleAnimationComplete = (completedFishId) => {
-  //   setDisplayedFishes((currentDisplayedFishes) => {
-  //     // Filtrera bort fisken som just har slutfört sin animation.
-  //     const remainingFishes = currentDisplayedFishes.filter(fish => fish.id !== completedFishId);
-  
-  //     // Hitta nästa fisk som inte redan visas.
-  //     const nextFishIndex = fishes.findIndex(fish => !remainingFishes.includes(fish));
-  //     const nextFish = fishes[nextFishIndex];
-  
-  //     // Lägg till nästa fisk om det finns någon som inte visas.
-  //     if (nextFish) {
-  //       return [...remainingFishes, nextFish];
-  //     } else {
-  //       // Om det inte finns någon mer fisk att visa, börja om från början av listan.
-  //       return fishes.slice(0, fishnumber);
-  //     }
-  //   });
-  // };
-
-
     // --------------------------------------------------Visa en spinner loading innan fiskar kommer in i bild
     useEffect(() => {
       if (isLoading === false) {
@@ -124,10 +102,12 @@ function Fishtank() {
         return () => clearTimeout(timer);
       }
     }, [isLoading]);
+
   
-    // ---------------------------------------------------use effect för att hämta 5 fiskar åt gången
-    // const fishnumber = Math.round(window.innerWidth / 100);
-    // console.log('fishnumber before' + fishnumber);
+    const fishnumber = Math.round(window.innerWidth / 100);
+    console.log('fishnumber before' + fishnumber);
+
+    // const intervalTime = window.innerWidth < 500 ? 15000 : 30000;
    
     // useEffect(() => {
     //   console.log('useEffect körs med fishes och fishnumber:', fishes, fishnumber);
@@ -135,35 +115,24 @@ function Fishtank() {
     //   if (fishes && fishes.length > 0) {
     //     setDisplayedFishes(fishes.slice(0, fishnumber));
 
+    //     const interval = setInterval(() => {
+    //       setDisplayedFishes(prevDisplayedFishes => {
+    //         const startIndex = (fishes.indexOf(prevDisplayedFishes[0]) + fishnumber) % fishes.length;
+    //         return fishes.slice(startIndex, startIndex + fishnumber);
+    //       });
+    //     }, intervalTime); // byt ut fiskar
+  
+    //     return () => clearInterval(interval);
     //   }
-    // }, [fishes, fishnumber]);
-    //   // fisk A, fisk B, fisk C, fisk E fisk G
-    //   const recentlyCreatedFishes = fishes.filter((fish) => (new Date().getTime() - new Date(fish.created_at).getTime()) < 5*60*1000);
-    //   // fisk G, fisk J och fisk Z
-    //   const actuallyDisplayedFishes = [...recentlyCreatedFishes, ...displayedFishes.filter((fish) => !recentlyCreatedFishes.some((f) => f.id === fish.id))].slice(0, fishnumber);
-    //   // fisk G, fisk J och fisk Z    fisk A, fisk B
+    // }, [fishes, fishnumber, intervalTime]);
 
-    const fishnumber = Math.round(window.innerWidth / 100);
-    console.log('fishnumber before' + fishnumber);
 
-    const intervalTime = window.innerWidth < 500 ? 15000 : 30000;
-   
     useEffect(() => {
-      console.log('useEffect körs med fishes och fishnumber:', fishes, fishnumber);
-
       if (fishes && fishes.length > 0) {
         setDisplayedFishes(fishes.slice(0, fishnumber));
-
-        const interval = setInterval(() => {
-          setDisplayedFishes(prevDisplayedFishes => {
-            const startIndex = (fishes.indexOf(prevDisplayedFishes[0]) + fishnumber) % fishes.length;
-            return fishes.slice(startIndex, startIndex + fishnumber);
-          });
-        }, intervalTime); // byt ut fiskar
-  
-        return () => clearInterval(interval);
+    
       }
-    }, [fishes, fishnumber, intervalTime]);
+    }, [fishes, fishnumber]);
       // fisk A, fisk B, fisk C, fisk E fisk G
       const recentlyCreatedFishes = fishes.filter((fish) => (new Date().getTime() - new Date(fish.created_at).getTime()) < 5*60*1000);
       // fisk G, fisk J och fisk Z
@@ -175,6 +144,7 @@ function Fishtank() {
       if (isLoading) return 'Loading...'
 
       if (error) return 'An error has occurred: ' + error.message
+
   
 
     const handleFishClick = (fishId) => {
@@ -255,7 +225,7 @@ function Fishtank() {
                 onFishClick={() => handleFishClick(fish.id)}
                 setDisplayedFishes={setDisplayedFishes}
                 fishes={fishes}
-                // handleAnimationComplete={handleAnimationComplete}
+                fishnumber={fishnumber}
                 >
                 <Fish 
                   fish={fish} 
@@ -266,7 +236,7 @@ function Fishtank() {
                   setSpinnerLoading={setSpinnerLoading}
                   isActive={activeFishId === fish.id} // Ny prop för att kontrollera om fisken är aktiv
                   />
-              </FishAnimated>
+                </FishAnimated>
             ))}
           </div>
         </Container>

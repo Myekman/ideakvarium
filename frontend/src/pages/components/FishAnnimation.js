@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect} from 'react';
+import React, { useCallback, useEffect, useState} from 'react';
 import { useSpring, animated } from '@react-spring/web';
 
 const FishAnimated = ({ 
@@ -10,6 +10,7 @@ const FishAnimated = ({
   handleAnimationComplete,
   setDisplayedFishes,
   fishes,
+  fishnumber,
   setIsPaused, 
   setActiveFishId,
   fishId,
@@ -19,6 +20,7 @@ const FishAnimated = ({
     // const minDuration = 20000; // 20 sekunder
     // const maxDuration = 40000; // 40 sekunder
     // const getRandomDuration = () => Math.random() * (maxDuration - minDuration) + minDuration;
+
 
       // Funktion för att anpassa hastigheten baserat på skärmstorlek
     const getRandomDuration = useCallback(() => {
@@ -46,19 +48,75 @@ const FishAnimated = ({
     const getCenterYPosition = () => window.innerHeight / 2;
     console.log(getCenterYPosition());
 
+    const [completedAnimations, setCompletedAnimations] = useState(0);
+
    
+    // const onRestCallback = () => {
+    //   console.log('Animation completed, resetting position...');
+    //   console.log(`onRestCallback: FishID is ${fishId}, isPaused: ${isPaused}, isActive: ${isActive}`);
+    //   if (!isPaused && !isActive) {
+    //     console.log(`Starting new animation for FishID ${fishId}`);
+    
+    //     apiX.start({
+    //       from: { x: -200, y: getRandomYPosition() },
+    //       to: { x: window.innerWidth },
+    //       config: { duration: getRandomDuration() },
+    //       // delay: index * 3000,
+    //     });
+    //   }
+    // };
+
+    // const onRestCallback = () => {
+    //   console.log('Animation completed, resetting position...');
+    //   console.log(`onRestCallback: FishID is ${fishId}, isPaused: ${isPaused}, isActive: ${isActive}`);
+      
+    //   if (!isPaused && !isActive) {
+    //     console.log(`Starting new animation for FishID ${fishId}`);
+    
+    //     // När animationen är klar, byt ut fiskarna i FishList
+    //     setDisplayedFishes(prevDisplayedFishes => {
+    //       const startIndex = (fishes.indexOf(prevDisplayedFishes[0]) + fishnumber) % fishes.length;
+    //       return fishes.slice(startIndex, startIndex + fishnumber);
+    //     });
+    //   }
+    // };
+
     const onRestCallback = () => {
       console.log('Animation completed, resetting position...');
+      console.log(`onRestCallback: FishID is ${fishId}, isPaused: ${isPaused}, isActive: ${isActive}`);
+      
       if (!isPaused && !isActive) {
+        console.log(`Starting new animation for FishID ${fishId}`);
+        
+        // Öka antalet färdiga animationer
+        setCompletedAnimations(prev => prev + 1);
 
-        apiX.start({
-          from: { x: -200, y: getRandomYPosition() },
-          to: { x: window.innerWidth },
-          config: { duration: getRandomDuration() },
-          // delay: index * 3000,
-        });
+        // Kontrollera om vi har nått antalet fiskar vi vill visa
+        if (completedAnimations + 1 >= fishnumber) {
+          // Återställ completedAnimations och starta om från början av listan
+          setCompletedAnimations(0);
+          setDisplayedFishes(fishes.slice(0, fishnumber));
+          
+          // Starta om animationen från början för varje fisk
+          apiX.start({
+            from: { x: -200, y: getRandomYPosition() },
+            to: { x: window.innerWidth },
+            config: { duration: getRandomDuration() },
+            onRest: onRestCallback,
+          });
+        } else {
+          // Byt ut fiskarna i FishList som tidigare
+          setDisplayedFishes(prevDisplayedFishes => {
+            const startIndex = (fishes.indexOf(prevDisplayedFishes[0]) + 1) % fishes.length;
+            return fishes.slice(startIndex, startIndex + fishnumber);
+          });
+        }
       }
     };
+
+
+   
+  
 
     const [styleX, apiX] = useSpring(() => ({
       from: { x: -200, y: getRandomYPosition() },
