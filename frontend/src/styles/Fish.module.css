@@ -17,7 +17,7 @@ button {
 }
 
 .fontstyle2 {
-    font-family:  "Cormorant", sans-serif;
+    font-family:  "Cormorant", sans-serif !important;
 
 }
 

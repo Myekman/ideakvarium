@@ -34,7 +34,7 @@ const FishAnimated = ({
       // Returnera en slumpmässig varaktighet inom det angivna intervallet
       return Math.random() * (maxDuration - minDuration) + minDuration;
     }, []);
-  
+
 
     // ge fiskarna en slumpmässig y-position vid start och efter att de har varit aktiva
     const getRandomYPosition = useCallback(() => {
@@ -49,6 +49,7 @@ const FishAnimated = ({
     console.log(getCenterYPosition());
 
     const [completedAnimations, setCompletedAnimations] = useState(0);
+    const [isRestarting, setIsRestarting] = useState(false);
 
    
     // const onRestCallback = () => {
@@ -62,21 +63,6 @@ const FishAnimated = ({
     //       to: { x: window.innerWidth },
     //       config: { duration: getRandomDuration() },
     //       // delay: index * 3000,
-    //     });
-    //   }
-    // };
-
-    // const onRestCallback = () => {
-    //   console.log('Animation completed, resetting position...');
-    //   console.log(`onRestCallback: FishID is ${fishId}, isPaused: ${isPaused}, isActive: ${isActive}`);
-      
-    //   if (!isPaused && !isActive) {
-    //     console.log(`Starting new animation for FishID ${fishId}`);
-    
-    //     // När animationen är klar, byt ut fiskarna i FishList
-    //     setDisplayedFishes(prevDisplayedFishes => {
-    //       const startIndex = (fishes.indexOf(prevDisplayedFishes[0]) + fishnumber) % fishes.length;
-    //       return fishes.slice(startIndex, startIndex + fishnumber);
     //     });
     //   }
     // };
@@ -95,6 +81,7 @@ const FishAnimated = ({
         if (completedAnimations + 1 >= fishnumber) {
           // Återställ completedAnimations och starta om från början av listan
           setCompletedAnimations(0);
+          setIsRestarting(true); 
           setDisplayedFishes(fishes.slice(0, fishnumber));
           
           // Starta om animationen från början för varje fisk
@@ -103,10 +90,13 @@ const FishAnimated = ({
             to: { x: window.innerWidth },
             config: { duration: getRandomDuration() },
             onRest: onRestCallback,
+          }).then(() => {
+            setIsRestarting(false);
           });
         } else {
           // Byt ut fiskarna i FishList som tidigare
           setDisplayedFishes(prevDisplayedFishes => {
+            setIsRestarting(true);
             const startIndex = (fishes.indexOf(prevDisplayedFishes[0]) + 1) % fishes.length;
             return fishes.slice(startIndex, startIndex + fishnumber);
           });
@@ -115,14 +105,11 @@ const FishAnimated = ({
     };
 
 
-   
-  
-
     const [styleX, apiX] = useSpring(() => ({
       from: { x: -200, y: getRandomYPosition() },
       to: { x: window.innerWidth },
       config: { duration: getRandomDuration() },
-      delay:  index * 3000,
+      delay:  isRestarting ? 0 : index * 3000,
       onRest: onRestCallback,
       paused: isPaused,
     }));

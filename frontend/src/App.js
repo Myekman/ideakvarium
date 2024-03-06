@@ -2,7 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Fishtank from './pages/Fishtank';
-// import FishDetail from './pages/FishDetail';
+import FishList from './pages/Fishlist';
 import LoginForm from './pages/auth/SigninForm';
 import { UserProvider } from './pages/auth/UserContext';
 import NavigationBar from './pages/components/Navbar';
@@ -40,7 +40,7 @@ function App() {
               <Fishtank />
               </>
             } />
-            {/* <Route path="/fiskar/:pk" element={<FishDetail />} /> */}
+            <Route path="/fiskar/lista" element={<FishList/>} />
             <Route path="/fiskar/create" element={<FishCreateForm />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
