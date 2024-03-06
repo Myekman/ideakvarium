@@ -1,6 +1,5 @@
 // FishList.js
 import React, { useState, useEffect } from 'react';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import styles from '../styles/FishList.module.css';
 import { Col } from 'react-bootstrap';
 
@@ -29,13 +28,6 @@ const FishList = () => {
   return (
     <div className={styles.fishlistContainer}>
         <h1 className={styles.heading}>Alla våra idéer!</h1>
-        <InfiniteScroll
-           dataLength={fishes.length}
-          //  next={fetchData}
-          //  hasMore={true} 
-           loader={<p>Loading...</p>}
-           endMessage={<p>No more data to load.</p>}
-        >
       {fishes.map(fish => (
         <Col key={fish.id} xs={12} md={6}>
         <ul col-md={6} className={styles.fishlist}>
@@ -47,7 +39,6 @@ const FishList = () => {
         </ul>
         </Col>
       ))}
-      </InfiniteScroll>
     </div>
   );
 };
