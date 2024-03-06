@@ -28,9 +28,9 @@ const NavigationBar = () => {
                         <Nav.Item className="me-3">
                             <Nav.Link as={NavLink} to="/fiskar/create" className={styles.customnavlink}>Skapa fisk</Nav.Link>
                         </Nav.Item>
-                        <Nav.Item>
+                        {/* <Nav.Item>
                             <Nav.Link as={NavLink} to="/fiskar/lista" className={styles.customnavlink}>Fisklista</Nav.Link>
-                        </Nav.Item>
+                        </Nav.Item> */}
                 </Nav>
                     {/* {user ? (
                         <>
