@@ -13,10 +13,14 @@ h1 {
     font-family:  "Cormorant", sans-serif !important;
 }
 
-.fishlist {
-    background-color: aliceblue;
-    border-radius: 5px;
-}
+
+.fishInfo {
+    background-color: #f8f9fa; 
+    border-radius: 4px; 
+    padding: 1rem; 
+    box-shadow: 0 4px 8px rgb(0 0 0 / 75%); /* Skugga med svag genomskinlighet */
+   
+  }
 
 .fishlistContainer {
     display: grid;
@@ -25,9 +29,9 @@ h1 {
 }
 
 h2 {
-    font-size:  25px;
+    font-size: 25px !important;
 }
 
 p {
-    font-size: 20px;
+    font-size: 20px !important;
 }

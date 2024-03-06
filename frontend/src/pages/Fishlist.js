@@ -71,7 +71,7 @@ const FishList = () => {
       {fishes.map(fish => (
         <Col key={fish.id} xs={12} md={6}>
         <ul col-md={6} className={styles.fishlist}>
-            <div className="fish-info">
+            <div className={styles.fishInfo}>
                 <h2>{fish.title}</h2>
                 <p>{fish.message}</p>
                 <p>Likes: {fish.likes_count}</p>

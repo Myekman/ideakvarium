@@ -24,9 +24,12 @@ const NavigationBar = () => {
                  {/* <Navbar.Toggle aria-controls="basic-navbar-nav" className={styles.Navbar}/> */}
                 {/* <Navbar.Collapse id="basic-navbar-nav"> */}
                 {/* <div className={styles.navbarcollapse}> */}
-                <Nav className="mr-auto">
-                        <Nav.Item>
+                <Nav className={styles.customNavbar}>
+                        <Nav.Item className="me-3">
                             <Nav.Link as={NavLink} to="/fiskar/create" className={styles.customnavlink}>Skapa fisk</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link as={NavLink} to="/fiskar/lista" className={styles.customnavlink}>Fisklista</Nav.Link>
                         </Nav.Item>
                 </Nav>
                     {/* {user ? (

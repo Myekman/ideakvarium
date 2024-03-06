@@ -1,10 +1,18 @@
 .Navbar {
     background-color: white !important;
+
 }
 
 nav {
     margin-left: 15px;
 
+}
+
+.customNavbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+   
 }
 
 /* .nav-link {
@@ -24,6 +32,7 @@ nav {
     padding: 5px !important;
     /* background-color: rgba(29, 78, 45, 0.616) !important; */
     background-color: rgb(136 134 84 / 88%) !important;
+
     /* font-family: "Oswald", sans-serif !important; */
 }
 
