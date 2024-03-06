@@ -1,7 +1,7 @@
 // import { useNavigate } from "react-router-dom";
 import styles from "../../styles/NavBar.module.css";
 import Nav from 'react-bootstrap/Nav';
-import { Navbar } from "react-bootstrap";
+// import { Navbar } from "react-bootstrap";
 import { NavLink } from 'react-router-dom';
 
 // import { useUser } from "../auth/UserContext";
@@ -20,7 +20,7 @@ const NavigationBar = () => {
 
     return (
         <div>
-            <Navbar expand="lg">
+            {/* <Navbar expand="lg"> */}
                  {/* <Navbar.Toggle aria-controls="basic-navbar-nav" className={styles.Navbar}/> */}
                 {/* <Navbar.Collapse id="basic-navbar-nav"> */}
                 {/* <div className={styles.navbarcollapse}> */}
@@ -28,9 +28,9 @@ const NavigationBar = () => {
                         <Nav.Item className="me-3">
                             <Nav.Link as={NavLink} to="/fiskar/create" className={styles.customnavlink}>Skapa fisk</Nav.Link>
                         </Nav.Item>
-                        {/* <Nav.Item>
+                        <Nav.Item>
                             <Nav.Link as={NavLink} to="/fiskar/lista" className={styles.customnavlink}>Fisklista</Nav.Link>
-                        </Nav.Item> */}
+                        </Nav.Item>
                 </Nav>
                     {/* {user ? (
                         <>
@@ -53,7 +53,7 @@ const NavigationBar = () => {
                 
                 {/* </div>
                 </Navbar.Collapse> */}
-            </Navbar>
+            {/* </Navbar> */}
         </div>
     )
 }

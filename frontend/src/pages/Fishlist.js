@@ -1,9 +1,11 @@
 // FishList.js
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/FishList.module.css';
-import { Col } from 'react-bootstrap';
+import { Button, Col, Container } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const FishList = () => {
+  const navigate = useNavigate();
   const [fishes, setFishes] = useState([]);
 
   useEffect(() => {
@@ -21,25 +23,38 @@ const FishList = () => {
     fetchFishes();
   }, []);
 
-  if (!fishes || fishes.length === 0) {
+  // Kontrollera om 'fishes'-arrayen är tom och visa ett meddelande om det
+  if (fishes.length === 0) {
     return <div>Inga fiskar att visa.</div>;
   }
 
+
+  const handleBackToFishTank = () => {
+    navigate('/');
+  };
+
   return (
-    <div className={styles.fishlistContainer}>
-        <h1 className={styles.heading}>Alla våra idéer!</h1>
+    <Container>
+    <ul>
+      <h1 className={styles.heading}>Alla våra idéer!</h1>
       {fishes.map(fish => (
-        <Col key={fish.id} xs={12} md={6}>
-        <ul col-md={6} className={styles.fishlist}>
+        <li key={fish.id}>
             <div className={styles.fishInfo}>
-                <h2>{fish.title}</h2>
-                <p>{fish.message}</p>
-                <p>Likes: {fish.likes_count}</p>
-            </div>
-        </ul>
-        </Col>
+              <h2>{fish.title}</h2>
+               <p>{fish.message}</p>
+               <p>Likes: {fish.likes_count}</p>
+           </div>
+        </li>
       ))}
-    </div>
+      <Col className='mt-4'>
+        <Button className={styles.fishlistbtn} variant="success" onClick={handleBackToFishTank}>Tillbaka till Fiskarna</Button>
+      </Col>
+    </ul>
+
+    {/* <Col className='mt-4'>
+    <Button className={formstyles.formbtn} variant="success" onClick={handleBackToFishTank}>Tillbaka till Fiskarna</Button>
+    </Col> */}
+    </Container>
   );
 };
 

@@ -19,6 +19,7 @@ h1 {
     border-radius: 4px; 
     padding: 1rem; 
     box-shadow: 0 4px 8px rgb(0 0 0 / 75%); /* Skugga med svag genomskinlighet */
+    margin-top: 15px;
    
   }
 
@@ -35,3 +36,26 @@ h2 {
 p {
     font-size: 20px !important;
 }
+
+ul {
+    width: 50%;
+    overflow: scroll;
+    height: 100vh;
+    padding-bottom: 40px;
+}
+
+.fishlistbtn {
+    border: 1px solid white !important;
+    background-color:   rgb(95 147 145) !important;
+    /* margin-top: 10px; */
+  }
+
+@media (max-width: 1000px) {
+
+    ul {
+        width: 80%;
+    
+    }
+    
+  
+  }
