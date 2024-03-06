@@ -21,6 +21,12 @@ button {
 
 }
 
+.sökcontainer {
+    margin-left: 10px !important;
+    padding-right: 20px !important;
+   
+}
+
 /* fish.module.css */
 .fish-default {
     width: 80px;
@@ -172,6 +178,6 @@ button {
     .fontstyle {
         font-size: 10px !important;
     }
-    
+ 
   
   }

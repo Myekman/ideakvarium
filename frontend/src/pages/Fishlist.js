@@ -50,10 +50,6 @@ const FishList = () => {
         <Button className={styles.fishlistbtn} variant="success" onClick={handleBackToFishTank}>Tillbaka till Fiskarna</Button>
       </Col>
     </ul>
-
-    {/* <Col className='mt-4'>
-    <Button className={formstyles.formbtn} variant="success" onClick={handleBackToFishTank}>Tillbaka till Fiskarna</Button>
-    </Col> */}
     </Container>
   );
 };

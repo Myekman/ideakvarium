@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Fish from './Fish';
 import SearchBigFishes from './SearchFishes';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -162,27 +162,27 @@ function Fishtank() {
 
     
       return (
-        <Container>
           <div className={fishstyles.fishtank}>
-            <Row>
-            <Col sm={12} md={6}>
-              <InputGroup>
-                <InputGroup.Text className={fishstyles.fontstyle}>Sök efter Title/Fisktyp:</InputGroup.Text>
-                <Form.Control 
-                  as="textarea" 
-                  aria-label="Sök efter Title/Fisktyp:" 
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  rows = {1}
-                />
-              </InputGroup>
-            </Col>
-            <Col sm={12}>
-              <Button className={fishstyles.sökbtn} variant="success" onClick={handleSearch}>Sök</Button>
-            </Col>
+            <Row className={fishstyles.sökcontainer}>
+                <Col sm={12} md={4} className={fishstyles.filtermessage}>
+                  <InputGroup>
+                    <InputGroup.Text className={fishstyles.fontstyle}>Sök efter Title/Fisktyp:</InputGroup.Text>
+                    <Form.Control 
+                      as="textarea" 
+                      aria-label="Sök efter Title/Fisktyp:" 
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      rows = {1}
+                    />
+                  </InputGroup>
+                  <Button className={fishstyles.sökbtn} variant="success" onClick={handleSearch}>Sök</Button>
+                </Col>
+                {/* <Col sm={12}>
+                  <Button className={fishstyles.sökbtn} variant="success" onClick={handleSearch}>Sök</Button>
+                </Col> */}
             </Row>
 
-            <Row>
+            <Row className={fishstyles.sökcontainer}>
               <Col className='mt-4'>
                 {!filterMessage && <SearchBigFishes onSearch={handleFilter} />}
               </Col>
@@ -239,7 +239,6 @@ function Fishtank() {
                 </FishAnimated>
             ))}
           </div>
-        </Container>
       );
     }
     

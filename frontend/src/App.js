@@ -36,7 +36,7 @@ function App() {
         <Routes>
             <Route path="/" element={
               <>
-              <NavigationBar />
+              <NavigationBar /> 
               <Fishtank />
               </>
             } />

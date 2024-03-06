@@ -86,7 +86,7 @@ const FishAnimated = ({
           
           // Starta om animationen från början för varje fisk
           apiX.start({
-            from: { x: -200, y: getRandomYPosition() },
+            from: { x: 1400, y: getRandomYPosition() },
             to: { x: window.innerWidth },
             config: { duration: getRandomDuration() },
             onRest: onRestCallback,
@@ -154,6 +154,7 @@ const FishAnimated = ({
         });
         apiX.resume();
         console.log(`random Y: ${getRandomYPosition()}`);
+        
       }
     }, [isActive, apiY, apiX, getRandomYPosition, activePausedApi]);
 

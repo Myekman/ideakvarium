@@ -69,7 +69,8 @@ const PostCreateFish = ( { isPaused }  ) => {
     <Container>
       {/* <NavigationBar /> */}
       <Bubbles count={20}/>
-
+      
+    <div className={formstyles.backgroundcontainer}>
       {!isFormSubmitted && ( // Visa den skapade fisken om formuläret har skickats
       <Row className={formstyles.formcontainer}>
         <Col md={6}>
@@ -139,6 +140,8 @@ const PostCreateFish = ( { isPaused }  ) => {
       <Col className='mt-4'>
           <Button className={formstyles.formbtn} variant="success" onClick={handleBackToFishTank}>Tillbaka till Fiskarna</Button>
       </Col>
+
+      </div>
 
       {isFormSubmitted && ( // Visa den skapade fisken om formuläret har skickats
       <Col className={formstyles.displyfish}>
